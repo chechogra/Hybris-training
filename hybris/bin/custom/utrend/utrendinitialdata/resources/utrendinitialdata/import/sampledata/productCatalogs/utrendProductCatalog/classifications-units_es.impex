@@ -1,0 +1,30 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Units
+# English Localisation
+
+# Macros / Replacement Parameter definitions
+$classificationCatalog = utrendClassificationCatalog
+
+$systemVersion = systemVersion(catalog(id[default = '$classificationCatalog']), version[default = '1.0'])
+
+# Language
+$lang = es
+
+UPDATE ClassificationAttributeUnit; code[unique = true]; name[lang = $lang]; $systemVersion[unique = true];
+; mp ; "Megapixeles" ;
+; g  ; "Gramos"      ;
+; hz ; "Hercios"     ;
+; cm ; "Centímetros" ;
+; mm ; "Milímetros"  ;
+; l  ; "Litros"      ;
+
+

@@ -1,0 +1,42 @@
+.tc-personal-details-header {
+  font-weight: 500;
+  margin-bottom: 30px;
+}
+
+.tc-personal-details-form-wp {
+
+  .tc-personal-details-actions-wp {
+    margin-top: 20px;
+    button:first-of-type {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .tc-personal-details-actions-wp{
+    display: flex;
+    justify-content: space-between;
+    .accountAction{
+      width: 50%;
+      display: inline-block;
+      &:first-of-type{
+        padding-right: 5px;
+      }
+      &:last-of-type {
+        padding-left: 5px;
+      }
+    }
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  .tc-personal-details-header {
+    margin-bottom: 50px;
+  }
+
+  .tc-personal-details-wp {
+    width: 50%;
+    margin: 0 auto;
+  }
+}

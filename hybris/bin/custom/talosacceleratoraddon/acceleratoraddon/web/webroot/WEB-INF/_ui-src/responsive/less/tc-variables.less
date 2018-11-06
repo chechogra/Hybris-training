@@ -1,0 +1,143 @@
+@tc-primary-color: #267F98;
+@tc-link-color: #000000;
+@tc-link-hover-color: #267F98;
+@tc-link-active-color: darken(@tc-primary-color, 30%);
+@tc-background-general: #F8F8F8;
+@tc-error-color: #D74444;
+
+@tc-btn-light-color: #FFFFFF;
+@tc-btn-light-border-color: #FFFFFF;
+@tc-btn-light-background-color: transparent;
+@tc-btn-light-color-hover: #1E1E1E;
+@tc-btn-light-background-color-hover: #FFFFFF;
+
+@tc-btn-default-color: #1E1E1E;
+@tc-btn-default-border-color: #A3A3A3;
+@tc-btn-default-background-color: transparent;
+@tc-btn-default-background-color-hover: rgba(0, 0, 0, 0.3);
+@tc-btn-default-color-hover: #FFFFFF;
+
+@tc-btn-primary-color: #FFFFFF;
+@tc-btn-primary-border-color: #267F98;
+@tc-btn-primary-background-color: #267F98;
+@tc-btn-primary-border-color-hover: darken(@tc-btn-primary-border-color, 10%);
+@tc-btn-primary-background-color-hover: darken(@tc-btn-primary-background-color, 10%);
+
+@tc-btn-danger-color: #FFFFFF;
+@tc-btn-danger-border-color: #E94B4B;
+@tc-btn-danger-background-color: #E94B4B;
+@tc-btn-danger-border-color-hover: darken(@tc-btn-danger-border-color, 30%);
+@tc-btn-danger-background-color-hover: darken(@tc-btn-danger-background-color, 30%);
+
+@tc-btn-lg: 10px 16px;
+@tc-btn-sm: 5px 10px;
+@tc-btn-xs: 1px 5px;
+
+@tc-btn-text-color: #1E1E1E;
+@tc-btn-color-clean: #FFFFFF;
+@tc-btn-default-color-clean: #1E1E1E;
+@tc-btn-border-color-clean: #A3A3A3;
+@tc-btn-color-cta: #E94B4B;
+@tc-input-color: #000000;
+@tc-input-background-color: #FFFFFF;
+@tc-input-light-color: #979797;
+@tc-input-border-color: #DEDEDE;
+@tc-input-border-color-light: #979797;
+@tc-checkbox-color: #A3A3A3;
+@tc-control-color: #1E1E1E;
+@tc-control-border-color: #A3A3A3;
+@tc-breadcrumb-color: #A3A3A3;
+
+@tc-border-color: #E1DEDE;
+@tc-header-background-color: #FFFFFF;
+
+//== Media queries breakpoints
+//
+//## Define the breakpoints at which your layout will change, adapting to different screen sizes.
+
+// Extra small screen / phone
+//** Deprecated `@screen-xs` as of v3.0.1
+@screen-xs: 480px;
+//** Deprecated `@screen-xs-min` as of v3.2.0
+@screen-xs-min: @screen-xs;
+//** Deprecated `@screen-phone` as of v3.0.1
+@screen-phone: @screen-xs-min;
+
+// Small screen / tablet
+//** Deprecated `@screen-sm` as of v3.0.1
+@screen-sm: 768px;
+@screen-sm-min: @screen-sm;
+//** Deprecated `@screen-tablet` as of v3.0.1
+@screen-tablet: @screen-sm-min;
+
+// Medium screen / desktop
+//** Deprecated `@screen-md` as of v3.0.1
+@screen-md: 992px;
+@screen-md-min: @screen-md;
+//** Deprecated `@screen-desktop` as of v3.0.1
+@screen-desktop: @screen-md-min;
+
+// Large screen / wide desktop
+//** Deprecated `@screen-lg` as of v3.0.1
+@screen-lg: 1200px;
+@screen-lg-min: @screen-lg;
+//** Deprecated `@screen-lg-desktop` as of v3.0.1
+@screen-lg-desktop: @screen-lg-min;
+
+// So media queries don't overlap when required, provide a maximum
+@screen-xs-max: (@screen-sm-min - 1);
+@screen-sm-max: (@screen-md-min - 1);
+@screen-md-max: (@screen-lg-min - 1);
+
+@nav-header-inner-height: 54px;
+@nav-header-padding-y: 3px;
+@nav-animation-timing: 0.35s ease-in 200ms;
+@search-animation-timing: 0.5s;
+@nav-animation-slider-timing: 0.35s ease-in 0ms;
+
+@tc-general-height: 50px;
+@tc-categories-height: 44px;
+@tc-input-height: 50px;
+@tc-input-height-sm: 30px;
+@tc-input-height-lg: 60px;
+@tc-btn-font-weight: 300;
+@tc-btn-font-size: 1.3rem;
+@tc-btn-font-size-xs: 1rem;
+@tc-btn-font-size-sm: 1rem;
+@tc-btn-font-size-lg: 1.6rem;
+@tc-input-font-size: 1.4rem;
+@tc-input-font-size-sm: 1.2rem;
+@tc-input-font-size-lg: 1.8rem;
+@tc-input-font-weight: 300;
+
+@main-content-max-width: 1170px;
+@body-padding-top-desktop: 119px;
+@body-padding-top-breadcrumb-not-present-desktop: 139px;
+@tc-content-extra-padding: 10px;
+
+@tc-payment-detail-border-color: #E1DEDE;
+
+@tc-user-preferences-background-color: #FFFFFF;
+
+@header-icons-content-animation-timing: 0.35s ease-in;
+@header-icons-content-border-color: #267F98;
+
+@product-grid-border-color: #DEDEDE;
+@product-grid-options-count-color: #A3A3A3;
+@product-grid-name-color: #3D3D3D;
+@product-grid-name-font-size-xs: 1.4rem;
+@product-grid-name-font-size-md: 1.2rem;
+@product-grid-name-font-weight: 300;
+@product-grid-price-font-size-xs: 1.4rem;
+@product-grid-price-font-size-md: 1.2rem;
+@product-grid-button-font-size: 2rem;
+@product-grid-list-order-button-font-size: 1.4rem;
+@product-grid-image-background-color: #f5f5f5;
+@product-grid-image-border-color: #f4eded;
+@product-grid-details-background-color: #FFFFFF;
+@tc-product-grid-extra-breakpoint: 520px;
+@tc-product-grid-extra-breakpoint-xl: 1400px;
+
+@product-details-review-title-color: #267F98;
+@product-details-tabs-title-color: #000000;
+@product-details-tabs-stars-color: #E1DEDE;

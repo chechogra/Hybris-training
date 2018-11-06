@@ -1,0 +1,355 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Products Stock Levels and Warehouses
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+$vendor = utrendVendor
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+
+INSERT_UPDATE Vendor; code[unique = true]
+
+INSERT_UPDATE Warehouse; code[unique = true]; vendor(code); default[default = true]
+
+INSERT_UPDATE StockLevel; available; warehouse(code)[default = 'Manhattan', unique = true]; inStockStatus(code); maxPreOrder; maxStockLevelHistoryCount; overSelling; preOrder; productCode[unique = true]; reserved
+# Tech - Cameras - DSLR
+; 999 ; ; notSpecified ; ; ; ; ; 0001   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0002   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0003   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0005   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0006   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0010   ;
+# Tech - Cameras - Mirrorless
+; 999 ; ; notSpecified ; ; ; ; ; 0101   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0102   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0103   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0104   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0106   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0107   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0109   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0110   ;
+# Tech - Headphones - On-ear
+; 999 ; ; notSpecified ; ; ; ; ; 020101 ;
+; 999 ; ; notSpecified ; ; ; ; ; 020102 ;
+; 999 ; ; notSpecified ; ; ; ; ; 020103 ;
+; 999 ; ; notSpecified ; ; ; ; ; 0204   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0205   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0206   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0207   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0210   ;
+# Tech - Headphones - In-ear
+; 999 ; ; notSpecified ; ; ; ; ; 0301   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0302   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0303   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0304   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0307   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0308   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0309   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0310   ;
+# Tech - Headphones - Over-ear
+; 999 ; ; notSpecified ; ; ; ; ; 0405   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0406   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0407   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0408   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0410   ;
+# Women - Tops
+; 999 ; ; notSpecified ; ; ; ; ; 050101 ;
+; 500 ; ; notSpecified ; ; ; ; ; 050102 ;
+; 124 ; ; notSpecified ; ; ; ; ; 050103 ;
+; 435 ; ; notSpecified ; ; ; ; ; 050201 ;
+; 235 ; ; notSpecified ; ; ; ; ; 050202 ;
+; 455 ; ; notSpecified ; ; ; ; ; 050203 ;
+; 122 ; ; notSpecified ; ; ; ; ; 050301 ;
+; 100 ; ; notSpecified ; ; ; ; ; 050302 ;
+; 231 ; ; notSpecified ; ; ; ; ; 050303 ;
+; 432 ; ; notSpecified ; ; ; ; ; 050401 ;
+; 322 ; ; notSpecified ; ; ; ; ; 050402 ;
+; 251 ; ; notSpecified ; ; ; ; ; 050403 ;
+; 154 ; ; notSpecified ; ; ; ; ; 050501 ;
+; 325 ; ; notSpecified ; ; ; ; ; 050502 ;
+; 0   ; ; notSpecified ; ; ; ; ; 050503 ;
+; 123 ; ; notSpecified ; ; ; ; ; 050510 ;
+; 389 ; ; notSpecified ; ; ; ; ; 050511 ;
+; 190 ; ; notSpecified ; ; ; ; ; 050512 ;
+; 50  ; ; notSpecified ; ; ; ; ; 050520 ;
+; 356 ; ; notSpecified ; ; ; ; ; 050521 ;
+; 234 ; ; notSpecified ; ; ; ; ; 050522 ;
+; 567 ; ; notSpecified ; ; ; ; ; 050601 ;
+; 387 ; ; notSpecified ; ; ; ; ; 050602 ;
+; 908 ; ; notSpecified ; ; ; ; ; 050603 ;
+; 950 ; ; notSpecified ; ; ; ; ; 050610 ;
+; 234 ; ; notSpecified ; ; ; ; ; 050611 ;
+; 456 ; ; notSpecified ; ; ; ; ; 050612 ;
+; 589 ; ; notSpecified ; ; ; ; ; 050620 ;
+; 23  ; ; notSpecified ; ; ; ; ; 050621 ;
+; 987 ; ; notSpecified ; ; ; ; ; 050622 ;
+; 126 ; ; notSpecified ; ; ; ; ; 050701 ;
+; 678 ; ; notSpecified ; ; ; ; ; 050702 ;
+; 102 ; ; notSpecified ; ; ; ; ; 050703 ;
+; 390 ; ; notSpecified ; ; ; ; ; 050710 ;
+; 448 ; ; notSpecified ; ; ; ; ; 050711 ;
+; 60  ; ; notSpecified ; ; ; ; ; 050712 ;
+# Women - Bottoms
+; 10  ; ; notSpecified ; ; ; ; ; 060101 ;
+; 10  ; ; notSpecified ; ; ; ; ; 060102 ;
+; 10  ; ; notSpecified ; ; ; ; ; 060103 ;
+; 100 ; ; notSpecified ; ; ; ; ; 060201 ;
+; 448 ; ; notSpecified ; ; ; ; ; 060202 ;
+; 60  ; ; notSpecified ; ; ; ; ; 060203 ;
+; 0   ; ; notSpecified ; ; ; ; ; 060301 ;
+; 356 ; ; notSpecified ; ; ; ; ; 060302 ;
+; 234 ; ; notSpecified ; ; ; ; ; 060303 ;
+; 29  ; ; notSpecified ; ; ; ; ; 060401 ;
+; 20  ; ; notSpecified ; ; ; ; ; 060402 ;
+; 30  ; ; notSpecified ; ; ; ; ; 060403 ;
+; 908 ; ; notSpecified ; ; ; ; ; 060410 ;
+; 950 ; ; notSpecified ; ; ; ; ; 060411 ;
+; 234 ; ; notSpecified ; ; ; ; ; 060412 ;
+; 999 ; ; notSpecified ; ; ; ; ; 060501 ;
+; 500 ; ; notSpecified ; ; ; ; ; 060502 ;
+; 124 ; ; notSpecified ; ; ; ; ; 060503 ;
+; 435 ; ; notSpecified ; ; ; ; ; 060510 ;
+; 235 ; ; notSpecified ; ; ; ; ; 060511 ;
+; 455 ; ; notSpecified ; ; ; ; ; 060512 ;
+; 122 ; ; notSpecified ; ; ; ; ; 060520 ;
+; 100 ; ; notSpecified ; ; ; ; ; 060521 ;
+; 231 ; ; notSpecified ; ; ; ; ; 060522 ;
+# Men - Pants
+; 999 ; ; notSpecified ; ; ; ; ; 070101 ;
+; 500 ; ; notSpecified ; ; ; ; ; 070102 ;
+; 124 ; ; notSpecified ; ; ; ; ; 070103 ;
+; 435 ; ; notSpecified ; ; ; ; ; 070201 ;
+; 235 ; ; notSpecified ; ; ; ; ; 070202 ;
+; 455 ; ; notSpecified ; ; ; ; ; 070203 ;
+; 122 ; ; notSpecified ; ; ; ; ; 070301 ;
+; 100 ; ; notSpecified ; ; ; ; ; 070302 ;
+; 231 ; ; notSpecified ; ; ; ; ; 070303 ;
+; 432 ; ; notSpecified ; ; ; ; ; 070401 ;
+; 322 ; ; notSpecified ; ; ; ; ; 070402 ;
+; 251 ; ; notSpecified ; ; ; ; ; 070403 ;
+; 154 ; ; notSpecified ; ; ; ; ; 070410 ;
+; 325 ; ; notSpecified ; ; ; ; ; 070411 ;
+; 0   ; ; notSpecified ; ; ; ; ; 070412 ;
+; 123 ; ; notSpecified ; ; ; ; ; 070501 ;
+; 389 ; ; notSpecified ; ; ; ; ; 070502 ;
+; 190 ; ; notSpecified ; ; ; ; ; 070503 ;
+; 50  ; ; notSpecified ; ; ; ; ; 070510 ;
+; 356 ; ; notSpecified ; ; ; ; ; 070511 ;
+; 234 ; ; notSpecified ; ; ; ; ; 070512 ;
+# Men - Shirts
+; 567 ; ; notSpecified ; ; ; ; ; 080101 ;
+; 387 ; ; notSpecified ; ; ; ; ; 080102 ;
+; 908 ; ; notSpecified ; ; ; ; ; 080103 ;
+; 950 ; ; notSpecified ; ; ; ; ; 080201 ;
+; 234 ; ; notSpecified ; ; ; ; ; 080202 ;
+; 456 ; ; notSpecified ; ; ; ; ; 080203 ;
+; 589 ; ; notSpecified ; ; ; ; ; 080301 ;
+; 23  ; ; notSpecified ; ; ; ; ; 080302 ;
+; 987 ; ; notSpecified ; ; ; ; ; 080303 ;
+; 126 ; ; notSpecified ; ; ; ; ; 080401 ;
+; 678 ; ; notSpecified ; ; ; ; ; 080402 ;
+; 102 ; ; notSpecified ; ; ; ; ; 080403 ;
+; 390 ; ; notSpecified ; ; ; ; ; 080410 ;
+; 448 ; ; notSpecified ; ; ; ; ; 080411 ;
+; 60  ; ; notSpecified ; ; ; ; ; 080412 ;
+; 10  ; ; notSpecified ; ; ; ; ; 080501 ;
+; 10  ; ; notSpecified ; ; ; ; ; 080502 ;
+; 10  ; ; notSpecified ; ; ; ; ; 080503 ;
+; 100 ; ; notSpecified ; ; ; ; ; 080510 ;
+; 448 ; ; notSpecified ; ; ; ; ; 080511 ;
+; 60  ; ; notSpecified ; ; ; ; ; 080512 ;
+; 0   ; ; notSpecified ; ; ; ; ; 080601 ;
+; 356 ; ; notSpecified ; ; ; ; ; 080602 ;
+; 234 ; ; notSpecified ; ; ; ; ; 080603 ;
+; 29  ; ; notSpecified ; ; ; ; ; 080701 ;
+; 20  ; ; notSpecified ; ; ; ; ; 080702 ;
+; 30  ; ; notSpecified ; ; ; ; ; 080703 ;
+; 908 ; ; notSpecified ; ; ; ; ; 080710 ;
+; 950 ; ; notSpecified ; ; ; ; ; 080711 ;
+; 234 ; ; notSpecified ; ; ; ; ; 080712 ;
+
+INSERT_UPDATE StockLevel; available; warehouse(code)[default = 'Philadelphia', unique = true]; inStockStatus(code); maxPreOrder; maxStockLevelHistoryCount; overSelling; preOrder; productCode[unique = true]; reserved
+# Tech - Cameras - DSLR
+; 999 ; ; notSpecified ; ; ; ; ; 0003   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0004   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0005   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0006   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0007   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0008   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0009   ;
+# Tech - Cameras - Mirrorless
+; 999 ; ; notSpecified ; ; ; ; ; 0102   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0104   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0105   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0106   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0108   ;
+# Tech - Headphones - On-ear
+; 999 ; ; notSpecified ; ; ; ; ; 0202   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0203   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0204   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0205   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0207   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0208   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0209   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0210   ;
+# Tech - Headphones - In-ear
+; 999 ; ; notSpecified ; ; ; ; ; 0301   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0304   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0305   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0306   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0307   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0310   ;
+# Tech - Headphones - Over-ear
+; 999 ; ; notSpecified ; ; ; ; ; 0401   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0402   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0403   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0404   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0405   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0408   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0409   ;
+; 999 ; ; notSpecified ; ; ; ; ; 0410   ;
+# Women - Tops
+; 1   ; ; notSpecified ; ; ; ; ; 050101 ;
+; 500 ; ; notSpecified ; ; ; ; ; 050102 ;
+; 876 ; ; notSpecified ; ; ; ; ; 050103 ;
+; 565 ; ; notSpecified ; ; ; ; ; 050201 ;
+; 265 ; ; notSpecified ; ; ; ; ; 050202 ;
+; 545 ; ; notSpecified ; ; ; ; ; 050203 ;
+; 878 ; ; notSpecified ; ; ; ; ; 050301 ;
+; 900 ; ; notSpecified ; ; ; ; ; 050302 ;
+; 769 ; ; notSpecified ; ; ; ; ; 050303 ;
+; 568 ; ; notSpecified ; ; ; ; ; 050401 ;
+; 678 ; ; notSpecified ; ; ; ; ; 050402 ;
+; 0   ; ; notSpecified ; ; ; ; ; 050403 ;
+; 100 ; ; notSpecified ; ; ; ; ; 050501 ;
+; 0   ; ; notSpecified ; ; ; ; ; 050502 ;
+; 0   ; ; notSpecified ; ; ; ; ; 050503 ;
+; 256 ; ; notSpecified ; ; ; ; ; 050510 ;
+; 987 ; ; notSpecified ; ; ; ; ; 050511 ;
+; 126 ; ; notSpecified ; ; ; ; ; 050512 ;
+; 678 ; ; notSpecified ; ; ; ; ; 050520 ;
+; 102 ; ; notSpecified ; ; ; ; ; 050521 ;
+; 390 ; ; notSpecified ; ; ; ; ; 050522 ;
+; 448 ; ; notSpecified ; ; ; ; ; 050601 ;
+; 60  ; ; notSpecified ; ; ; ; ; 050602 ;
+; 50  ; ; notSpecified ; ; ; ; ; 050603 ;
+; 0   ; ; notSpecified ; ; ; ; ; 050610 ;
+; 590 ; ; notSpecified ; ; ; ; ; 050611 ;
+; 109 ; ; notSpecified ; ; ; ; ; 050612 ;
+; 234 ; ; notSpecified ; ; ; ; ; 050620 ;
+; 100 ; ; notSpecified ; ; ; ; ; 050621 ;
+; 50  ; ; notSpecified ; ; ; ; ; 050622 ;
+; 356 ; ; notSpecified ; ; ; ; ; 050701 ;
+; 234 ; ; notSpecified ; ; ; ; ; 050702 ;
+; 567 ; ; notSpecified ; ; ; ; ; 050703 ;
+; 387 ; ; notSpecified ; ; ; ; ; 050710 ;
+; 908 ; ; notSpecified ; ; ; ; ; 050711 ;
+; 79  ; ; notSpecified ; ; ; ; ; 050712 ;
+# Women - Bottoms
+; 29  ; ; notSpecified ; ; ; ; ; 060101 ;
+; 20  ; ; notSpecified ; ; ; ; ; 060102 ;
+; 30  ; ; notSpecified ; ; ; ; ; 060103 ;
+; 700 ; ; notSpecified ; ; ; ; ; 060201 ;
+; 23  ; ; notSpecified ; ; ; ; ; 060202 ;
+; 90  ; ; notSpecified ; ; ; ; ; 060203 ;
+; 49  ; ; notSpecified ; ; ; ; ; 060301 ;
+; 420 ; ; notSpecified ; ; ; ; ; 060302 ;
+; 123 ; ; notSpecified ; ; ; ; ; 060303 ;
+; 790 ; ; notSpecified ; ; ; ; ; 060401 ;
+; 555 ; ; notSpecified ; ; ; ; ; 060402 ;
+; 126 ; ; notSpecified ; ; ; ; ; 060403 ;
+; 678 ; ; notSpecified ; ; ; ; ; 060410 ;
+; 102 ; ; notSpecified ; ; ; ; ; 060411 ;
+; 5   ; ; notSpecified ; ; ; ; ; 060412 ;
+; 1   ; ; notSpecified ; ; ; ; ; 060501 ;
+; 500 ; ; notSpecified ; ; ; ; ; 060502 ;
+; 876 ; ; notSpecified ; ; ; ; ; 060503 ;
+; 565 ; ; notSpecified ; ; ; ; ; 060510 ;
+; 265 ; ; notSpecified ; ; ; ; ; 060511 ;
+; 545 ; ; notSpecified ; ; ; ; ; 060512 ;
+; 878 ; ; notSpecified ; ; ; ; ; 060520 ;
+; 900 ; ; notSpecified ; ; ; ; ; 060521 ;
+; 769 ; ; notSpecified ; ; ; ; ; 060522 ;
+# Men - Pants
+; 1   ; ; notSpecified ; ; ; ; ; 070101 ;
+; 500 ; ; notSpecified ; ; ; ; ; 070102 ;
+; 876 ; ; notSpecified ; ; ; ; ; 070103 ;
+; 565 ; ; notSpecified ; ; ; ; ; 070201 ;
+; 265 ; ; notSpecified ; ; ; ; ; 070202 ;
+; 545 ; ; notSpecified ; ; ; ; ; 070203 ;
+; 878 ; ; notSpecified ; ; ; ; ; 070301 ;
+; 900 ; ; notSpecified ; ; ; ; ; 070302 ;
+; 769 ; ; notSpecified ; ; ; ; ; 070303 ;
+; 568 ; ; notSpecified ; ; ; ; ; 070401 ;
+; 678 ; ; notSpecified ; ; ; ; ; 070402 ;
+; 0   ; ; notSpecified ; ; ; ; ; 070403 ;
+; 100 ; ; notSpecified ; ; ; ; ; 070410 ;
+; 0   ; ; notSpecified ; ; ; ; ; 070411 ;
+; 0   ; ; notSpecified ; ; ; ; ; 070412 ;
+; 256 ; ; notSpecified ; ; ; ; ; 070501 ;
+; 987 ; ; notSpecified ; ; ; ; ; 070502 ;
+; 126 ; ; notSpecified ; ; ; ; ; 070503 ;
+; 678 ; ; notSpecified ; ; ; ; ; 070510 ;
+; 102 ; ; notSpecified ; ; ; ; ; 070511 ;
+; 390 ; ; notSpecified ; ; ; ; ; 070512 ;
+# Men - Shirts
+; 448 ; ; notSpecified ; ; ; ; ; 080101 ;
+; 60  ; ; notSpecified ; ; ; ; ; 080102 ;
+; 50  ; ; notSpecified ; ; ; ; ; 080103 ;
+; 0   ; ; notSpecified ; ; ; ; ; 080201 ;
+; 590 ; ; notSpecified ; ; ; ; ; 080202 ;
+; 109 ; ; notSpecified ; ; ; ; ; 080203 ;
+; 234 ; ; notSpecified ; ; ; ; ; 080301 ;
+; 100 ; ; notSpecified ; ; ; ; ; 080302 ;
+; 50  ; ; notSpecified ; ; ; ; ; 080303 ;
+; 356 ; ; notSpecified ; ; ; ; ; 080401 ;
+; 234 ; ; notSpecified ; ; ; ; ; 080402 ;
+; 567 ; ; notSpecified ; ; ; ; ; 080403 ;
+; 387 ; ; notSpecified ; ; ; ; ; 080410 ;
+; 908 ; ; notSpecified ; ; ; ; ; 080411 ;
+; 79  ; ; notSpecified ; ; ; ; ; 080412 ;
+; 29  ; ; notSpecified ; ; ; ; ; 080501 ;
+; 20  ; ; notSpecified ; ; ; ; ; 080502 ;
+; 30  ; ; notSpecified ; ; ; ; ; 080503 ;
+; 700 ; ; notSpecified ; ; ; ; ; 080510 ;
+; 23  ; ; notSpecified ; ; ; ; ; 080511 ;
+; 90  ; ; notSpecified ; ; ; ; ; 080512 ;
+; 49  ; ; notSpecified ; ; ; ; ; 080601 ;
+; 420 ; ; notSpecified ; ; ; ; ; 080602 ;
+; 123 ; ; notSpecified ; ; ; ; ; 080603 ;
+; 790 ; ; notSpecified ; ; ; ; ; 080701 ;
+; 555 ; ; notSpecified ; ; ; ; ; 080702 ;
+; 126 ; ; notSpecified ; ; ; ; ; 080703 ;
+; 678 ; ; notSpecified ; ; ; ; ; 080710 ;
+; 102 ; ; notSpecified ; ; ; ; ; 080711 ;
+; 5   ; ; notSpecified ; ; ; ; ; 080712 ;
+
+UPDATE Product; code[unique = true]; $catalogVersion; stockLevels(productCode, warehouse(code)); vendors(code)
+
+# Home Appliances
+INSERT_UPDATE StockLevel; available; warehouse(code)[default = 'Manhattan', unique = true]; inStockStatus(code); maxPreOrder; maxStockLevelHistoryCount; overSelling; preOrder; productCode[unique = true]; reserved
+# Home Appliances - Refrigerators - French Door Refrigerators
+; 800 ; ; notSpecified ; ; ; ; ; 0901 ;
+; 800 ; ; notSpecified ; ; ; ; ; 0902 ;
+; 800 ; ; notSpecified ; ; ; ; ; 0903 ;
+; 800 ; ; notSpecified ; ; ; ; ; 0904 ;
+; 800 ; ; notSpecified ; ; ; ; ; 0905 ;
+; 800 ; ; notSpecified ; ; ; ; ; 0906 ;
+# Home Appliances - Refrigerators - Side by Side Refrigerators
+; 800 ; ; notSpecified ; ; ; ; ; 0920 ;
+; 800 ; ; notSpecified ; ; ; ; ; 0921 ;
+# Home Appliances - Refrigerators - Wine Coolers
+; 800 ; ; notSpecified ; ; ; ; ; 0940 ;
+# Home Appliances - Refrigerators - Water dispensers
+; 800 ; ; notSpecified ; ; ; ; ; 0950 ;

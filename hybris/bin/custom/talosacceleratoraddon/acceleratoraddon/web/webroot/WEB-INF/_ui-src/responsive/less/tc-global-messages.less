@@ -1,0 +1,79 @@
+@tc-alert-info-color: #CDE6FE;
+@tc-alert-warning-color: #FFF3CF;
+@tc-alert-danger-color: #F7D7DB;
+
+.global-alerts, #import-csv-alerts{
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.tc-global-message-wp{
+  position: relative;
+  padding: 10px 50px 10px 25px;
+  width: 100%;
+}
+
+.alert {
+  border-bottom: 1px solid;
+  border-top: 1px solid;
+  .close {
+    background: transparent;
+    border: none;
+  }
+
+  &.alert-info, &.alert-warning, &.alert-danger {
+    button {
+      position: absolute;
+      top: 11px;
+      right: 20px;
+    }
+  }
+
+  &.alert-info {
+    background-color: @tc-alert-info-color;
+    color: darken(@tc-alert-info-color, 50%);
+    border-color: darken(@tc-alert-info-color, 15%);
+    a {
+      color: darken(@tc-alert-info-color, 60%);
+    }
+    button {
+      &:hover, &:active {
+        color: darken(@tc-alert-info-color, 90%);
+      }
+    }
+  }
+
+  &.alert-warning {
+    background-color: @tc-alert-warning-color;
+    color: darken(@tc-alert-warning-color, 50%);
+    border-color: darken(@tc-alert-warning-color, 15%);
+    a {
+      color: darken(@tc-alert-warning-color, 60%);
+    }
+    button {
+      &:hover, &:active {
+        color: darken(@tc-alert-warning-color, 90%);
+      }
+    }
+  }
+
+  &.alert-danger {
+    background-color: @tc-alert-danger-color;
+    color: darken(@tc-alert-danger-color, 50%);
+    border-color: darken(@tc-alert-danger-color, 15%);
+    a {
+      color: darken(@tc-alert-danger-color, 50%);
+    }
+    button {
+      &:hover, &:active {
+        color: darken(@tc-alert-danger-color, 90%);
+      }
+    }
+  }
+}
+
+@media screen and (min-width: @screen-lg-min) {
+  .tc-global-message-wp{
+    padding: 10px 50px 10px 15px;
+  }
+}

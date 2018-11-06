@@ -1,0 +1,4 @@
+[submodule "hybris/bin/custom/talosacceleratoraddon"]
+	path = hybris/bin/custom/talosacceleratoraddon
+url=https://github.com/talosdigital/talosacceleratoraddon.git
+	branch = develop

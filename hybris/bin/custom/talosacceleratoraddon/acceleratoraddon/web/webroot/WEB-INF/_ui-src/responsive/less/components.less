@@ -1,0 +1,405 @@
+.btn {
+  background-image: none;
+  border: 1px solid transparent;
+  color: @tc-btn-text-color;
+  cursor: pointer;
+  display: inline-block;
+  font-size: @tc-btn-font-size;
+  font-weight: @tc-btn-font-weight;
+  padding: 15px 25px 16px;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  vertical-align: middle;
+  white-space: nowrap;
+  -ms-touch-action: manipulation;
+  touch-action: manipulation;
+  transition: background-color 0.2s;
+
+  &:hover {
+    transition: background-color 0.2s;
+  }
+
+  &.btn-light {
+    color: @tc-btn-light-color;
+    border-color: @tc-btn-light-border-color;
+    background-color: @tc-btn-light-background-color;
+    &:hover {
+      color: @tc-btn-light-color-hover;
+      background-color: @tc-btn-light-background-color-hover;
+    }
+  }
+
+  &.btn-default {
+    color: @tc-btn-default-color;
+    border-color: @tc-btn-default-border-color;
+    background-color: @tc-btn-default-background-color;
+    &:hover {
+      color: @tc-btn-default-color-hover;
+      background-color: @tc-btn-default-background-color-hover;
+    }
+  }
+  &.btn-primary {
+    color: @tc-btn-primary-color;
+    border-color: @tc-btn-primary-border-color;
+    background-color: @tc-btn-primary-background-color;
+    &:hover {
+      border-color: @tc-btn-primary-border-color-hover;
+      background-color: @tc-btn-primary-background-color-hover;
+    }
+  }
+
+  &.btn-danger {
+    color: @tc-btn-danger-color;
+    border-color: @tc-btn-danger-border-color;
+    background-color: @tc-btn-danger-background-color;
+    &:hover {
+      border-color: @tc-btn-danger-border-color-hover;
+      background-color: @tc-btn-danger-background-color-hover;
+    }
+  }
+
+  &.btn-block {
+    display: block;
+    width: 100%;
+  }
+
+  &.btn-xs {
+    font-size: @tc-btn-font-size-xs;
+    padding: @tc-btn-xs;
+  }
+
+  &.btn-sm {
+    font-size: @tc-btn-font-size-sm;
+    padding: @tc-btn-sm;
+  }
+
+  &.btn-lg {
+    font-size: @tc-btn-font-size-lg;
+    padding: @tc-btn-lg;
+  }
+}
+
+.btn[disabled] {
+  opacity: 0.65;
+  filter: alpha(opacity=65);
+  cursor: not-allowed;
+}
+
+.tc-input, .tc-textarea {
+  background-color: @tc-input-background-color;
+  border: 1px solid @tc-input-border-color;
+  display: block;
+  color: @tc-input-color;
+  font-weight: @tc-input-font-weight;
+  font-size: @tc-input-font-size;
+  height: @tc-input-height;
+  line-height: @tc-input-font-size;
+  padding: 0 15px;
+  width: 100%;
+
+  &.tc-input-light, &.tc-textarea-light {
+    color: @tc-input-light-color;
+    border-color: @tc-input-border-color-light;
+  }
+
+  &.input-sm, &.textarea-sm {
+    font-size: @tc-input-font-size-sm;
+    height: @tc-input-height-sm;
+    padding: 5px 10px;
+  }
+
+  &.input-lg, &.textarea-lg {
+    font-size: @tc-input-font-size-lg;
+    height: @tc-input-height-lg;
+    padding: 10px 15px;
+  }
+}
+
+.tc-textarea {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  height: auto;
+}
+
+.tc-input::placeholder, .tc-textarea::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: inherit;
+  opacity: 0.6; /* Firefox */
+  text-transform: uppercase;
+}
+
+.tc-input:-webkit-input-placeholder, .tc-textarea:-webkit-input-placeholder {
+  color: inherit;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.tc-input:-ms-input-placeholder, .tc-textarea:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: inherit;
+  text-transform: uppercase;
+  opacity: 0.6;
+}
+
+.tc-control {
+  color: @tc-checkbox-color;
+  cursor: pointer;
+  display: inline-block;
+  font-size: 1.4rem;
+  font-weight: 300;
+  line-height: 25px;
+  margin-bottom: 15px;
+  min-height: 25px;
+  padding-left: 40px;
+  position: relative;
+
+  input {
+    left: 0;
+    margin: 0;
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+  }
+
+  .tc-control__indicator {
+    background: transparent;
+    border: 1.5px solid @tc-checkbox-color;
+    box-sizing: border-box;
+    height: 25px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 25px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+
+    &:after {
+      content: '';
+      bottom: 0;
+      display: none;
+      left: 0;
+      margin: auto;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+  }
+
+  &.tc-sm {
+    line-height: 15px;
+    font-size: 1.2rem;
+    min-height: 25px;
+    padding: 0 0 0 30px;
+    .tc-control__indicator {
+      height: 15px;
+      width: 15px;
+      &:after {
+        height: 9px;
+        width: 5px;
+      }
+    }
+
+    &.tc-control-right {
+      padding: 0 30px 0 0;
+    }
+  }
+
+  &.tc-control-right {
+    padding: 0 40px 0 0;
+    .tc-control__indicator {
+      left: auto;
+      right: 0;
+    }
+  }
+}
+
+.tc-checkbox {
+  .tc-control__indicator:after {
+    border: solid @tc-primary-color;
+    border-width: 0 2px 2px 0;
+    height: 16px;
+    transform: rotate(45deg);
+    transform-origin: 80%;
+    width: 7px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+  }
+}
+
+.tc-radio {
+  .tc-control__indicator {
+    border-radius: 50%;
+    &:after {
+      background-color: @tc-primary-color;
+      border-radius: 50%;
+      height: 15px;
+      width: 15px;
+    }
+  }
+  &.tc-sm {
+    .tc-control__indicator {
+      &:after {
+        height: 7px;
+        width: 7px;
+      }
+    }
+  }
+}
+
+.tc-control {
+  input:checked ~ .tc-control__indicator:after {
+    display: block;
+  }
+}
+
+// Select styling
+.select {
+  position: relative;
+  height: @tc-input-height;
+  background: @tc-input-background-color;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 0;
+    height: 0;
+    right: 15px;
+    bottom: 0;
+    margin: auto;
+    border-style: solid;
+    border-width: 5px 5px 0 5px;
+    border-color: black transparent transparent transparent;
+    pointer-events: none;
+  }
+
+  &:before {
+    width: 30px;
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 1px;
+    content: '';
+    pointer-events: none;
+  }
+
+  &.tc-select-light {
+    select {
+      color: @tc-input-light-color;
+      border-color: @tc-input-border-color-light;
+    }
+  }
+
+  &.select-sm {
+    font-size: @tc-input-font-size-sm;
+    height: @tc-input-height-sm;
+  }
+
+  &.select-lg {
+    font-size: @tc-input-font-size-lg;
+    height: @tc-input-height-lg;
+  }
+
+  select {
+    font-size: 14px;
+    box-shadow: none;
+    border-radius: 0;
+    background: transparent;
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    outline: none;
+    padding-right: 35px;
+    padding-left: 15px;
+    border: 1px solid @tc-input-border-color;
+    color: @tc-input-color;
+
+    // Disable default styling on ff
+    -moz-appearance: none;
+
+    // Disable ugly ass outline on firefox
+    &:-moz-focusring {
+      color: transparent;
+      text-shadow: 0 0 0 #000;
+    }
+
+    // Disable default styling on webkit browsers
+    -webkit-appearance: none;
+
+    // Disable default arrow on IE 11+
+    &::-ms-expand {
+      display: none;
+    }
+
+    &:focus {
+      border-color: @tc-input-border-color;
+    }
+
+  }
+}
+
+.form-group {
+  margin-bottom: 15px;
+
+  &.has-error {
+
+    .tc-input, .tc-textarea, .select select {
+      border-color: @tc-error-color;
+    }
+
+    .help-block {
+      color: @tc-error-color;
+    }
+  }
+
+  .help-block {
+    margin-top: 3px;
+    font-size: 13px;
+    color: @tc-primary-color;
+  }
+}
+
+.rating {
+  .rating-stars {
+    cursor: pointer;
+    display: inline-block;
+
+    span {
+      color: @product-details-tabs-stars-color;
+      margin: 0 0.1em;
+      overflow: hidden;
+      width: 0.5em;
+
+      &.active {
+        color: @tc-primary-color;
+      }
+
+      &.fh {
+        margin-right: 0;
+        float: left;
+      }
+
+      &.lh {
+        text-indent: -0.5em;
+        margin-left: 0;
+        float: left;
+      }
+    }
+
+    &.product-reviews-stars {
+      padding-top: 0;
+      span {
+        width: 1em;
+        display: inline-block;
+      }
+
+      .greenStars {
+        width: 100% !important;
+        span {
+          width: 0;
+        }
+      }
+    }
+  }
+}

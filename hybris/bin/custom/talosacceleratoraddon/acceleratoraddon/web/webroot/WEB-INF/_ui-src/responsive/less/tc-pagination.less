@@ -1,0 +1,74 @@
+.sort-refine-bar {
+  margin-bottom: 20px;
+
+  .pagination {
+    display: table;
+    width: 100%;
+    max-width: 300px;
+    padding: 0;
+    margin: 25px auto 0;
+    font-size: 2rem;
+
+    li {
+      display: table-cell;
+      vertical-align: top;
+      text-align: center;
+
+      &.active {
+        span {
+          color: darken(@tc-primary-color, 10%);
+          font-weight: bold;
+          cursor: default;
+        }
+      }
+      &:hover, &:focus {
+        color: darken(@tc-primary-color, 10%);
+      }
+    }
+
+    .pagination-prev, .pagination-next {
+      padding-top: 2px;
+      &.disabled {
+        cursor: not-allowed;
+        svg {
+          fill: #A6A6A6;
+        }
+      }
+    }
+  }
+
+  label {
+    margin-bottom: 10px;
+  }
+}
+
+.pagination-bar {
+  label, .pagination-bar-results {
+    color: #A5A5A5;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: inline-block;
+    font-size: 12px;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .pagination-bar {
+    .tc-refine-btn {
+      margin-top: 28px;
+    }
+    .tc-pagination-wp {
+      margin-top: 16px;
+      display: inline-block;
+      float: right;
+      text-align: right;
+
+      li {
+        a, span {
+          display: inline-block;
+          width: 30px;
+        }
+      }
+    }
+  }
+}

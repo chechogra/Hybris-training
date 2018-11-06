@@ -1,0 +1,290 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Products
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$supercategories = supercategories(code, $catalogVersion)
+$baseProduct = baseProduct(code, $catalogVersion)
+$approved = approvalstatus(code)[default = 'check']
+
+# Insert Products
+INSERT_UPDATE Product; code[unique = true]; $supercategories; manufacturerName; manufacturerAID; unit(code); ean; variantType(code); $catalogVersion; $approved
+# Tech - Cameras - DSLR
+; 0001 ; dslr,nikon       ; Nikon ; ; pieces ; ;                                ; ;
+; 0002 ; dslr,nikon       ; Nikon ; ; pieces ; ;                                ; ;
+; 0003 ; dslr,nikon       ; Nikon ; ; pieces ; ;                                ; ;
+; 0004 ; dslr,nikon       ; Nikon ; ; pieces ; ;                                ; ;
+; 0005 ; dslr,nikon       ; Nikon ; ; pieces ; ;                                ; ;
+; 0006 ; dslr,nikon       ; Nikon ; ; pieces ; ;                                ; ;
+; 0007 ; dslr,canon       ; Canon ; ; pieces ; ;                                ; ;
+; 0008 ; dslr,canon       ; Canon ; ; pieces ; ;                                ; ;
+; 0009 ; dslr,canon       ; Canon ; ; pieces ; ;                                ; ;
+; 0010 ; dslr,canon       ; Canon ; ; pieces ; ;                                ; ;
+# Tech - Cameras - Mirrorless
+; 0101 ; mirrorless,canon ; Canon ; ; pieces ; ;                                ; ;
+; 0102 ; mirrorless,canon ; Canon ; ; pieces ; ;                                ; ;
+; 0103 ; mirrorless,canon ; Canon ; ; pieces ; ;                                ; ;
+; 0104 ; mirrorless,sony  ; Sony  ; ; pieces ; ;                                ; ;
+; 0105 ; mirrorless,sony  ; Sony  ; ; pieces ; ;                                ; ;
+; 0106 ; mirrorless,sony  ; Sony  ; ; pieces ; ;                                ; ;
+; 0107 ; mirrorless,nikon ; Nikon ; ; pieces ; ;                                ; ;
+; 0108 ; mirrorless,nikon ; Nikon ; ; pieces ; ;                                ; ;
+; 0109 ; mirrorless,nikon ; Nikon ; ; pieces ; ;                                ; ;
+; 0110 ; mirrorless,nikon ; Nikon ; ; pieces ; ;                                ; ;
+# Tech - Headphones - On-ear
+; 0201 ; on-ear,jbl       ; JBL   ; ; pieces ; ; ElectronicsColorVariantProduct ; ; approved
+; 0202 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0203 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0204 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0205 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0206 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0207 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0208 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0209 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0210 ; on-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+# Tech - Headphones - In-ear
+; 0301 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0302 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0303 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0304 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0305 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0306 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0307 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0308 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0309 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+; 0310 ; in-ear,jbl       ; JBL   ; ; pieces ; ;                                ; ;
+# Tech - Headphones - Over-ear
+; 0401 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0402 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0403 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0404 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0405 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0406 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0407 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0408 ; over-ear,jbl     ; JBL   ; ; pieces ; ;                                ; ;
+; 0409 ; over-ear,bose    ; Bose  ; ; pieces ; ;                                ; ;
+; 0410 ; over-ear,bose    ; Bose  ; ; pieces ; ;                                ; ;
+
+INSERT_UPDATE ElectronicsColorVariantProduct; code[unique = true]; $baseProduct; $supercategories; manufacturerName; manufacturerAID; unit(code); ean; $catalogVersion; approvalstatus(code)[default = 'approved']
+; 020101 ; 0201 ; on-ear,jbl ; JBL ; ; pieces ; ; ;
+; 020102 ; 0201 ; on-ear,jbl ; JBL ; ; pieces ; ; ;
+; 020103 ; 0201 ; on-ear,jbl ; JBL ; ; pieces ; ; ;
+
+INSERT_UPDATE ApparelProduct; code[unique = true]; $supercategories; manufacturerName; manufacturerAID; unit(code); ean; variantType(code); $catalogVersion; approvalstatus(code)[default = 'approved']; genders(code)
+# Women - Tops
+; 0501 ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0502 ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0503 ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0504 ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0505 ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0506 ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0507 ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+# Women - Bottoms
+; 0601 ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0602 ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0603 ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0604 ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+; 0605 ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; FEMALE
+# Men - Pants
+; 0701 ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0702 ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0703 ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0704 ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0705 ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+# Men - Shirts
+; 0801 ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0802 ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0803 ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0804 ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0805 ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0806 ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+; 0807 ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelStyleVariantProduct ; ; ; MALE
+
+INSERT_UPDATE ApparelStyleVariantProduct; code[unique = true]; $baseProduct; swatchColors(code); $supercategories; manufacturerName; manufacturerAID; unit(code); ean; variantType(code); $catalogVersion; approvalstatus(code)[default = 'approved']
+# Women - Tops
+; 0501_blue      ; 0501 ; STEELBLUE       ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0502_navy_blue ; 0502 ; NAVY            ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0503_black     ; 0503 ; BLACK           ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0504_red       ; 0504 ; CRIMSON,BLACK   ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0505_taupe     ; 0505 ; ROSYBROWN       ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0505_turquoise ; 0505 ; MEDIUMTURQUOISE ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0505_peach     ; 0505 ; PEACHPUFF       ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0506_black     ; 0506 ; BLACK           ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0506_white     ; 0506 ; WHITE           ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0506_grey      ; 0506 ; DARKGRAY        ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0507_green     ; 0507 ; OLIVEDRAB       ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0507_black     ; 0507 ; BLACK           ; tops,utrend    ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+# Women - Bottoms
+; 0601_red       ; 0601 ; CRIMSON         ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0602_green     ; 0602 ; OLIVEDRAB       ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0603_blue      ; 0603 ; STEELBLUE       ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0604_grey      ; 0604 ; DARKGRAY        ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0604_green     ; 0604 ; OLIVEDRAB       ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0605_blue      ; 0605 ; STEELBLUE       ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0605_black     ; 0605 ; BLACK           ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0605_grey      ; 0605 ; DARKGRAY        ; bottoms,utrend ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+# Men - Pants
+; 0701_beige     ; 0701 ; BEIGE           ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0702_grey      ; 0702 ; DARKGRAY        ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0703_navy_blue ; 0703 ; NAVY            ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0704_grey      ; 0704 ; DARKGRAY        ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0704_navy_blue ; 0704 ; NAVY            ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0705_brown     ; 0705 ; SADDLEBROWN     ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0705_steel     ; 0705 ; GAINSBORO       ; pants,utrend   ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+# Men - Shirts
+; 0801_white     ; 0801 ; WHITE           ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0802_green     ; 0802 ; OLIVEDRAB       ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0803_black     ; 0803 ; BLACK           ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0804_black     ; 0804 ; BLACK           ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0804_navy_blue ; 0804 ; NAVY            ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0805_red       ; 0805 ; CRIMSON         ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0805_navy_blue ; 0805 ; NAVY            ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0806_blue      ; 0806 ; STEELBLUE       ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0807_black     ; 0807 ; BLACK           ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+; 0807_navy_blue ; 0807 ; NAVY            ; shirts,utrend  ; UTrend ; ; pieces ; ; ApparelSizeVariantProduct ; ;
+
+INSERT_UPDATE ApparelSizeVariantProduct; code[unique = true]; $baseProduct; size; $supercategories; manufacturerName; manufacturerAID; unit(code); ean; variantType(code); $catalogVersion; $approved
+# Women - Tops
+; 050101 ; 0501_blue      ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050102 ; 0501_blue      ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050103 ; 0501_blue      ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050201 ; 0502_navy_blue ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050202 ; 0502_navy_blue ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050203 ; 0502_navy_blue ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050301 ; 0503_black     ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050302 ; 0503_black     ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050303 ; 0503_black     ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050401 ; 0504_red       ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050402 ; 0504_red       ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050403 ; 0504_red       ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050501 ; 0505_taupe     ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050502 ; 0505_taupe     ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050503 ; 0505_taupe     ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050510 ; 0505_turquoise ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050511 ; 0505_turquoise ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050512 ; 0505_turquoise ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050520 ; 0505_peach     ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050521 ; 0505_peach     ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050522 ; 0505_peach     ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050601 ; 0506_black     ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050602 ; 0506_black     ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050603 ; 0506_black     ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050610 ; 0506_white     ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050611 ; 0506_white     ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050612 ; 0506_white     ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050620 ; 0506_grey      ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050621 ; 0506_grey      ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050622 ; 0506_grey      ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050701 ; 0507_green     ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050702 ; 0507_green     ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050703 ; 0507_green     ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050710 ; 0507_black     ; L ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050711 ; 0507_black     ; M ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+; 050712 ; 0507_black     ; S ; tops,utrend    ; UTrend ; ; pieces ; ; ; ;
+# Women - Bottoms
+; 060101 ; 0601_red       ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060102 ; 0601_red       ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060103 ; 0601_red       ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060201 ; 0602_green     ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060202 ; 0602_green     ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060203 ; 0602_green     ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060301 ; 0603_blue      ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060302 ; 0603_blue      ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060303 ; 0603_blue      ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060401 ; 0604_grey      ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060402 ; 0604_grey      ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060403 ; 0604_grey      ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060410 ; 0604_green     ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060411 ; 0604_green     ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060412 ; 0604_green     ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060501 ; 0605_blue      ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060502 ; 0605_blue      ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060503 ; 0605_blue      ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060510 ; 0605_black     ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060511 ; 0605_black     ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060512 ; 0605_black     ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060520 ; 0605_grey      ; L ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060521 ; 0605_grey      ; M ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+; 060522 ; 0605_grey      ; S ; bottoms,utrend ; UTrend ; ; pieces ; ; ; ;
+# Men - Pants
+; 070101 ; 0701_beige     ; L ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070102 ; 0701_beige     ; M ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070103 ; 0701_beige     ; S ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070201 ; 0702_grey      ; L ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070202 ; 0702_grey      ; M ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070203 ; 0702_grey      ; S ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070301 ; 0703_navy_blue ; L ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070302 ; 0703_navy_blue ; M ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070303 ; 0703_navy_blue ; S ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070401 ; 0704_grey      ; L ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070402 ; 0704_grey      ; M ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070403 ; 0704_grey      ; S ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070410 ; 0704_navy_blue ; L ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070411 ; 0704_navy_blue ; M ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070412 ; 0704_navy_blue ; S ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070501 ; 0705_brown     ; L ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070502 ; 0705_brown     ; M ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070503 ; 0705_brown     ; S ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070510 ; 0705_steel     ; L ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070511 ; 0705_steel     ; M ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+; 070512 ; 0705_steel     ; S ; pants,utrend   ; UTrend ; ; pieces ; ; ; ;
+# Men - Shirts
+; 080101 ; 0801_white     ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080102 ; 0801_white     ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080103 ; 0801_white     ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080201 ; 0802_green     ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080202 ; 0802_green     ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080203 ; 0802_green     ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080301 ; 0803_black     ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080302 ; 0803_black     ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080303 ; 0803_black     ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080401 ; 0804_black     ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080402 ; 0804_black     ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080403 ; 0804_black     ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080410 ; 0804_navy_blue ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080411 ; 0804_navy_blue ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080412 ; 0804_navy_blue ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080501 ; 0805_red       ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080502 ; 0805_red       ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080503 ; 0805_red       ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080510 ; 0805_navy_blue ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080511 ; 0805_navy_blue ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080512 ; 0805_navy_blue ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080601 ; 0806_blue      ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080602 ; 0806_blue      ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080603 ; 0806_blue      ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080701 ; 0807_black     ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080702 ; 0807_black     ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080703 ; 0807_black     ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080710 ; 0807_navy_blue ; L ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080711 ; 0807_navy_blue ; M ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+; 080712 ; 0807_navy_blue ; S ; shirts,utrend  ; UTrend ; ; pieces ; ; ; ;
+
+# Insert Products - Home Appliances
+INSERT_UPDATE Product; code[unique = true]; $supercategories; manufacturerName; manufacturerAID; unit(code); ean; variantType(code); $catalogVersion; $approved
+# Home Appliances - Refrigerators - French Door Refrigerators
+; 0901 ; french-door-refrigerators,haceb  ; Haceb ; ; pieces ; ; ; ;
+; 0902 ; french-door-refrigerators,haceb  ; Haceb ; ; pieces ; ; ; ;
+; 0903 ; french-door-refrigerators,haceb  ; Haceb ; ; pieces ; ; ; ;
+; 0904 ; french-door-refrigerators,haceb  ; Haceb ; ; pieces ; ; ; ;
+; 0905 ; french-door-refrigerators,haceb  ; Haceb ; ; pieces ; ; ; ;
+; 0906 ; french-door-refrigerators,haceb  ; Haceb ; ; pieces ; ; ; ;
+# Home Appliances - Refrigerators - Side by Side Refrigerators
+; 0920 ; side-by-side-refrigerators,haceb ; Haceb ; ; pieces ; ; ; ;
+; 0921 ; side-by-side-refrigerators,haceb ; Haceb ; ; pieces ; ; ; ;
+# Home Appliances - Refrigerators - Wine Coolers
+; 0940 ; wine-coolers,haceb               ; Haceb ; ; pieces ; ; ; ;
+# Home Appliances - Refrigerators - Water dispensers
+; 0950 ; water-dispensers,haceb           ; Haceb ; ; pieces ; ; ; ;

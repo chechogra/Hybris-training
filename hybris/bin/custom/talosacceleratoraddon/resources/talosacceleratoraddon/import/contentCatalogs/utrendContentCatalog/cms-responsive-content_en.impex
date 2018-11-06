@@ -1,0 +1,44 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+$contentCatalog = utrendContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$jarResourceCms = jar:com.talos.talosacceleratoraddon.constants.TalosacceleratoraddonConstants&/talosacceleratoraddon/import/cockpit/cmscockpit
+$lang = en
+
+UPDATE FooterNavigationComponent; $contentCV[unique = true]; uid[unique = true]; notice[lang = $lang]
+; ; TCFooterNavigationComponent ; "@2018 Talos Commerce"
+
+UPDATE TCBannerAction; $contentCV[unique = true]; uid[unique = true]; text[lang = $lang]
+; ; homepageGridBanner1Action1 ; "Shop men"
+; ; homepageGridBanner1Action2 ; "Shop women"
+
+UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; homepageProductCarousel ; "What's new"
+
+UPDATE TCBannerAction; $contentCV[unique = true]; uid[unique = true]; text[lang = $lang]
+; ; homepageRotatingBanner1Action1 ; "Shop"
+; ; homepageRotatingBanner2Action1 ; "Shop"
+; ; homepageRotatingBanner3Action1 ; "Shop"
+
+UPDATE TCRotatingBannerComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; homepageRotatingBanner ; "Trending"
+
+UPDATE TCResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; titleXs[lang = $lang]; titleSm[lang = $lang]; titleMd[lang = $lang]; titleLg[lang = $lang]
+; ; homepageLargeBanner1 ; "<p style=""font-size: 24px; font-weight: 100; text-transform: uppercase; margin: 0;"">The forever</p> <p style=""font-size: 50px; font-weight: 600; font-style: italic; line-height: 48px; text-transform: uppercase; margin: 0;"">Closet</p> <p style=""font-size: 16px; font-weight: 100; text-transform: uppercase; margin: 0;"">Winter to spring</p>" ; "<p style=""font-size: 24px; font-weight: 100; text-transform: uppercase; margin: 0;"">The forever</p> <p style=""font-size: 50px; font-weight: 600; font-style: italic; line-height: 48px; text-transform: uppercase; margin: 0;"">Closet</p> <p style=""font-size: 16px; font-weight: 100; text-transform: uppercase; margin: 0;"">Winter to spring</p>" ; "<p style=""font-size: 24px; font-weight: 100; text-transform: uppercase; margin: 0;"">The forever</p> <p style=""font-size: 50px; font-weight: 600; font-style: italic; line-height: 48px; text-transform: uppercase; margin: 0;"">Closet</p> <p style=""font-size: 16px; font-weight: 100; text-transform: uppercase; margin: 0;"">Winter to spring</p>" ; "<p style=""font-size: 24px; font-weight: 100; text-transform: uppercase; margin: 0;"">The forever</p> <p style=""font-size: 50px; font-weight: 600; font-style: italic; line-height: 48px; text-transform: uppercase; margin: 0;"">Closet</p> <p style=""font-size: 16px; font-weight: 100; text-transform: uppercase; margin: 0;"">Winter to spring</p>"
+
+UPDATE TCResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; descriptionXs[lang = $lang]; descriptionSm[lang = $lang]; descriptionMd[lang = $lang]; descriptionLg[lang = $lang]
+; ; homepageLargeBanner1 ; ; ; ;
+
+UPDATE ConsentTemplate; id[unique = true]; name[lang = $lang]; description[lang = $lang]
+; UTREND_CONSENT_TEMPLATE_1 ; "Newsletter Subscription" ; "I approve to use my personal data for receiving e-mail newsletters for Marketing campaigns."
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
+; ; HelpParagraphComponent ; "<div class=""tc-checkout-help""><span class=""tc-brand-color"">Need Help with your checkout process?</span>&nbsp;<span>Contact Us or Call phone number.</span></div>"

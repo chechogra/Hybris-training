@@ -1,0 +1,150 @@
+.tc-import-csv-section {
+  margin-top: 25px;
+}
+
+.tc-import-csv-header, .import-csv__file-spec-wp, .import-csv__file-upload-wp {
+  padding: 0 @tc-content-extra-padding;
+}
+
+.import-csv__file-upload-wp {
+  padding: 30px @tc-content-extra-padding 35px;
+  p {
+    margin: 0 0 15px;
+  }
+}
+
+.tc-import-csv-wp {
+  > .form-group {
+    margin-bottom: 0;
+  }
+}
+
+.tc-import-csv__headline {
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.tc-import-csv__subheadline {
+  margin-bottom: 15px;
+}
+
+.import-csv__file-spec {
+  p {
+    margin-bottom: 20px;
+    font-weight: 500;
+  }
+}
+
+.tc-csv-spec-list {
+  list-style: none;
+  padding: 0;
+  li {
+    position: relative;
+    padding-left: 24px;
+    &:before {
+      content: "\00b7";
+      padding-right: 20px;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+  }
+}
+
+.import-csv__file-spec-item {
+  padding-bottom: 10px;
+}
+
+.import-csv__file-upload {
+  background-color: #F8F8F8;
+
+  p {
+    padding: 0 0 14px 0;
+    font-weight: 500;
+  }
+
+  span.file-upload__file-name {
+    display: block;
+    margin-bottom: 15px;
+  }
+}
+
+.file-upload__wrapper {
+  width: 100%;
+  box-sizing: border-box;
+  span {
+    font-weight: 400;
+  }
+}
+
+.tc-import-csv-btn-wp {
+  width: 100%;
+}
+
+#csvFile {
+  display: none;
+}
+
+@media screen and (min-width: @screen-sm-min) {
+  .tc-import-csv-section {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+
+  .import-csv__file-upload-wp {
+    background-color: #F8F8F8;
+    padding: 30px 25px 35px;
+  }
+
+  .import-csv__file-upload {
+    background: transparent;
+
+    p {
+      padding: 0 0 14px 0;
+    }
+  }
+
+  .tc-import-csv__headline {
+    font-weight: 500;
+    font-size: 18px;
+    margin-bottom: 25px;
+  }
+
+  .tc-import-csv__subheadline {
+    margin-bottom: 25px;
+  }
+  
+  .import-csv__file-spec{
+    p:first-of-type{
+      margin-top: 30px;
+    }
+  }
+}
+
+@media screen and (min-width: @screen-md-min) {
+  .tc-import-csv-wp {
+    text-align: right;
+    .file-upload {
+      text-align: left;
+    }
+
+    .file-upload__wrapper {
+      width: 175px;
+      display: inline-block;
+    }
+
+    .import-csv__action {
+      width: 200px;
+      display: inline-block;
+    }
+  }
+}
+
+@media screen and (min-width: @screen-lg-min) {
+  .tc-import-csv-header, .import-csv__file-spec-wp {
+    padding: 0;
+  }
+}
+

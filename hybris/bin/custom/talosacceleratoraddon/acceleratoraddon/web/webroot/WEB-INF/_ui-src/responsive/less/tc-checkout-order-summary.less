@@ -1,0 +1,113 @@
+.tc-os-title {
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+.tc-os-list {
+  list-style: none;
+  padding: 0;
+}
+
+.tc-os-payment-list {
+  list-style: none;
+  padding: 0;
+  border-bottom: 1px solid @tc-border-color;
+}
+
+.tc-os-heading {
+  color: @tc-primary-color;
+  font-size: 20px;
+  margin: 20px 0;
+}
+
+.tc-os-address {
+  color: @tc-btn-text-color;
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+.tc-os-product-container {
+  border-bottom: 1px solid @tc-border-color;
+  display: flex;
+  justify-content: flex-start;
+  position: relative;
+  padding: 0 80px 10px 0;
+  margin-bottom: 10px;
+
+  .tc-os-product-thumbnail {
+    position: static;
+    border: 1px solid #E5E2E2;
+    background-color: #F1F1F1;
+    width: 65px;
+    height: 65px;
+    img {
+      width: 65px;
+      height: 65px;
+    }
+  }
+
+  .tc-os-product-name {
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+  .tc-os-product-total-price {
+    font-weight: 500;
+    padding-top: 0;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    -moz-transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -o-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
+  .tc-os-product-details {
+    padding-bottom: 0;
+    padding-left: 20px;
+  }
+}
+
+.tc-os-subtotals-container {
+  border-bottom: 1px solid @tc-border-color;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  .tc-os-subtotal {
+    font-weight: 400;
+    font-size: 20px;
+    span {
+      float: right;
+    }
+  }
+  .tc-os-subtotal-discount {
+    font-size: 16px;
+    color: @tc-primary-color;
+    span {
+      float: right;
+    }
+  }
+  .tc-os-subtotal-delivery {
+    font-size: 16px;
+    color: @tc-btn-text-color;
+    span {
+      float: right;
+    }
+  }
+}
+
+.tc-os-totals-container {
+
+  .tc-os-total {
+    font-size: 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    span {
+      float: right;
+    }
+  }
+  .tc-os-taxes {
+    font-size: 16px;
+  }
+}

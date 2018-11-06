@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:util="http://www.springframework.org/schema/util" xmlns="http://www.springframework.org/schema/beans"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans.xsd
+
+
+           http://www.springframework.org/schema/context
+           http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
+
+    <context:annotation-config/>
+
+    <context:component-scan base-package="com.talos.talosacceleratoraddon.controllers"
+                            scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"/>
+
+    <!-- Expose /acceleratoraddon/web/webroot/WEB-INF/messages/base.js.properties  resource bundle as javascript variables -->
+    <bean id="defaultTalosacceleratoraddonJavaScriptMessageResourceAccessor" parent="abstractJavaScriptMessageResourceAccessor">
+        <property name="addOnName" value="talosacceleratoraddon"/>
+    </bean>
+
+    <bean id="defaultTalosacceleratoraddonBeforeViewJsPropsHandlerAdaptee" parent="abstractBeforeViewJsPropsHandlerAdaptee"
+          class="de.hybris.platform.addonsupport.interceptors.ExportJsPropertiesBeforeViewHandler">
+        <property name="messageSource" ref="defaultTalosacceleratoraddonJavaScriptMessageResourceAccessor"/>
+    </bean>
+
+    <bean id="getTalosacceleratoraddonBeforeViewHandler" parent="beforeViewHandlerAdapter">
+        <property name="adaptee" ref="defaultTalosacceleratoraddonBeforeViewJsPropsHandlerAdaptee"/>
+    </bean>
+    <bean id="talosAcceleratorAddonBeforeViewHandlerListMergeDirective" depends-on="beforeViewHandlersList"
+          parent="listMergeDirective">
+        <property name="add" ref="getTalosacceleratoraddonBeforeViewHandler"/>
+    </bean>
+
+    <bean id="talosAcceleratorAddonBeforeViewHandler"
+          class="com.talos.talosacceleratoraddon.interceptors.TalosAcceleratorAddonBeforeViewHandler">
+        <property name="viewMap" ref="talosAcceleratorAddonViewMap"/>
+    </bean>
+
+    <bean depends-on="beforeViewHandlersList" parent="listMergeDirective">
+        <property name="add" ref="talosAcceleratorAddonBeforeViewHandler"/>
+    </bean>
+
+    <util:map id="talosAcceleratorAddonViewMap" key-type="java.lang.String" value-type="java.lang.Map">
+        <entry key="pages/layout/landingLayout2Page" value-ref="landingLayout2Page"/>
+        <entry key="pages/account/accountLoginPage" value-ref="accountLoginPage"/>
+        <entry key="pages/csv/importCSVSavedCartPage" value-ref="importCSVSavedCartPage"/>
+        <entry key="pages/quickOrder/quickOrderPage" value-ref="quickOrderPage"/>
+        <entry key="pages/account/accountLayoutPage" value-ref="accountLayoutPage"/>
+        <entry key="pages/account/accountPaymentInfoPage" value-ref="accountPaymentInfoPage"/>
+        <entry key="pages/account/accountChangePasswordPage" value-ref="accountChangePasswordPage"/>
+        <entry key="pages/account/accountProfileEditPage" value-ref="accountProfileEditPage"/>
+        <entry key="pages/account/accountProfileEmailEditPage" value-ref="accountProfileEmailEditPage"/>
+        <entry key="pages/error/errorNotFoundPage" value-ref="errorNotFoundPage"/>
+        <entry key="pages/product/productLayout2Page" value-ref="productLayout2Page"/>
+        <entry key="pages/product/productReviewsTab" value-ref="productReviewsTab"/>
+        <entry key="pages/search/searchEmptyPage" value-ref="searchEmptyPage"/>
+        <entry key="pages/search/searchGridPage" value-ref="searchGridPage"/>
+        <entry key="pages/search/searchListPage" value-ref="searchListPage"/>
+        <entry key="pages/search/searchListPage" value-ref="searchListPage"/>
+        <entry key="pages/category/productGridPage" value-ref="productGridPage"/>
+        <entry key="pages/category/productListPage" value-ref="productListPage"/>
+        <entry key="pages/category/categoryPage" value-ref="categoryPage"/>
+        <entry key="fragments/address/countryAddressForm" value-ref="countryAddressForm"/>
+        <entry key="fragments/cart/cartPopup" value-ref="cartPopup"/>
+        <entry key="fragments/cart/addToCartPopup" value-ref="addToCartPopup"/>
+        <entry key="fragments/product/reviewsTab" value-ref="reviewsTab"/>
+        <entry key="pages/cart/cartDisplay" value-ref="cartDisplay"/>
+        <entry key="pages/cart/cartPage" value-ref="cartPage"/>
+        <entry key="pages/cart/cartPromotionsDisplay" value-ref="cartPromotionsDisplay"/>
+        <entry key="pages/cart/cartTotalsDisplay" value-ref="cartTotalsDisplay"/>
+        <entry key="pages/cart/checkoutDisplay" value-ref="checkoutDisplay"/>
+        <entry key="pages/cart/potentialPromotionsDisplay" value-ref="potentialPromotionsDisplay"/>
+        <entry key="pages/checkout/checkoutLoginPage" value-ref="checkoutLoginPage"/>
+        <entry key="pages/checkout/multi/addEditDeliveryAddressPage" value-ref="addEditDeliveryAddressPage"/>
+        <entry key="pages/checkout/multi/addPaymentMethodPage" value-ref="addPaymentMethodPage"/>
+        <entry key="pages/checkout/multi/checkoutSummaryPage" value-ref="checkoutSummaryPage"/>
+        <entry key="pages/checkout/multi/chooseDeliveryMethodPage" value-ref="chooseDeliveryMethodPage"/>
+        <entry key="pages/checkout/multi/silentOrderPostPage" value-ref="silentOrderPostPage"/>
+        <entry key="fragments/checkout/billingAddressForm" value-ref="billingAddressForm"/>
+
+    </util:map>
+
+    <util:map id="landingLayout2Page" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/layout/landingLayout2Page"/>
+    </util:map>
+
+    <util:map id="accountLoginPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/account/accountLoginPage"/>
+    </util:map>
+
+    <util:map id="importCSVSavedCartPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/csv/importCSVSavedCartPage"/>
+    </util:map>
+
+    <util:map id="quickOrderPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/quickOrder/quickOrderPage"/>
+    </util:map>
+
+    <util:map id="accountLayoutPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/account/accountLayoutPage"/>
+    </util:map>
+
+    <util:map id="accountPaymentInfoPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/account/accountPaymentInfoPage"/>
+    </util:map>
+
+    <util:map id="accountChangePasswordPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/account/accountChangePasswordPage"/>
+    </util:map>
+
+    <util:map id="accountProfileEditPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/account/accountProfileEditPage"/>
+    </util:map>
+
+    <util:map id="productLayout2Page" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/product/productLayout2Page"/>
+    </util:map>
+
+    <util:map id="productReviewsTab" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/product/productReviewsTab"/>
+    </util:map>
+
+    <util:map id="accountProfileEmailEditPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/account/accountProfileEmailEditPage"/>
+    </util:map>
+
+    <util:map id="errorNotFoundPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/error/errorNotFoundPage"/>
+    </util:map>
+
+    <util:map id="searchEmptyPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/search/searchEmptyPage"/>
+    </util:map>
+
+    <util:map id="searchGridPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/search/searchGridPage"/>
+    </util:map>
+
+    <util:map id="searchListPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/search/searchListPage"/>
+    </util:map>
+
+    <util:map id="productGridPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/category/productGridPage"/>
+    </util:map>
+
+    <util:map id="productListPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/category/productListPage"/>
+    </util:map>
+
+    <util:map id="categoryPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/category/categoryPage"/>
+    </util:map>
+
+
+    <util:map id="countryAddressForm" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/fragments/address/countryAddressForm"/>
+    </util:map>
+
+    <util:map id="cartPopup" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/fragments/cart/cartPopup"/>
+    </util:map>
+
+    <util:map id="addToCartPopup" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/fragments/cart/addToCartPopup"/>
+    </util:map>
+
+    <util:map id="reviewsTab" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/fragments/product/reviewsTab"/>
+    </util:map>
+
+    <util:map id="cartDisplay" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/cart/cartDisplay"/>
+    </util:map>
+
+    <util:map id="cartPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/cart/cartPage"/>
+    </util:map>
+
+    <util:map id="cartPromotionsDisplay" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/cart/cartPromotionsDisplay"/>
+    </util:map>
+
+    <util:map id="cartTotalsDisplay" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/cart/cartTotalsDisplay"/>
+    </util:map>
+
+    <util:map id="checkoutDisplay" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/cart/checkoutDisplay"/>
+    </util:map>
+
+    <util:map id="potentialPromotionsDisplay" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/cart/potentialPromotionsDisplay"/>
+    </util:map>
+
+    <util:map id="checkoutLoginPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/checkout/checkoutLoginPage"/>
+    </util:map>
+
+    <util:map id="addEditDeliveryAddressPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/checkout/multi/addEditDeliveryAddressPage"/>
+    </util:map>
+
+    <util:map id="addPaymentMethodPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/checkout/multi/addPaymentMethodPage"/>
+    </util:map>
+
+    <util:map id="checkoutSummaryPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/checkout/multi/checkoutSummaryPage"/>
+    </util:map>
+
+    <util:map id="chooseDeliveryMethodPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/checkout/multi/chooseDeliveryMethodPage"/>
+    </util:map>
+
+    <util:map id="silentOrderPostPage" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/pages/checkout/multi/silentOrderPostPage"/>
+    </util:map>
+
+    <util:map id="billingAddressForm" key-type="java.lang.String" value-type="java.lang.String">
+        <entry key="viewName" value="/fragments/checkout/billingAddressForm"/>
+    </util:map>
+
+
+    <bean id="tcCategoryNavigationComponentRenderer"
+          class="com.talos.talosacceleratoraddon.component.renderer.TCCategoryNavigationComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer"/>
+
+    <bean id="tcCustomComponentRenderer"
+          class="com.talos.talosacceleratoraddon.component.renderer.TCCustomComponentRenderer"
+          parent="genericAddOnCMSComponentRenderer"/>
+
+    <bean id="tcCustomActionRenderer"
+          parent="genericAddOnCMSComponentRenderer"/>
+
+    <bean id="tcCategoryNavigationComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CategoryNavigationComponent"/>
+        <property name="renderer" ref="tcCategoryNavigationComponentRenderer"/>
+    </bean>
+
+    <bean id="tcNavigationComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="NavigationComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcSearchBoxComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="SearchBoxComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcFooterNavigationComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="FooterNavigationComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcSocialActionRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TCSocialAction"/>
+        <property name="renderer" ref="tcCustomActionRenderer"/>
+    </bean>
+
+    <bean id="tcSocialCollectionComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TCSocialCollectionComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcSignUpComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TCEmailOptInComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcBreadcrumbComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="BreadcrumbComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcBannerActionRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TCBannerAction"/>
+        <property name="renderer" ref="tcCustomActionRenderer"/>
+    </bean>
+
+    <bean id="tcResponsiveBannerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TCResponsiveBannerComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcRotatingBannerComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TCRotatingBannerComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcResponsiveGridComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="TCResponsiveGridComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcProductVariantSelectorComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductVariantSelectorComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcProductAddToCartComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductAddToCartComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcProductGridComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductGridComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcSearchResultsGridComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="SearchResultsGridComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcListAddToCartActionRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ListAddToCartAction"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcListPickUpInStoreActionRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ListPickUpInStoreAction"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcListOrderFormActionRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ListOrderFormAction"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcProductRefinementComponentRendererMaping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="ProductRefinementComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="tcCMSTabParagraphComponentRendererMapping" parent="addonCmsComponentRendererMapping">
+        <property name="typeCode" value="CMSTabParagraphComponent"/>
+        <property name="renderer" ref="tcCustomComponentRenderer"/>
+    </bean>
+
+    <bean id="ProductCarouselComponentController"
+          class="com.talos.talosacceleratoraddon.controllers.cms.TCProductCarouselComponentController"/>
+
+    <bean id="CMSTabParagraphContainerController"
+          class="com.talos.talosacceleratoraddon.controllers.cms.TCCMSTabParagraphContainerController"/>
+
+    <bean id="MiniCartComponentController"
+          class="com.talos.talosacceleratoraddon.controllers.cms.TCMiniCartComponentController"/>
+
+    <bean id="CartSuggestionComponentController"
+          class="com.talos.talosacceleratoraddon.controllers.cms.TCCartSuggestionComponentController"/>
+
+    <bean class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+                <prop key="/view/ProductCarouselComponentController">ProductCarouselComponentController</prop>
+                <prop key="/view/CMSTabParagraphContainerController">CMSTabParagraphContainerController</prop>
+                <prop key="/view/MiniCartComponentController">MiniCartComponentController</prop>
+                <prop key="/view/CartSuggestionComponentController">CartSuggestionComponentController</prop>
+            </props>
+        </property>
+    </bean>
+</beans>

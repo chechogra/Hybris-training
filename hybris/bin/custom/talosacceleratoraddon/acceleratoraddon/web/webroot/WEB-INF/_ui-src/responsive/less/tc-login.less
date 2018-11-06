@@ -1,0 +1,103 @@
+.tc-signup-column-wp, .tc-guest-checkout-login-column-wp {
+  background-color: @tc-background-general;
+
+  .tc-account-login_column.tc-signup-column {
+    padding-bottom: 50px;
+  }
+}
+
+.tc-account-login_column, .tc-account-register_column, .tc-guest-checkout-login_column {
+  padding: 30px @tc-content-extra-padding 40px;
+
+  h3 {
+    margin: 0 0 15px;
+    text-transform: uppercase;
+  }
+
+  > p {
+    margin-bottom: 25px;
+  }
+
+  &.tc-signup-column {
+
+    .form-actions {
+      text-align: right;
+      button {
+        margin-top: 10px;
+      }
+    }
+    input {
+      background-color: @tc-btn-color-clean;
+    }
+
+    .forgotten-password {
+      display: flex;
+      justify-content: flex-end;
+      margin: 14px 0 20px;
+    }
+  }
+
+  .forgotten-password {
+    text-align: right;
+    margin-bottom: 10px;
+    a {
+      display: inline-block;
+      color: @tc-primary-color;
+      padding: 5px 0;
+    }
+  }
+
+  #registerForm {
+    button.btn {
+      min-width: 160px;
+    }
+  }
+
+  .tc-login-sign-in-button-wp, .tc-guest-checkout-login-btn-wp {
+    display: flex;
+    justify-content: flex-end;
+
+    .btn {
+      min-width: 160px;
+    }
+  }
+
+  .tc-guest-checkout-login-btn-wp {
+    margin-top: 55px;
+  }
+}
+
+#password_bar {
+  .progress-bar {
+    color: #FFF;
+    font-size: 1.2rem;
+    margin: 5px 0;
+    padding-left: 10px;
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .tc-signup-column, .tc-guest-checkout-login_column {
+    padding: 35px 33px;
+  }
+
+  .tc-login-column {
+    padding: 35px 33px 35px @tc-content-extra-padding;
+  }
+
+  .tc-signup-column-wp {
+    background-color: transparent;
+
+    .register__section {
+      background-color: @tc-background-general;
+      margin-bottom: 30px;
+    }
+  }
+
+}
+
+@media (min-width: @screen-lg-min) {
+  .tc-login-column {
+    padding-left: 0;
+  }
+}

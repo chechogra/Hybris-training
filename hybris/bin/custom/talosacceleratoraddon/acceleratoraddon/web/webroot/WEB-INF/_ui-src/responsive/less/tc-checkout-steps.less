@@ -1,0 +1,97 @@
+.checkout-steps {
+  margin: 0 -15px;
+  padding: 25px 0 35px;
+
+  .step-head {
+    display: block;
+    padding: 0 15px;
+    line-height: 50px;
+    height: 50px;
+    text-transform: uppercase;
+    background-color: transparent;
+    border-top: 1px solid @tc-btn-default-border-color;
+    border-bottom: 1px solid @tc-btn-default-border-color;
+    color: @tc-btn-default-border-color;
+
+    &.active {
+      background-color: @tc-primary-color;
+      border: none;
+      color: white;
+    }
+
+    &:not(:first-of-type) {
+      margin-top: 10px;
+    }
+  }
+
+  .tc-checkout-step-container {
+    background-color: #F8F8F8;
+    padding: 15px;
+  }
+
+  .tc-checkout-step-headline {
+    font-size: 20px;
+    font-weight: 500;
+    text-transform: uppercase;
+  }
+
+  .tc-checkout-current-step-title {
+    color: @tc-primary-color;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 25px;
+  }
+
+  .tc-clean {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.checkout-help .tc-checkout-help {
+  text-align: center;
+  padding: 50px;
+  font-size: 16px;
+  text-transform: uppercase;
+
+  .tc-brand-color {
+    color: @tc-primary-color;
+  }
+}
+
+//Address and Payment modals
+#addressbook, #savedpayments, #savedpaymentsbody {
+  display: none;
+  padding-bottom: 20px;
+  #colorbox & {
+    display: block;
+  }
+  ul {
+    margin: 0;
+    li {
+      padding: (@grid-gutter-width/2) 0;
+    }
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .checkout-help .tc-checkout-help {
+    padding: 60px;
+    font-size: 18px;
+  }
+
+  .checkout-steps {
+    margin: 0;
+    padding-bottom: 0;
+
+    .step-head {
+      padding: 0 20px;
+      border: 1px solid @tc-btn-default-border-color;
+    }
+
+    .tc-checkout-step-container {
+      padding: 20px;
+    }
+  }
+}

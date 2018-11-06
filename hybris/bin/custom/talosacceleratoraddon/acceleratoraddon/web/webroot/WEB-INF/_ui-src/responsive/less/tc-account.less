@@ -1,0 +1,89 @@
+.tc-account-section {
+  padding: 0 @tc-content-extra-padding 40px;
+}
+
+.tc-account-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+
+  .tc-account-card {
+    border-top: 1px solid @tc-payment-detail-border-color;
+    font-size: 1.3rem;
+    padding: 20px 32px 20px 7px;
+    position: relative;
+    width: 100%;
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    li {
+      &:first-of-type {
+        padding-bottom: 10px;
+      }
+
+      padding-top: 2px;
+    }
+
+    .tc-account-card-tittle {
+      font-weight: 500;
+      text-transform: uppercase;
+
+      &.tc-account-card-default {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+.tc-account-card-icon-cross, .tc-account-card-icon-edit {
+  top: 15px;
+  right: 0;
+  position: absolute;
+  display: block;
+  padding: 7px;
+  color: #000;
+
+  &:hover {
+    color: @tc-primary-color;
+  }
+}
+
+.tc-account-card-icon-edit + .tc-account-card-icon-cross {
+  top: 50px;
+}
+
+.tc-account-card-set-default-btn {
+  margin-top: 15px;
+}
+
+@media (min-width: @screen-sm-min) {
+  .tc-account-cards {
+    .tc-account-card {
+      border: 1px solid @tc-payment-detail-border-color;
+      width: 49%;
+      padding: 20px 42px 20px 25px;
+      margin-bootom: 15px;
+    }
+
+    .tc-account-card-icon-cross, .tc-account-card-icon-edit {
+      right: 15px;
+    }
+  }
+}
+
+@media (min-width: @screen-md-min) {
+  .tc-account-cards {
+    .tc-account-card {
+      width: 32.3333%;
+    }
+  }
+}
+
+@media (min-width: @screen-lg-min) {
+  .tc-account-section {
+    padding: 0 0 40px;
+  }
+}

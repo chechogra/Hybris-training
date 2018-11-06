@@ -1,0 +1,531 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing CMS Content
+# English Localisation
+
+# Macros / Replacement Parameter definitions
+$contentCatalog = utrendContentCatalog
+$productCatalog = utrendProductCatalog
+
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$picture = media(code, $contentCV);
+$siteResource = jar:com.talos.utrend.initialdata.constants.UtrendInitialDataConstants&/utrendinitialdata/import/sampledata/contentCatalogs/$contentCatalog
+$medias = medias(code, $contentCV);
+$mediaContainer = media(qualifier, $contentCV)[lang = $lang];
+
+# Language
+$lang = es
+
+# Site Logo Component
+UPDATE SimpleBannerComponent; $contentCV[unique = true]; uid[unique = true]; $picture[lang = $lang]
+; ; SiteLogoComponent ; /images/theme/utrend-logo.svg
+
+UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
+; ; HomepageNavLink        ; "Inicio"
+; ; AllBrandsCategoryLink  ; "Marcas"
+; ; NikonBrandCategoryLink ; "Nikon"
+; ; CanonBrandCategoryLink ; "Canon"
+; ; SonyBrandCategoryLink  ; "Sony"
+; ; JBLBrandCategoryLink   ; "JBL"
+; ; BoseBrandCategoryLink  ; "Bose"
+
+UPDATE MiniCartComponent; $contentCV[unique = true]; uid[unique = true]; name; title[lang = $lang]
+; ; MiniCart ; Mini Cart ; "TU CARRITO DE COMPRAS"
+
+UPDATE CMSTabParagraphComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]; content[lang = $lang]
+; ; deliveryTab ; Entrega ; "<div class=""tab-delivery"">Lorem ipsum dolor sit amet, dolor sed, ut nam ut. Senectus mauris egestas a massa, enim placeat wisi congue purus fermentum.</div>"
+
+INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; ProductDetailsTabComponent ; Detalles de Producto
+; ; ProductSpecsTabComponent   ; Especificaciones
+; ; ProductReviewsTabComponent ; Reseñas
+
+UPDATE ProductReferencesComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; CrossSelling ; "También te podría gustar..."
+; ; UpSelling    ; "También te podría gustar..."
+
+UPDATE CartSuggestionComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; CartSuggestions ; "También te podría gustar..."
+
+UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; AcceleratorNavNode ; "Acelerador"
+; ; BrandLinksNavNode  ; "Tecnología"
+; ; BrandsNavNode      ; "Marcas"
+; ; UTrendNavNode      ; "Sitio UC"
+; ; SiteRootNode       ; "SiteRoot"
+
+# Utrend FAQ Page
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
+; ; faqMenuParagraph ; "<div class=""nav_column""><div class=""title_holder""><div class=""title""><div class=""title-top""><span></span></div></div><h2>Preguntas Frecuentes</h2></div><div class=""item""><ul class=""facet_block indent""><li>Retornos y Reembolsos</li></ul></div></div>" ;
+; ; faqTextParagraph ; "<div class=""textpage textpage-faqs""><div class=""item_container""><h2>Retornos y Reembolsos</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lorem augue, luctus interdum pellentesque ut, luctus congue ligula.</p></div></div>"                ;
+
+
+# Utrend Order Expired Page
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
+; ; orderExpiredMenuParagraph ;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ;
+; ; orderExpiredTextParagraph ; "<div class='cms-content order-expired'><div class='information_message neutral'><span class='single'></span><p>Esta página ha expirado</p></div><h2>Querido usuario,</h2><p>El estado del pedido para los usuarios invitados solo se conserva durante 3 meses a partir de la fecha en que se realizó el pedido.<br>Si no ha recibido su envío o tiene otras consultas, comuníquese con nuestro Departamento de Atención al Cliente.</p><h3>Be prepared with:</h3><ul class='bullet-list'><li>Your Name</li><li>Order Number (Your Order Number can be found on the confirmation email sent shortly after your order was placed.)</li><li>Order Delivery Address or Pick Up in Store Location</li></ul><p>Our Customer Service professionals will be happy to update you on the status of your order.</p><p class='cms-content-emphasized-big'>Thank you for shopping at hybrisstore.</p></div>" ;
+
+
+# Utrend Terms and Conditions Page
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
+; ; termsAndConditionsMenuParagraph ; "<div class=""nav_column""><div class=""title_holder""><div class=""title""><div class=""title-top""><span></span></div></div><h2>Términos y Condiciones</h2></div><div class=""item""><ul class=""facet_block indent""><li><a href=""#a00"">Registro</a></li></ul></div></div>" ;
+; ; termsAndConditionsTextParagraph ; "<div class=""textpage textpage-termsAndConditions""><div class=""item_container""><h2><a name=""a00""></a>Registro</h2><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam lorem augue, luctus interdum pellentesque ut, luctus congue ligula.</p></div></div>"     ;
+
+
+# UTrend Homepage
+UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; UTrendHomepageProductCarouselComponent ; Los más vendidos
+
+UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; NewUTrendHomepageProductCarouselComponent ; Nuevos productos ;
+
+
+# Utrend Search Results Page
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
+; ; EmptyCartParagraphComponent       ; "<h2>Su carrito está vacío</h2><p>Sugerencias</p><ul><li>Navegue nuestros productos seleccionando una categoría arriba</li></ul>"
+; ; NoSearchResultsParagraphComponent ; "<h2>Lo sentimos, no pudimos encontrar ningún resultado para tu búsqueda</h2><p>Sugerencias:</p><ul><li>Es posible que haya escrito sus palabras clave de forma incorrecta - por favor revise si hay errores ortográficos.</li><li>Puede haber sido muy específico - amplíe su búsqueda utilizando menos palabras clave.</li><li>Navegue nuestros productos seleccionando una categoría arriba.</li></ul>"
+
+
+# Utrend Cart Page
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
+; ; EmptyCartParagraphComponent ; "<h2>Su carrito está vacío</h2><p>Sugerencias</p><ul><li>Navegue nuestros productos seleccionando una categoría arriba</li></ul>"
+; ; HelpParagraphComponent      ; "<strong>¿Necesita ayuda con su proceso de pago?</strong> <span>Contáctenos o llame al número de teléfono.</span>"
+
+###  Home page splash   #######
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; realfilename; altText; mime[default = 'image/jpeg']; $contentCV[unique = true]; folder(qualifier)[default = images];
+; mobile     ; UTrend_480x320_HomeSpeed_ES_01_480W.jpg   ; $siteResource/images/banners/homepage/responsive/UTrend_480x320_HomeSpeed_ES_01_480W.jpg   ; UTrend_480x320_HomeSpeed_ES_01_480W.jpg   ; "Ahorre en grandes selecciones de cámaras" ;
+; tablet     ; UTrend_770x350_HomeSpeed_ES_01_770W.jpg   ; $siteResource/images/banners/homepage/responsive/UTrend_770x350_HomeSpeed_ES_01_770W.jpg   ; UTrend_770x350_HomeSpeed_ES_01_770W.jpg   ; "Ahorre en grandes selecciones de cámaras" ;
+; desktop    ; UTrend_960x330_HomeSpeed_ES_01_960W.jpg   ; $siteResource/images/banners/homepage/responsive/UTrend_960x330_HomeSpeed_ES_01_960W.jpg   ; UTrend_960x330_HomeSpeed_ES_01_960W.jpg   ; "Ahorre en grandes selecciones de cámaras" ;
+; widescreen ; UTrend_1400x440_HomeSpeed_ES_01_1400W.jpg ; $siteResource/images/banners/homepage/responsive/UTrend_1400x440_HomeSpeed_ES_01_1400W.jpg ; UTrend_1400x440_HomeSpeed_ES_01_1400W.jpg ; "Ahorre en grandes selecciones de cámaras" ;
+
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $contentCV[unique = true]
+; utrend-homepage-splash-es ; UTrend_480x320_HomeSpeed_ES_01_480W.jpg,UTrend_770x350_HomeSpeed_ES_01_770W.jpg,UTrend_960x330_HomeSpeed_ES_01_960W.jpg,UTrend_1400x440_HomeSpeed_ES_01_1400W.jpg
+
+INSERT_UPDATE SimpleResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; $mediaContainer
+; ; UTrendHomepageSplashBannerComponent ; utrend-homepage-splash-es
+
+# update linkname
+UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
+; ; PersonalDetailsLink   ; "Información Personal"
+; ; UpdateEmailLink       ; "Dirección Email"
+; ; UpdatePasswordLink    ; "Contraseña"
+; ; AddressBookLink       ; "Libreta de Direcciones"
+; ; PaymentDetailsLink    ; "Detalles de Pago"
+; ; OrderHistoryLink      ; "Historial de Ordenes"
+; ; SavedCartsLink        ; "Carritos Guardados"
+; ; ImportSavedCartLink   ; "Importación de Carrito Guardado"
+; ; ConsentManagementLink ; "Administración de Consentimientos"
+
+#update navigation node title
+UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; MyAccountNavNode ; "Mi Cuenta"
+
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; importCSVSavedCartPage ; "Importación de Carrito Guardado"
+; ; savedCartDetailsPage   ; "Detalles de Carrito Guardado"
+; ; saved-carts            ; "Carritos Guardados"
+
+# CMS Link name
+UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
+; ; QuickOrderLink ; "Orden rápida"
+
+# CMS Paragraph Component
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
+; ; QuickOrderInfoParagraphComponent ; "Puede agregar hasta 25 SKU válidos a continuación y agregarlos al carrito. Las existencias se reservan una vez que los productos se agregan al carrito."
+
+# CMS Footer Navigation Component
+UPDATE FooterNavigationComponent; $contentCV[unique = true]; uid[unique = true]; notice[lang = $lang]
+; ; FooterNavigationComponent ; "© 2016 hybris software"
+
+UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; HelpNavNode             ; "Ayuda"
+; ; ShopNavNode             ; "Comprar"
+; ; CompanyNavNode          ; "Compañía"
+; ; StoresNavNode           ; "Tiendas"
+; ; PhoneNavNode            ; "Teléfono"
+; ; EmailNavNode            ; "Correo Electronico"
+; ; FAQNavNode              ; "Preguntas frecuentes"
+; ; ReturnsExchangesNavNode ; "Devoluciones e intercambios"
+; ; GiftCardsNavNode        ; "Tarjetas de regalo"
+; ; SeasonalNavNode         ; "Temporada"
+; ; CareersNavNode          ; "Carreras"
+; ; OurStoryNavNode         ; "Nuestra historia"
+; ; OurPromiseNavNode       ; "Nuestra Promesa"
+; ; PartnershipsNavNode     ; "Alianzas"
+; ; PressNavNode            ; "Noticias"
+; ; NewYorkNavNode          ; "New York"
+; ; PhiladelphiaNavNode     ; "Philadelphia"
+
+UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
+; ; PhoneLink            ; "1-888-963-8944"
+; ; EmailLink            ; "help@utrend.com"
+; ; FAQLink              ; "Preguntas frecuentes"
+; ; ReturnsExchangesLink ; "Devoluciones e intercambios"
+; ; GiftCardsLink        ; "Tarjetas de regalo"
+; ; SeasonalLink         ; "Temporada"
+; ; CareersLink          ; "Carreras"
+; ; OurStoryLink         ; "Nuestra historia"
+; ; OurPromiseLink       ; "Nuestra Promesa"
+; ; PartnershipsLink     ; "Alianzas"
+; ; PressLink            ; "Noticias"
+; ; NewYorkLink          ; "New York"
+; ; PhiladelphiaLink     ; "Philadelphia"
+
+UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName[lang = $lang]
+; ; TechCategoryLink                        ; "Tecnología"
+; ; CamerasCategoryLink                     ; "Cameras"
+; ; DSLRCamerasCategoryLink                 ; "DSLR"
+; ; MirrorlessCamerasCategoryLink           ; "Mirrorless"
+; ; HeadphonesCategoryLink                  ; "Headphones"
+; ; OnEarHeadphonesCategoryLink             ; "On-ear"
+; ; InEarHeadphonesCategoryLink             ; "In-ear"
+; ; OverEarHeadphonesCategoryLink           ; "Over-ear"
+; ; WomensCategoryLink                      ; "Mujer"
+; ; WomensTopsCategoryLink                  ; "Tops"
+; ; WomensPolosCategoryLink                 ; "Polos"
+; ; WomensShirtsAndBlousesCategoryLink      ; "Shirts & Blouses"
+; ; WomensTShirtsCategoryLink               ; "T-Shirts"
+; ; WomensCamisAndTankTopsCategoryLink      ; "Camis & Tank Tops"
+; ; WomensBottomsCategoryLink               ; "Bottoms"
+; ; WomensJeansCategoryLink                 ; "Jeans"
+; ; WomensSweatpantsCategoryLink            ; "Sweatpants"
+; ; WomensLeggingsCategoryLink              ; "Leggings"
+; ; WomensPantsCategoryLink                 ; "Pants"
+; ; WomensSkirtsCategoryLink                ; "Skirts"
+; ; WomensShortsCategoryLink                ; "Shorts"
+; ; WomensOwterwearCategoryLink             ; "Owterwear"
+; ; WomensSweatersCategoryLink              ; "Sweaters"
+; ; WomensHoodiesAndSweatshirtsCategoryLink ; "Hoodies & Sweatshirts"
+; ; WomensCrewNeckSweatshirtsCategoryLink   ; "Crew Neck Sweatshirts"
+; ; WomensDressesAndJumpsuitsCategoryLink   ; "Dresses & Jumpsuits"
+; ; WomensShortDressesCategoryLink          ; "Short Dresses"
+; ; WomensLongDressesCategoryLink           ; "Long Dresses"
+; ; WomensRompersAndJumpsuitsCategoryLink   ; "Rompers & Jumpsuits"
+; ; WomensSwimwearCategoryLink              ; "Swimwear"
+; ; WomensBikiniTopsCategoryLink            ; "Bikini Tops"
+; ; WomensBikiniBottomsCategoryLink         ; "Bikini Bottoms"
+; ; WomensOnePieceSwimsuitsCategoryLink     ; "One Piece Swimsuits"
+; ; WomensCoverUpsCategoryLink              ; "Cover Ups"
+; ; WomensSwimAccesoriesCategoryLink        ; "Swim Accesories"
+; ; WomensSleepwearCategoryLink             ; "Sleepwear"
+; ; WomensLoungeCategoryLink                ; "Lounge"
+; ; WomensPijamasCategoryLink               ; "Pijamas"
+; ; WomensLingerieCategoryLink              ; "Lingerie"
+; ; WomensAccesoriesCategoryLink            ; "Accesories"
+; ; WomensScarvesCategoryLink               ; "Scarves"
+; ; WomensBagsCategoryLink                  ; "Bags"
+; ; WomensJewerlyAndWatchesCategoryLink     ; "Jewerly & Watches"
+; ; WomensHatsCategoryLink                  ; "Hats"
+; ; WomensBeltsCategoryLink                 ; "Belts"
+; ; WomensHomeAndGiftsCategoryLink          ; "Home & Gifts"
+; ; WomensShoesCategoryLink                 ; "Shoes"
+; ; WomensCasualCategoryLink                ; "Casual"
+; ; WomensSneakersCategoryLink              ; "Sneakers"
+; ; WomensDressCategoryLink                 ; "Dress"
+; ; MensCategoryLink                        ; "Hombre"
+; ; MensNewArrivalsCategoryLink             ; "New Arrivals"
+; ; MensTopsCategoryLink                    ; "Tops"
+; ; MensShirtsCategoryLink                  ; "Shirts"
+; ; MensGraphicTeesCategoryLink             ; "Graphic Tees"
+; ; MensPolosCategoryLink                   ; "Polos"
+; ; MensHenleysCategoryLink                 ; "Henleys"
+; ; MensCrewTeesCategoryLink                ; "Crew Tees"
+; ; MensVNeckTeesCategoryLink               ; "V-Neck Tees"
+; ; MensBottomsCategoryLink                 ; "Bottoms"
+; ; MensJeansCategoryLink                   ; "Jeans"
+; ; MensPantsCategoryLink                   ; "Pants"
+; ; MensSweatpantsCategoryLink              ; "Sweatpants"
+; ; MensShortsCategoryLink                  ; "Shorts"
+; ; MensOwterwearCategoryLink               ; "Owterwear"
+; ; MensJacketsCategoryLink                 ; "Jackets"
+; ; MensCoatsCategoryLink                   ; "Coats"
+; ; MensSweatersCategoryLink                ; "Sweaters"
+; ; MensHoodiesCategoryLink                 ; "Hoodies"
+; ; MensAccesoriesCategoryLink              ; "Accesories"
+; ; MensScarvesCategoryLink                 ; "Scarves"
+; ; MensHatsCategoryLink                    ; "Hats"
+; ; MensBeltsCategoryLink                   ; "Belts"
+; ; MensSocksCategoryLink                   ; "Socks"
+; ; MensWalletsCategoryLink                 ; "Wallets"
+; ; MensTiesCategoryLink                    ; "Ties"
+; ; MensBagsCategoryLink                    ; "Bags"
+; ; MensJewerlyAndWatchesCategoryLink       ; "Jewerly"
+
+; ; ComputersCategoryLink                   ; "Computers"
+; ; LaptopsCategoryLink                     ; "Laptops"
+; ; DesktopComputersCategoryLink            ; "Desktop"
+; ; NoteBooksCategoryLink                   ; "Notebooks"
+
+; ; TvCategoryLink                          ; "TVs"
+; ; LCDCategoryLink                         ; "LCD"
+; ; CurvedCategoryLink                      ; "Curved"
+; ; 4kCategoryLink                          ; "4K"
+
+; ; MusicPlayersCategoryLink                ; "Music Player"
+; ; MP3sCategoryLink                        ; "MP3s"
+; ; MP4sCategoryLink                        ; "MP4s"
+; ; iPodsCategoryLink                       ; "iPods"
+
+; ; AsusCategoryLink                        ; "Asus"
+; ; AppleCategoryLink                       ; "Apple"
+; ; LenovoCategoryLink                      ; "Lenovo"
+; ; ToshibaCategoryLink                     ; "Toshiba"
+; ; SamsungCategoryLink                     ; "Samsung"
+
+; ; KidsCategoryLink                        ; "Kids"
+; ; KidsBeltsCategoryLink                   ; "Belts"
+; ; KidsTopsCategoryLink                    ; "Tops"
+; ; KidsPolosCategoryLink                   ; "Polos"
+; ; KidsShirtsAndBlousesCategoryLink        ; "Shirts And Blouses"
+; ; KidsTShirtsCategoryLink                 ; "TShirts"
+; ; KidsCamisAndTankTopsCategoryLink        ; "Camis And TankTops"
+; ; KidsBottomsCategoryLink                 ; "Bottoms"
+; ; KidsJeansCategoryLink                   ; "Jeans"
+; ; KidsSweatpantsCategoryLink              ; "Sweatpants"
+; ; KidsPantsCategoryLink                   ; "Pants"
+; ; KidsSkirtsCategoryLink                  ; "Skirts"
+; ; KidsOwterwearCategoryLink               ; "Owterwear"
+; ; KidsSweatersCategoryLink                ; "Sweaters"
+; ; KidsHoodiesAndSweatshirtsCategoryLink   ; "Hoodies And Sweatshirts"
+; ; KidsCrewNeckSweatshirtsCategoryLink     ; "Crew Neck Sweatshirts"
+; ; KidsDressesAndJumpsuitsCategoryLink     ; "Dresses And Jumpsuits"
+; ; KidsShortDressesCategoryLink            ; "Short Dresses"
+; ; KidsLongDressesCategoryLink             ; "Long Dresses"
+; ; KidsRompersAndJumpsuitsCategoryLink     ; "Rompers And Jumpsuits"
+; ; KidsSwimwearCategoryLink                ; "Swimwear"
+; ; KidsBikiniTopsCategoryLink              ; "BikiniTops"
+; ; KidsBikiniBottomsCategoryLink           ; "BikiniBottoms"
+; ; KidsOnePieceSwimsuitsCategoryLink       ; "One Piece Swimsuits"
+; ; KidsSleepwearCategoryLink               ; "Sleepwear"
+; ; KidsLoungeCategoryLink                  ; "Lounge"
+; ; KidsPijamasCategoryLink                 ; "Pijamas"
+; ; KidsLingerieCategoryLink                ; "Lingerie"
+; ; KidsAccesoriesCategoryLink              ; "Accesories"
+; ; KidsScarvesCategoryLink                 ; "Scarves"
+; ; KidsBagsCategoryLink                    ; "Bags"
+; ; KidsHatsCategoryLink                    ; "Hats"
+; ; KidsShoesCategoryLink                   ; "Shoes"
+; ; KidsCasualCategoryLink                  ; "Casual"
+; ; KidsSneakersCategoryLink                ; "Sneakers"
+; ; KidsDressCategoryLink                   ; "Dress"
+; ; KidsNewArrivalsCategoryLink             ; "NewArrivals"
+; ; KidsShirtsCategoryLink                  ; "Shirts"
+; ; KidsGraphicTeesCategoryLink             ; "GraphicTees"
+; ; KidsHenleysCategoryLink                 ; "Henleys"
+; ; KidsCrewTeesCategoryLink                ; "CrewTees"
+; ; KidsVNeckTeesCategoryLink               ; "VNeckTees"
+; ; KidsJacketsCategoryLink                 ; "Jackets"
+; ; KidsCoatsCategoryLink                   ; "Coats"
+; ; KidsHoodiesCategoryLink                 ; "Hoodies"
+; ; KidsSocksCategoryLink                   ; "Socks"
+; ; KidsWalletsCategoryLink                 ; "Wallets"
+; ; KidsTiesCategoryLink                    ; "Ties"
+
+; ; HomeAppliancesCategoryLink              ; "Electrodomesticos"
+; ; RefrigeratorsCategoryLink               ; "Refrigeración"
+; ; FrenchDoorRefrigeratorsCategoryLink     ; "Neveras"
+; ; SideBySideRefrigeratorsCategoryLink     ; "Nevecones"
+; ; WineCoolersCategoryLink                 ; "Cavas de vino"
+; ; CommercialRefrigeratorsCategoryLink     ; "Congeladores"
+; ; WaterDispensersCategoryLink             ; "Dispensadores de agua"
+; ; IceMakersCategoryLink                   ; "Fabricadores de hielo"
+; ; WashersCategoryLink                     ; "Lavado"
+; ; SemiautomaticWashersCategoryLink        ; "Lavadoras Semiautomáticas"
+; ; DigitalWashersCategoryLink              ; "Lavadoras Digitales"
+; ; ManualWashersCategoryLink               ; "Lavadoras Manuales"
+; ; WashersDryersCategoryLink               ; "Lavadora - Secadora"
+; ; DishwashersCategoryLink                 ; "Lavavajillas"
+; ; CookingAppliancesCategoryLink           ; "Cocción"
+; ; CooktopsCategoryLink                    ; "Cubiertas"
+; ; OvensCategoryLink                       ; "Hornos"
+; ; RangeHoodsCategoryLink                  ; "Campanas"
+; ; RangesCategoryLink                      ; "Estufas"
+; ; MicrowavesCategoryLink                  ; "Microondas"
+; ; SmallerAppliancesCategoryLink           ; "Electrodomésticos menores"
+; ; CountertopsCategoryLink                 ; "Mesones"
+; ; AirConditionersCategoryLink             ; "Aire acondicionado"
+; ; WaterHeatersCategoryLink                ; "Calentadores de agua"
+
+UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; TechNavNode                        ; "Tecnología"
+; ; CamerasNavNode                     ; "Cameras"
+; ; DSLRCamerasNavNode                 ; "DSLR"
+; ; MirrorlessCamerasNavNode           ; "Mirrorless"
+; ; HeadphonesNavNode                  ; "Headphones"
+; ; OnEarHeadphonesNavNode             ; "On-ear"
+; ; InEarHeadphonesNavNode             ; "In-ear"
+; ; OverEarHeadphonesNavNode           ; "Over-ear"
+; ; WomensNavNode                      ; "Mujer"
+; ; WomensTopsNavNode                  ; "Tops"
+; ; WomensPolosNavNode                 ; "Polos"
+; ; WomensShirtsAndBlousesNavNode      ; "Shirts & Blouses"
+; ; WomensTShirtsNavNode               ; "T-Shirts"
+; ; WomensCamisAndTankTopsNavNode      ; "Camis & Tank Tops"
+; ; WomensBottomsNavNode               ; "Bottoms"
+; ; WomensJeansNavNode                 ; "Jeans"
+; ; WomensSweatpantsNavNode            ; "Sweatpants"
+; ; WomensLeggingsNavNode              ; "Leggings"
+; ; WomensPantsNavNode                 ; "Pants"
+; ; WomensSkirtsNavNode                ; "Skirts"
+; ; WomensShortsNavNode                ; "Shorts"
+; ; WomensOwterwearNavNode             ; "Owterwear"
+; ; WomensSweatersNavNode              ; "Sweaters"
+; ; WomensHoodiesAndSweatshirtsNavNode ; "Hoodies & Sweatshirts"
+; ; WomensCrewNeckSweatshirtsNavNode   ; "Crew Neck Sweatshirts"
+; ; WomensDressesAndJumpsuitsNavNode   ; "Dresses & Jumpsuits"
+; ; WomensShortDressesNavNode          ; "Short Dresses"
+; ; WomensLongDressesNavNode           ; "Long Dresses"
+; ; WomensRompersAndJumpsuitsNavNode   ; "Rompers & Jumpsuits"
+; ; WomensSwimwearNavNode              ; "Swimwear"
+; ; WomensBikiniTopsNavNode            ; "Bikini Tops"
+; ; WomensBikiniBottomsNavNode         ; "Bikini Bottoms"
+; ; WomensOnePieceSwimsuitsNavNode     ; "One Piece Swimsuits"
+; ; WomensCoverUpsNavNode              ; "Cover Ups"
+; ; WomensSwimAccesoriesNavNode        ; "Swim Accesories"
+; ; WomensSleepwearNavNode             ; "Sleepwear"
+; ; WomensLoungeNavNode                ; "Lounge"
+; ; WomensPijamasNavNode               ; "Pijamas"
+; ; WomensLingerieNavNode              ; "Lingerie"
+; ; WomensAccesoriesNavNode            ; "Accesories"
+; ; WomensScarvesNavNode               ; "Scarves"
+; ; WomensBagsNavNode                  ; "Bags"
+; ; WomensJewerlyAndWatchesNavNode     ; "Jewerly & Watches"
+; ; WomensHatsNavNode                  ; "Hats"
+; ; WomensBeltsNavNode                 ; "Belts"
+; ; WomensHomeAndGiftsNavNode          ; "Home & Gifts"
+; ; WomensShoesNavNode                 ; "Shoes"
+; ; WomensCasualNavNode                ; "Casual"
+; ; WomensSneakersNavNode              ; "Sneakers"
+; ; WomensDressNavNode                 ; "Dress"
+; ; MensNavNode                        ; "Hombre"
+; ; MensNewArrivalsNavNode             ; "New Arrivals"
+; ; MensTopsNavNode                    ; "Tops"
+; ; MensShirtsNavNode                  ; "Shirts"
+; ; MensGraphicTeesNavNode             ; "Graphic Tees"
+; ; MensPolosNavNode                   ; "Polos"
+; ; MensHenleysNavNode                 ; "Henleys"
+; ; MensCrewTeesNavNode                ; "Crew Tees"
+; ; MensVNeckTeesNavNode               ; "V-Neck Tees"
+; ; MensBottomsNavNode                 ; "Bottoms"
+; ; MensJeansNavNode                   ; "Jeans"
+; ; MensPantsNavNode                   ; "Pants"
+; ; MensSweatpantsNavNode              ; "Sweatpants"
+; ; MensShortsNavNode                  ; "Shorts"
+; ; MensOwterwearNavNode               ; "Owterwear"
+; ; MensJacketsNavNode                 ; "Jackets"
+; ; MensCoatsNavNode                   ; "Coats"
+; ; MensSweatersNavNode                ; "Sweaters"
+; ; MensHoodiesNavNode                 ; "Hoodies"
+; ; MensAccesoriesNavNode              ; "Accesories"
+; ; MensScarvesNavNode                 ; "Scarves"
+; ; MensHatsNavNode                    ; "Hats"
+; ; MensBeltsNavNode                   ; "Belts"
+; ; MensSocksNavNode                   ; "Socks"
+; ; MensWalletsNavNode                 ; "Wallets"
+; ; MensTiesNavNode                    ; "Ties"
+; ; MensBagsNavNode                    ; "Bags"
+; ; MensJewerlyAndWatchesNavNode       ; "Jewerly"
+
+; ; ComputersNavNode                   ; "Computers"
+; ; LaptopsNavNode                     ; "Laptops"
+; ; DesktopComputersNavNode            ; "Desktop"
+; ; NoteBooksNavNode                   ; "Notebooks"
+
+; ; TvNavNode                          ; "TVs"
+; ; LCDNavNode                         ; "LCD"
+; ; CurvedNavNode                      ; "Curved"
+; ; 4kNavNode                          ; "4K"
+
+; ; MusicPlayersNavNode                ; "Music Player"
+; ; MP3sNavNode                        ; "MP3s"
+; ; MP4sNavNode                        ; "MP4s"
+; ; iPodsNavNode                       ; "iPods"
+
+; ; AsusNavNode                        ; "Asus"
+; ; AppleNavNode                       ; "Apple"
+; ; LenovoNavNode                      ; "Lenovo"
+; ; ToshibaNavNode                     ; "Toshiba"
+; ; SamsungNavNode                     ; "Samsung"
+
+; ; KidsNavNode                        ; "Kids"
+; ; KidsBeltsNavNode                   ; "Belts"
+; ; KidsTopsNavNode                    ; "Tops"
+; ; KidsPolosNavNode                   ; "Polos"
+; ; KidsShirtsAndBlousesNavNode        ; "Shirts And Blouses"
+; ; KidsTShirtsNavNode                 ; "TShirts"
+; ; KidsCamisAndTankTopsNavNode        ; "Camis And TankTops"
+; ; KidsBottomsNavNode                 ; "Bottoms"
+; ; KidsJeansNavNode                   ; "Jeans"
+; ; KidsSweatpantsNavNode              ; "Sweatpants"
+; ; KidsPantsNavNode                   ; "Pants"
+; ; KidsSkirtsNavNode                  ; "Skirts"
+; ; KidsOwterwearNavNode               ; "Owterwear"
+; ; KidsSweatersNavNode                ; "Sweaters"
+; ; KidsHoodiesAndSweatshirtsNavNode   ; "Hoodies And Sweatshirts"
+; ; KidsCrewNeckSweatshirtsNavNode     ; "Crew Neck Sweatshirts"
+; ; KidsDressesAndJumpsuitsNavNode     ; "Dresses And Jumpsuits"
+; ; KidsShortDressesNavNode            ; "Short Dresses"
+; ; KidsLongDressesNavNode             ; "Long Dresses"
+; ; KidsRompersAndJumpsuitsNavNode     ; "Rompers And Jumpsuits"
+; ; KidsSwimwearNavNode                ; "Swimwear"
+; ; KidsBikiniTopsNavNode              ; "BikiniTops"
+; ; KidsBikiniBottomsNavNode           ; "BikiniBottoms"
+; ; KidsOnePieceSwimsuitsNavNode       ; "One Piece Swimsuits"
+; ; KidsSleepwearNavNode               ; "Sleepwear"
+; ; KidsLoungeNavNode                  ; "Lounge"
+; ; KidsPijamasNavNode                 ; "Pijamas"
+; ; KidsLingerieNavNode                ; "Lingerie"
+; ; KidsAccesoriesNavNode              ; "Accesories"
+; ; KidsScarvesNavNode                 ; "Scarves"
+; ; KidsBagsNavNode                    ; "Bags"
+; ; KidsHatsNavNode                    ; "Hats"
+; ; KidsShoesNavNode                   ; "Shoes"
+; ; KidsCasualNavNode                  ; "Casual"
+; ; KidsSneakersNavNode                ; "Sneakers"
+; ; KidsDressNavNode                   ; "Dress"
+; ; KidsNewArrivalsNavNode             ; "NewArrivals"
+; ; KidsShirtsNavNode                  ; "Shirts"
+; ; KidsGraphicTeesNavNode             ; "GraphicTees"
+; ; KidsHenleysNavNode                 ; "Henleys"
+; ; KidsCrewTeesNavNode                ; "CrewTees"
+; ; KidsVNeckTeesNavNode               ; "VNeckTees"
+; ; KidsJacketsNavNode                 ; "Jackets"
+; ; KidsCoatsNavNode                   ; "Coats"
+; ; KidsHoodiesNavNode                 ; "Hoodies"
+; ; KidsSocksNavNode                   ; "Socks"
+; ; KidsWalletsNavNode                 ; "Wallets"
+; ; KidsTiesNavNode                    ; "Ties"
+
+; ; HomeAppliancesNavNode              ; "Electrodomesticos"
+; ; RefrigeratorsNavNode               ; "Refrigeración"
+; ; FrenchDoorRefrigeratorsNavNode     ; "Neveras"
+; ; SideBySideRefrigeratorsNavNode     ; "Nevecones"
+; ; WineCoolersNavNode                 ; "Cavas de vino"
+; ; CommercialRefrigeratorsNavNode     ; "Congeladores"
+; ; WaterDispensersNavNode             ; "Dispensadores de agua"
+; ; IceMakersNavNode                   ; "Fabricadores de hielo"
+; ; WashersNavNode                     ; "Lavado"
+; ; SemiautomaticWashersNavNode        ; "Lavadoras Semiautomáticas"
+; ; DigitalWashersNavNode              ; "Lavadoras Digitales"
+; ; ManualWashersNavNode               ; "Lavadoras Manuales"
+; ; WashersDryersNavNode               ; "Lavadora - Secadora"
+; ; DishwashersNavNode                 ; "Lavavajillas"
+; ; CookingAppliancesNavNode           ; "Cocción"
+; ; CooktopsNavNode                    ; "Cubiertas"
+; ; OvensNavNode                       ; "Hornos"
+; ; RangeHoodsNavNode                  ; "Campanas"
+; ; RangesNavNode                      ; "Estufas"
+; ; MicrowavesNavNode                  ; "Microondas"
+; ; SmallerAppliancesNavNode           ; "Electrodomésticos menores"
+; ; CountertopsNavNode                 ; "Mesones"
+; ; AirConditionersNavNode             ; "Aire acondicionado"
+; ; WaterHeatersNavNode                ; "Calentadores de agua"

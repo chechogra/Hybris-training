@@ -1,0 +1,70 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$supercategories = source(code, $catalogVersion)[unique = true]
+$categories = target(code, $catalogVersion)[unique = true]
+
+# Insert Categories
+INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion
+; collections                ; ;
+; brands                     ; ;
+; categories                 ; ;
+; tech                       ; ;
+; cameras                    ; ;
+; dslr                       ; ;
+; mirrorless                 ; ;
+; headphones                 ; ;
+; on-ear                     ; ;
+; in-ear                     ; ;
+; over-ear                   ; ;
+; women                      ; ;
+; tops                       ; ;
+; bottoms                    ; ;
+; men                        ; ;
+; shirts                     ; ;
+; pants                      ; ;
+; kids                       ; ;
+; home-appliances            ; ;
+; refrigerators              ; ;
+; french-door-refrigerators  ; ;
+; side-by-side-refrigerators ; ;
+; wine-coolers               ; ;
+; water-dispensers           ; ;
+
+# Insert Category Structure
+INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
+; tech                       ; categories
+; cameras                    ; tech
+; dslr                       ; cameras
+; mirrorless                 ; cameras
+; headphones                 ; tech
+; on-ear                     ; headphones
+; in-ear                     ; headphones
+; over-ear                   ; headphones
+; women                      ; categories
+; tops                       ; women
+; bottoms                    ; women
+; men                        ; categories
+; shirts                     ; men
+; pants                      ; men
+; kids                       ; categories
+; home-appliances            ; categories
+; refrigerators              ; home-appliances
+; french-door-refrigerators  ; refrigerators
+; side-by-side-refrigerators ; refrigerators
+; wine-coolers               ; refrigerators
+; water-dispensers           ; refrigerators

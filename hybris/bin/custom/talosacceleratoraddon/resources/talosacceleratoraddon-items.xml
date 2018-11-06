@@ -1,0 +1,556 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<!--
+	ATTENTION: This is just an example file. You have to edit it according to your needs.
+-->
+
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
+
+    <collectiontypes>
+        <collectiontype code="TCResponsiveBannerComponentList" elementtype="TCResponsiveBannerComponent"/>
+    </collectiontypes>
+
+    <enumtypes>
+        <enumtype code="SocialIconType" dynamic="true">
+            <value code="facebook"/>
+            <value code="twitter"/>
+            <value code="instagram"/>
+            <value code="gplus"/>
+            <value code="youtube"/>
+            <value code="linkedin"/>
+            <value code="pinterest"/>
+        </enumtype>
+        <enumtype code="TCButtonStyle" dynamic="false">
+            <value code="BTN_DEFAULT"/>
+            <value code="BTN_PRIMARY"/>
+            <value code="BTN_LIGHT"/>
+            <value code="BTN_DANGER"/>
+        </enumtype>
+        <enumtype code="FlexDirectionEnum" dynamic="false">
+            <value code="ROW"/>
+            <value code="ROW_REVERSE"/>
+            <value code="COLUMN"/>
+            <value code="COLUMN_REVERSE"/>
+        </enumtype>
+        <enumtype code="JustifyContentEnum" dynamic="false">
+            <value code="FLEX_START"/>
+            <value code="FLEX_END"/>
+            <value code="CENTER"/>
+            <value code="SPACE_BETWEEN"/>
+            <value code="SPACE_AROUND"/>
+            <value code="SPACE_EVENLY"/>
+        </enumtype>
+        <enumtype code="AlignItemsEnum" dynamic="false">
+            <value code="FLEX_START"/>
+            <value code="FLEX_END"/>
+            <value code="CENTER"/>
+            <value code="BASELINE"/>
+            <value code="STRETCH"/>
+        </enumtype>
+        <enumtype code="SwatchColorEnum" generate="false" autocreate="false" dynamic="false">
+            <!-- RED HTML COLOR NAMES -->
+            <value code="INDIANRED"/>
+            <value code="LIGHTCORAL"/>
+            <value code="SALMON"/>
+            <value code="DARKSALMON"/>
+            <value code="LIGHTSALMON"/>
+            <!-- Already declared CRIMSON -->
+            <value code="RED"/>
+            <value code="FIREBRICK"/>
+            <value code="DARKRED"/>
+
+            <!-- PINK HTML COLOR NAMES -->
+            <!-- Already declared PINK -->
+            <value code="LIGHTPINK"/>
+            <value code="HOTPINK"/>
+            <value code="DEEPPINK"/>
+            <value code="MEDIUMVIOLETRED"/>
+            <value code="PALEVIOLETRED"/>
+
+            <!-- ORANGE HTML COLOR NAMES -->
+            <value code="CORAL"/>
+            <value code="TOMATO"/>
+            <value code="ORANGERED"/>
+            <value code="DARKORANGE"/>
+            <!-- Already declared ORANGE -->
+
+            <!-- YELLOW HTML COLOR NAMES -->
+            <!-- Already declared GOLD -->
+            <value code="YELLOW"/>
+            <value code="LIGHTYELLOW"/>
+            <value code="LEMONCHIFFON"/>
+            <value code="LIGHTGOLDENRODYELLOW"/>
+            <value code="PAPAYAWHIP"/>
+            <value code="MOCCASIN"/>
+            <!-- Already declared PEACHPUFF -->
+            <value code="PALEGOLDENROD"/>
+            <value code="KHAKI"/>
+            <value code="DARKKHAKI"/>
+
+            <!-- PURPLE HTML COLOR NAMES -->
+            <value code="LAVENDER"/>
+            <value code="THISTLE"/>
+            <value code="PLUM"/>
+            <value code="VIOLET"/>
+            <value code="ORCHID"/>
+            <value code="FUCHSIA"/>
+            <value code="MAGENTA"/>
+            <value code="MEDIUMORCHID"/>
+            <value code="MEDIUMPURPLE"/>
+            <value code="REBECCAPURPLE"/>
+            <value code="BLUEVIOLET"/>
+            <value code="DARKVIOLET"/>
+            <value code="DARKORCHID"/>
+            <value code="DARKMAGENTA"/>
+            <!-- Already declared PURPLE -->
+            <value code="INDIGO"/>
+            <value code="SLATEBLUE"/>
+            <value code="DARKSLATEBLUE"/>
+
+            <!-- GREEN HTML COLOR NAMES -->
+            <value code="GREENYELLOW"/>
+            <value code="CHARTREUSE"/>
+            <value code="LAWNGREEN"/>
+            <value code="LIME"/>
+            <value code="LIMEGREEN"/>
+            <value code="PALEGREEN"/>
+            <value code="LIGHTGREEN"/>
+            <value code="MEDIUMSPRINGGREEN"/>
+            <value code="SPRINGGREEN"/>
+            <value code="MEDIUMSEAGREEN"/>
+            <value code="SEAGREEN"/>
+            <value code="FORESTGREEN"/>
+            <value code="GREEN"/>
+            <value code="DARKGREEN"/>
+            <value code="YELLOWGREEN"/>
+            <!-- Already declared OLIVEDRAB -->
+            <value code="OLIVE"/>
+            <value code="DARKOLIVEGREEN"/>
+            <value code="MEDIUMAQUAMARINE"/>
+            <value code="DARKSEAGREEN"/>
+            <value code="LIGHTSEAGREEN"/>
+            <value code="DARKCYAN"/>
+            <value code="TEAL"/>
+
+            <!-- BLUE HTML COLOR NAMES -->
+            <value code="AQUA"/>
+            <value code="CYAN"/>
+            <value code="LIGHTCYAN"/>
+            <value code="PALETURQUOISE"/>
+            <value code="AQUAMARINE"/>
+            <value code="TURQUOISE"/>
+            <!-- Already declared MEDIUMTURQUOISE -->
+            <value code="DARKTURQUOISE"/>
+            <value code="CADETBLUE"/>
+            <!-- Already declared STEELBLUE -->
+            <value code="LIGHTSTEELBLUE"/>
+            <value code="POWDERBLUE"/>
+            <value code="LIGHTBLUE"/>
+            <value code="SKYBLUE"/>
+            <value code="LIGHTSKYBLUE"/>
+            <value code="DEEPSKYBLUE"/>
+            <value code="DODGERBLUE"/>
+            <value code="CORNFLOWERBLUE"/>
+            <value code="MEDIUMSLATEBLUE"/>
+            <value code="ROYALBLUE"/>
+            <value code="BLUE"/>
+            <value code="MEDIUMBLUE"/>
+            <value code="DARKBLUE"/>
+            <!-- Already declared NAVY -->
+            <value code="MIDNIGHTBLUE"/>
+
+            <!-- BROWN HTML COLOR NAMES -->
+            <value code="CORNSILK"/>
+            <value code="BLANCHEDALMOND"/>
+            <value code="BISQUE"/>
+            <value code="NAVAJOWHITE"/>
+            <value code="WHEAT"/>
+            <value code="BURLYWOOD"/>
+            <value code="TAN"/>
+            <!-- Already declared ROSYBROWN -->
+            <value code="SANDYBROWN"/>
+            <value code="GOLDENROD"/>
+            <value code="DARKGOLDENROD"/>
+            <value code="PERU"/>
+            <value code="CHOCOLATE"/>
+            <!-- Already declared SADDLEBROWN -->
+            <value code="SIENNA"/>
+            <value code="BROWN"/>
+            <value code="MAROON"/>
+
+            <!-- WHITE HTML COLOR NAMES-->
+            <!-- Already declared WHITE -->
+            <value code="SNOW"/>
+            <value code="HONEYDEW"/>
+            <value code="MINTCREAM"/>
+            <value code="AZURE"/>
+            <value code="ALICEBLUE"/>
+            <value code="GHOSTWHITE"/>
+            <value code="WHITESMOKE"/>
+            <value code="SEASHELL"/>
+            <!-- Already declared BEIGE -->
+            <value code="OLDLACE"/>
+            <value code="FLORALWHITE"/>
+            <value code="IVORY"/>
+            <value code="ANTIQUEWHITE"/>
+            <value code="LINEN"/>
+            <value code="LAVENDERBLUSH"/>
+            <value code="MISTYROSE"/>
+
+            <!-- GRAY HTML COLOR NAMES -->
+            <!-- Already declared GAINSBORO -->
+            <value code="LIGHTGRAY"/>
+            <!-- Already declared SILVER -->
+            <!-- Already declared DARKGRAY -->
+            <value code="GRAY"/>
+            <value code="DIMGRAY"/>
+            <value code="LIGHTSLATEGRAY"/>
+            <value code="SLATEGRAY"/>
+            <value code="DARKSLATEGRAY"/>
+            <!-- Already declared BLACK -->
+        </enumtype>
+    </enumtypes>
+
+    <itemtypes>
+        <typegroup name="TalosCommerce">
+            <itemtype code="TCSocialAction"
+                      jaloclass="com.talos.talosacceleratoraddon.jalo.TCSocialAction"
+                      extends="SimpleCMSAction">
+                <attributes>
+                    <attribute qualifier="iconCode" type="SocialIconType">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="localizedUrl" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="TCSocialCollectionComponent"
+                      jaloclass="com.talos.talosacceleratoraddon.jalo.TCSocialCollectionComponent"
+                      extends="SimpleCMSComponent"/>
+
+            <itemtype code="TCEmailOptInComponent"
+                      jaloclass="com.talos.talosacceleratoraddon.jalo.TCEmailOptInComponent"
+                      extends="SimpleCMSComponent"/>
+
+            <itemtype code="FooterNavigationComponent" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="optInComponent" type="TCEmailOptInComponent">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="socialCollectionComponent" type="TCSocialCollectionComponent">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="TCBannerAction"
+                      jaloclass="com.talos.talosacceleratoraddon.jalo.TCBannerAction"
+                      extends="SimpleCMSAction">
+                <attributes>
+                    <attribute qualifier="text" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="style" type="TCButtonStyle">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>em().getEnumerationValue("TCButtonStyle","BTN_DEFAULT")</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+
+            <itemtype code="TCResponsiveBannerComponent"
+                      jaloclass="com.talos.talosacceleratoraddon.jalo.TCResponsiveBannerComponent"
+                      extends="SimpleCMSComponent">
+                <attributes>
+                    <attribute qualifier="contentSpacing" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="maxContentWidth" type="java.lang.String">
+                        <persistence type="property"/>
+                        <defaultvalue>"1170px"</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="gridColumns" type="java.lang.Integer">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>4</defaultvalue>
+                    </attribute>
+
+                    <attribute qualifier="titleXs" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+                    <attribute qualifier="titleSm" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+                    <attribute qualifier="titleMd" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+                    <attribute qualifier="titleLg" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+
+                    <attribute qualifier="descriptionXs" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+                    <attribute qualifier="descriptionSm" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+                    <attribute qualifier="descriptionMd" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+                    <attribute qualifier="descriptionLg" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                        <modifiers dontOptimize="true"/>
+                    </attribute>
+
+                    <attribute qualifier="mediaXs" type="Media">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="mediaSm" type="Media">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="mediaMd" type="Media">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="mediaLg" type="Media">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="showContentOnHoverXs" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="showContentOnHoverSm" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="showContentOnHoverMd" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="showContentOnHoverLg" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+                    </attribute>
+
+
+                    <attribute qualifier="heightXs" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="heightSm" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="heightMd" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="heightLg" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="backgroundSizeXs" type="java.lang.String">
+                        <persistence type="property"/>
+                        <defaultvalue>"auto 100%"</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="backgroundSizeSm" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundSizeMd" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundSizeLg" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="backgroundPositionXs" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundPositionSm" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundPositionMd" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundPositionLg" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="flexDirectionXs" type="FlexDirectionEnum">
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("FlexDirectionEnum","COLUMN")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="flexDirectionSm" type="FlexDirectionEnum">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="flexDirectionMd" type="FlexDirectionEnum">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="flexDirectionLg" type="FlexDirectionEnum">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="justifyContentXs" type="JustifyContentEnum">
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("JustifyContentEnum","CENTER")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="justifyContentSm" type="JustifyContentEnum">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="justifyContentMd" type="JustifyContentEnum">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="justifyContentLg" type="JustifyContentEnum">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="alignItemsXs" type="AlignItemsEnum">
+                        <persistence type="property"/>
+                        <defaultvalue>em().getEnumerationValue("AlignItemsEnum","CENTER")</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="alignItemsSm" type="AlignItemsEnum">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="alignItemsMd" type="AlignItemsEnum">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="alignItemsLg" type="AlignItemsEnum">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="backgroundColorXs" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundColorSm" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundColorMd" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="backgroundColorLg" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="overlayXs" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="overlaySm" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="overlayMd" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="overlayLg" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+
+                    <attribute qualifier="textColorXs" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="textColorSm" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="textColorMd" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="textColorLg" type="java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="TCRotatingBannerComponent"
+                      jaloclass="com.talos.talosacceleratoraddon.jalo.TCRotatingBannerComponent"
+                      extends="SimpleCMSComponent">
+                <attributes>
+                    <attribute qualifier="title" type="localized:java.lang.String">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="banners" type="TCResponsiveBannerComponentList">
+                        <persistence type="property"/>
+                    </attribute>
+                    <attribute qualifier="navColor" type="java.lang.String">
+                        <persistence type="property"/>
+                        <defaultvalue>"#252525"</defaultvalue>
+                    </attribute>
+
+                    <attribute qualifier="itemsShownXs" type="java.lang.Integer">
+                        <persistence type="property"/>
+                        <defaultvalue>1</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="itemsShownSm" type="java.lang.Integer">
+                        <persistence type="property"/>
+                        <defaultvalue>1</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="itemsShownMd" type="java.lang.Integer">
+                        <persistence type="property"/>
+                        <defaultvalue>1</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="itemsShownLg" type="java.lang.Integer">
+                        <persistence type="property"/>
+                        <defaultvalue>1</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="ProductCarouselComponent" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="navColor" type="java.lang.String">
+                        <persistence type="property"/>
+                        <defaultvalue>"#F2F2F2"</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="backgroundColor" type="java.lang.String">
+                        <persistence type="property"/>
+                        <defaultvalue>"#252525"</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="rotateActiveItem" type="java.lang.Boolean">
+                        <persistence type="property"/>
+                        <modifiers optional="false"/>
+                        <defaultvalue>java.lang.Boolean.TRUE</defaultvalue>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="TCResponsiveGridComponent"
+                      jaloclass="com.talos.talosacceleratoraddon.jalo.TCResponsiveGridComponent"
+                      extends="SimpleCMSComponent">
+                <attributes>
+                    <attribute qualifier="gridItems" type="TCResponsiveBannerComponentList">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CMSNavigationNode" autocreate="false"
+                      generate="true"
+                      extends="CMSNavigationNode">
+                <attributes>
+                    <attribute qualifier="banner" type="TCResponsiveBannerComponent">
+                        <persistence type="property"/>
+                    </attribute>
+                </attributes>
+            </itemtype>
+        </typegroup>
+    </itemtypes>
+</items>

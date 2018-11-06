@@ -1,0 +1,235 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Prices
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = '$productCatalog:Staged']
+$prices = Europe1prices[translator = de.hybris.platform.europe1.jalo.impex.Europe1PricesTranslator]
+
+# Set product approval status to Approved only for those products that have prices.
+$approved = approvalstatus(code)[default = 'approved']
+
+UPDATE Product; code[unique = true]; $prices; $approved; $catalogVersion; Europe1PriceFactory_PTG(code)
+# Tech - Cameras - DSLR
+; 0001   ; "1499.95 USD" ; approved ; ; us-sales-tax-full
+; 0002   ; "3299.95 USD" ; approved ; ; us-sales-tax-full
+; 0003   ; "399.95 USD"  ; approved ; ; us-sales-tax-full
+; 0004   ; "699.95 USD"  ; approved ; ; us-sales-tax-full
+; 0005   ; "649.95 USD"  ; approved ; ; us-sales-tax-full
+; 0006   ; "799.95 USD"  ; approved ; ; us-sales-tax-full
+; 0007   ; "349.99 USD"  ; approved ; ; us-sales-tax-full
+; 0008   ; "549.99 USD"  ; approved ; ; us-sales-tax-full
+; 0009   ; "399.99 USD"  ; approved ; ; us-sales-tax-full
+; 0010   ; "599.99 USD"  ; approved ; ; us-sales-tax-full
+# Tech - Cameras - Mirrorless
+; 0101   ; "799.99 USD"  ; approved ; ; us-sales-tax-full
+; 0102   ; "1199 USD"    ; approved ; ; us-sales-tax-full
+; 0103   ; "449.99 USD"  ; approved ; ; us-sales-tax-full
+; 0104   ; "1584.50 USD" ; approved ; ; us-sales-tax-full
+; 0105   ; "1399 USD"    ; approved ; ; us-sales-tax-full
+; 0106   ; "496.95 USD"  ; approved ; ; us-sales-tax-full
+; 0107   ; "379.99 USD"  ; approved ; ; us-sales-tax-full
+; 0108   ; "499.95 USD"  ; approved ; ; us-sales-tax-full
+; 0109   ; "1199.95 USD" ; approved ; ; us-sales-tax-full
+; 0110   ; "799.95 USD"  ; approved ; ; us-sales-tax-full
+# Tech - Headphones - On-ear
+; 020101 ; "39.95 USD"   ; approved ; ; us-sales-tax-full
+; 020102 ; "40.50 USD"   ; approved ; ; us-sales-tax-full
+; 020103 ; "41.99 USD"   ; approved ; ; us-sales-tax-full
+; 0202   ; "149.95 USD"  ; approved ; ; us-sales-tax-full
+; 0203   ; "62.99 USD"   ; approved ; ; us-sales-tax-full
+; 0204   ; "99.95 USD"   ; approved ; ; us-sales-tax-full
+; 0205   ; "59.95 USD"   ; approved ; ; us-sales-tax-full
+; 0206   ; "24.95 USD"   ; approved ; ; us-sales-tax-full
+; 0207   ; "49.95 USD"   ; approved ; ; us-sales-tax-full
+; 0208   ; "89.95 USD"   ; approved ; ; us-sales-tax-full
+; 0209   ; "49.99 USD"   ; approved ; ; us-sales-tax-full
+; 0210   ; "109.99 USD"  ; approved ; ; us-sales-tax-full
+# Tech - Headphones - In-ear
+; 0301   ; "49.95 USD"   ; approved ; ; us-sales-tax-full
+; 0302   ; "39.95 USD"   ; approved ; ; us-sales-tax-full
+; 0303   ; "59.95 USD"   ; approved ; ; us-sales-tax-full
+; 0304   ; "99.95 USD"   ; approved ; ; us-sales-tax-full
+; 0305   ; "149.95 USD"  ; approved ; ; us-sales-tax-full
+; 0306   ; "149.95 USD"  ; approved ; ; us-sales-tax-full
+; 0307   ; "49.95 USD"   ; approved ; ; us-sales-tax-full
+; 0308   ; "199.95 USD"  ; approved ; ; us-sales-tax-full
+; 0309   ; "39.95 USD"   ; approved ; ; us-sales-tax-full
+; 0310   ; "9.99 USD"    ; approved ; ; us-sales-tax-full
+# Tech - Headphones - Over-ear
+; 0401   ; "124.95 USD"  ; approved ; ; us-sales-tax-full
+; 0402   ; "149.95 USD"  ; approved ; ; us-sales-tax-full
+; 0403   ; "149.95 USD"  ; approved ; ; us-sales-tax-full
+; 0404   ; "199.95 USD"  ; approved ; ; us-sales-tax-full
+; 0405   ; "299.95 USD"  ; approved ; ; us-sales-tax-full
+; 0406   ; "99.95 USD"   ; approved ; ; us-sales-tax-full
+; 0407   ; "149.95 USD"  ; approved ; ; us-sales-tax-full
+; 0408   ; "89.99 USD"   ; approved ; ; us-sales-tax-full
+; 0409   ; "465.00 USD"  ; approved ; ; us-sales-tax-full
+; 0410   ; "195.00 USD"  ; approved ; ; us-sales-tax-full
+# Women - Tops
+; 0501   ; "50.99 USD"   ; approved ; ; us-sales-tax-full
+; 050101 ; "50.99 USD"   ; approved ; ; us-sales-tax-full
+; 050102 ; "50.99 USD"   ; approved ; ; us-sales-tax-full
+; 050103 ; "50.99 USD"   ; approved ; ; us-sales-tax-full
+; 0502   ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 050201 ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 050202 ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 050203 ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 0503   ; "32.50 USD"   ; approved ; ; us-sales-tax-full
+; 050301 ; "32.50 USD"   ; approved ; ; us-sales-tax-full
+; 050302 ; "32.50 USD"   ; approved ; ; us-sales-tax-full
+; 050303 ; "32.50 USD"   ; approved ; ; us-sales-tax-full
+; 0504   ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 050401 ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 050402 ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 050403 ; "45.99 USD"   ; approved ; ; us-sales-tax-full
+; 0505   ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050501 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050502 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050503 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050510 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050511 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050512 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050520 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050521 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 050522 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 0506   ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050601 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050602 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050603 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050610 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050611 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050612 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050620 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050621 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050622 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 0507   ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050701 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050702 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050703 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050710 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050711 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+; 050712 ; "28.95 USD"   ; approved ; ; us-sales-tax-full
+# Women - Bottoms
+; 0601   ; "100.00 USD"  ; approved ; ; us-sales-tax-full
+; 060101 ; "100.00 USD"  ; approved ; ; us-sales-tax-full
+; 060102 ; "100.00 USD"  ; approved ; ; us-sales-tax-full
+; 060103 ; "100.00 USD"  ; approved ; ; us-sales-tax-full
+; 0602   ; "62.99 USD"   ; approved ; ; us-sales-tax-full
+; 060201 ; "62.99 USD"   ; approved ; ; us-sales-tax-full
+; 060202 ; "62.99 USD"   ; approved ; ; us-sales-tax-full
+; 060203 ; "62.99 USD"   ; approved ; ; us-sales-tax-full
+; 0603   ; "120.00 USD"  ; approved ; ; us-sales-tax-full
+; 060301 ; "120.00 USD"  ; approved ; ; us-sales-tax-full
+; 060302 ; "120.00 USD"  ; approved ; ; us-sales-tax-full
+; 060303 ; "120.00 USD"  ; approved ; ; us-sales-tax-full
+; 0604   ; "37.55 USD"   ; approved ; ; us-sales-tax-full
+; 060401 ; "37.55 USD"   ; approved ; ; us-sales-tax-full
+; 060402 ; "37.55 USD"   ; approved ; ; us-sales-tax-full
+; 060403 ; "37.55 USD"   ; approved ; ; us-sales-tax-full
+; 060410 ; "37.55 USD"   ; approved ; ; us-sales-tax-full
+; 060411 ; "37.55 USD"   ; approved ; ; us-sales-tax-full
+; 060412 ; "37.55 USD"   ; approved ; ; us-sales-tax-full
+; 0605   ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060501 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060502 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060503 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060510 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060511 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060512 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060520 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060521 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+; 060522 ; "75.99 USD"   ; approved ; ; us-sales-tax-full
+# Men - Pants
+; 0701   ; "150.95 USD"  ; approved ; ; us-sales-tax-full
+; 070101 ; "150.95 USD"  ; approved ; ; us-sales-tax-full
+; 070102 ; "150.95 USD"  ; approved ; ; us-sales-tax-full
+; 070103 ; "150.95 USD"  ; approved ; ; us-sales-tax-full
+; 0702   ; "200.00 USD"  ; approved ; ; us-sales-tax-full
+; 070201 ; "200.00 USD"  ; approved ; ; us-sales-tax-full
+; 070202 ; "200.00 USD"  ; approved ; ; us-sales-tax-full
+; 070203 ; "200.00 USD"  ; approved ; ; us-sales-tax-full
+; 0703   ; "160.99 USD"  ; approved ; ; us-sales-tax-full
+; 070301 ; "160.99 USD"  ; approved ; ; us-sales-tax-full
+; 070302 ; "160.99 USD"  ; approved ; ; us-sales-tax-full
+; 070303 ; "160.99 USD"  ; approved ; ; us-sales-tax-full
+; 0704   ; "230.50 USD"  ; approved ; ; us-sales-tax-full
+; 070401 ; "230.50 USD"  ; approved ; ; us-sales-tax-full
+; 070402 ; "230.50 USD"  ; approved ; ; us-sales-tax-full
+; 070403 ; "230.50 USD"  ; approved ; ; us-sales-tax-full
+; 070410 ; "230.50 USD"  ; approved ; ; us-sales-tax-full
+; 070411 ; "230.50 USD"  ; approved ; ; us-sales-tax-full
+; 070412 ; "230.50 USD"  ; approved ; ; us-sales-tax-full
+; 0705   ; "122.99 USD"  ; approved ; ; us-sales-tax-full
+; 070501 ; "122.99 USD"  ; approved ; ; us-sales-tax-full
+; 070502 ; "122.99 USD"  ; approved ; ; us-sales-tax-full
+; 070503 ; "122.99 USD"  ; approved ; ; us-sales-tax-full
+; 070510 ; "122.99 USD"  ; approved ; ; us-sales-tax-full
+; 070511 ; "122.99 USD"  ; approved ; ; us-sales-tax-full
+; 070512 ; "122.99 USD"  ; approved ; ; us-sales-tax-full
+# Men - Shirts
+; 0801   ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080101 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080102 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080103 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 0802   ; "53.99 USD"   ; approved ; ; us-sales-tax-full
+; 080201 ; "53.99 USD"   ; approved ; ; us-sales-tax-full
+; 080202 ; "53.99 USD"   ; approved ; ; us-sales-tax-full
+; 080203 ; "53.99 USD"   ; approved ; ; us-sales-tax-full
+; 0803   ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080301 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080302 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080303 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 0804   ; "65.95 USD"   ; approved ; ; us-sales-tax-full
+; 080401 ; "65.95 USD"   ; approved ; ; us-sales-tax-full
+; 080402 ; "65.95 USD"   ; approved ; ; us-sales-tax-full
+; 080403 ; "65.95 USD"   ; approved ; ; us-sales-tax-full
+; 080410 ; "65.95 USD"   ; approved ; ; us-sales-tax-full
+; 080411 ; "65.95 USD"   ; approved ; ; us-sales-tax-full
+; 080412 ; "65.95 USD"   ; approved ; ; us-sales-tax-full
+; 0805   ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 080501 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 080502 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 080503 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 080510 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 080511 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 080512 ; "78.99 USD"   ; approved ; ; us-sales-tax-full
+; 0806   ; "38.99 USD"   ; approved ; ; us-sales-tax-full
+; 080601 ; "38.99 USD"   ; approved ; ; us-sales-tax-full
+; 080602 ; "38.99 USD"   ; approved ; ; us-sales-tax-full
+; 080603 ; "38.99 USD"   ; approved ; ; us-sales-tax-full
+; 0807   ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080701 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080702 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080703 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080710 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080711 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+; 080712 ; "27.95 USD"   ; approved ; ; us-sales-tax-full
+
+# Home Appliances
+UPDATE Product; code[unique = true]; $prices; $approved; $catalogVersion; Europe1PriceFactory_PTG(code)
+# Home Appliances - Refrigerators - French Door Refrigerators
+; 0901 ; "204.80 USD"  ; approved ; ; us-sales-tax-full
+; 0902 ; "176.00 USD"  ; approved ; ; us-sales-tax-full
+; 0903 ; "280.40 USD"  ; approved ; ; us-sales-tax-full
+; 0904 ; "293.00 USD"  ; approved ; ; us-sales-tax-full
+; 0905 ; "308.84 USD"  ; approved ; ; us-sales-tax-full
+; 0906 ; "423.32 USD"  ; approved ; ; us-sales-tax-full
+# Home Appliances - Refrigerators - Side by Side Refrigerators
+; 0920 ; "2107.76 USD" ; approved ; ; us-sales-tax-full
+; 0921 ; "1457.60 USD" ; approved ; ; us-sales-tax-full
+# Home Appliances - Refrigerators - Wine Coolers
+; 0940 ; "241.52 USD"  ; approved ; ; us-sales-tax-full
+# Home Appliances - Refrigerators - Water dispensers
+; 0950 ; "178.52 USD"  ; approved ; ; us-sales-tax-full

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<groups xmlns="http://www.isdc.ro/wro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.isdc.ro/wro wro.xsd">
+   <group name="addons_responsive">
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.variables.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/talosacceleratoraddon.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.navigation.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.banner.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.carousel.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/svgxuse.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/owl.carousel.min.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/masonry.pkgd.min.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.grid.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc-quickorder.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.colorbox.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc-import-csv.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.tabs.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.pdp.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/lightslider.min.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/jquery.zoom.min.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.minicart.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.productgrid.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.cart.js</js>
+   </group>
+</groups>
+

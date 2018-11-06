@@ -1,0 +1,235 @@
+#tc-product-facet-wp {
+  #colorbox & {
+    display: block !important;
+  }
+
+  .tc-facet-nav-refinements {
+    .tc-collapsible-parent:last-of-type {
+      .facet__name.collapsed {
+        border-bottom: 1px solid @tc-border-color;
+      }
+
+      .facet__values.collapsing[aria-expanded="false"] {
+        border-top: none;
+      }
+    }
+
+    .js-shop-stores-facet {
+      .facet-form-hidden {
+        display: none;
+      }
+
+      .facet__values {
+        .line-text {
+          text-align: center;
+          overflow: hidden;
+          margin: 10px;
+
+          span {
+            &:before, &:after {
+              background-color: @tc-border-color;
+              content: "";
+              display: inline-block;
+              height: 1px;
+              position: relative;
+              vertical-align: middle;
+              width: 50%;
+            }
+
+            &:before {
+              right: 0.5em;
+              margin-left: -50%;
+            }
+            &:after {
+              left: 0.5em;
+              margin-right: -50%;
+            }
+          }
+        }
+
+        .facet__form {
+          padding: 20px;
+
+          .input-group {
+            position: relative;
+
+            .tc-input {
+              padding-right: 40px;
+            }
+
+            .input-group-btn {
+              position: absolute;
+              right: 15px;
+              top: 50%;
+              transform: translateY(-50%);
+              height: 14px;
+
+              button {
+                padding: 0;
+                border: none;
+                background-color: transparent;
+
+                svg {
+                  color: gray;
+                }
+
+                &:hover {
+                  svg {
+                    color: @tc-link-hover-color;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .facet__results {
+          padding: 20px;
+
+          .js-facet-change-link, .facet__values__more {
+            text-transform: uppercase;
+          }
+          .facet__list {
+            padding: 10px 0;
+            margin: 10px 0;
+            border-top: 1px solid @tc-border-color;
+            border-bottom: 1px solid @tc-border-color;
+          }
+        }
+      }
+    }
+
+    .facet__name {
+      padding: 0 50px 0 20px;
+      height: 50px;
+      line-height: 50px;
+      color: black;
+      border: 1px solid @tc-border-color;
+      border-bottom: none;
+      text-transform: uppercase;
+      background-color: #F2F2F2;
+      position: relative;
+      cursor: pointer;
+
+      svg {
+        color: black;
+        right: 20px;
+        top: 50%;
+        transform: translateY(-50%);
+      }
+    }
+
+    .facet__values {
+      padding: 0;
+      margin: 0;
+      background-color: #FBFBFB;
+      border-top: 1px solid @tc-border-color;
+
+      .facet__list {
+        padding: 10px 20px;
+        margin: 0;
+        list-style: none;
+
+        li {
+          cursor: pointer;
+          line-height: 28px;
+
+          a, label {
+            cursor: pointer;
+            color: #333333;
+          }
+
+          &:hover {
+            a, label {
+              color: @tc-link-hover-color;
+            }
+          }
+        }
+
+        &.tc-color-facet-list {
+          padding: 15px;
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+
+          .tc-color-facet-value {
+            border: 1px solid @tc-border-color;
+            border-radius: 12px;
+            width: 24px;
+            height: 24px;
+            margin: 5px 10px;
+
+            a {
+              border-radius: 12px;
+              display: block;
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.tc-refinements-wp, .tc-grid-component-wp {
+  clear: both;
+}
+
+.tc-applied-facets {
+  padding: 0 10px;
+
+  .facet__name {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    font-weight: 500;
+  }
+  .facet__list {
+    padding: 0;
+    list-style: none;
+    font-size: 0;
+    margin: 0 0 15px -5px;
+
+    li {
+      border: 1px solid @product-grid-border-color;
+      padding: 0 25px 0 10px;
+      position: relative;
+      display: inline-block;
+      height: 45px;
+      line-height: 45px;
+      margin: 0 0 5px 5px;
+      font-size: 1.4rem;
+
+      a {
+        position: absolute;
+        right: 10px;
+        height: 100%;
+        top: 50%;
+        transform: translateY(-50%);
+        svg {
+          height: 11px;
+          width: 11px;
+        }
+      }
+    }
+  }
+}
+
+.facet__list {
+  .tc-control {
+    margin-bottom: 0;
+    .tc-control__indicator {
+      border-width: 1px;
+    }
+    &.tc-sm{
+      font-size: 1.4rem;
+    }
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+  .tc-refinements-wp, .tc-grid-component-wp {
+    clear: none;
+  }
+}

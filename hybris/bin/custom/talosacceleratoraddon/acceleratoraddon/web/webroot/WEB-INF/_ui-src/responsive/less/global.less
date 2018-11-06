@@ -1,0 +1,227 @@
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Medium.eot');
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Medium.eot?#iefix') format('embedded-opentype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Medium.woff2') format('woff2'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Medium.woff') format('woff'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Medium.ttf') format('truetype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Medium.svg#Montserrat-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Bold.eot');
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Bold.eot?#iefix') format('embedded-opentype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Bold.woff2') format('woff2'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Bold.woff') format('woff'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Bold.ttf') format('truetype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Bold.svg#Montserrat-Bold') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Light.eot');
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Light.eot?#iefix') format('embedded-opentype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Light.woff2') format('woff2'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Light.woff') format('woff'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Light.ttf') format('truetype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Light.svg#Montserrat-Light') format('svg');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Regular.eot');
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Regular.eot?#iefix') format('embedded-opentype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Regular.woff2') format('woff2'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Regular.woff') format('woff'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Regular.ttf') format('truetype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-Regular.svg#Montserrat-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*@font-face {
+  font-family: 'Montserrat';
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-SemiBold.eot');
+  src: url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-SemiBold.eot?#iefix') format('embedded-opentype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-SemiBold.woff2') format('woff2'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-SemiBold.woff') format('woff'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-SemiBold.ttf') format('truetype'),
+  url('../../../addons/talosacceleratoraddon/responsive/common/fonts/Montserrat-SemiBold.svg#Montserrat-SemiBold') format('svg');
+  font-weight: 600;
+  font-style: normal;
+}*/
+
+html {
+  height: 100%;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+  font-style: normal;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
+  font-size: 1.4rem;
+  padding-top: @nav-header-inner-height + (@nav-header-padding-y * 2);
+}
+
+*:focus {
+  outline: none !important;
+}
+
+a {
+  color: @tc-primary-color;
+  &:hover, &:focus {
+    text-decoration: none;
+  }
+}
+
+#tc_main_nav {
+  /* We want the header to have a static height - it will always take up just as much space as it needs.  */
+  /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.tc-main-content {
+  /* By setting flex-grow to 1, the main content will take up
+  all of the remaining space on the page (the other elements have flex-grow: 0 and won't contest the free space). */
+  /* 1 flex-grow, 0 flex-shrink, auto flex-basis */
+  -webkit-box-flex: 1;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+}
+
+.tc-container {
+  max-width: @main-content-max-width;
+}
+
+footer {
+  /* Just like the header, the footer will have a static height - it shouldn't grow or shrink.  */
+  /* 0 flex-grow, 0 flex-shrink, auto flex-basis */
+  -webkit-box-flex: 0;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+}
+
+.icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+
+.tc-radio-group {
+
+  &:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+
+  input[type=radio] {
+    position: absolute;
+    visibility: hidden;
+    display: none;
+  }
+
+  label {
+    color: #777777;
+    display: inline-block;
+    cursor: pointer;
+    padding: 6px 15px;
+    border: 1px solid #E1DEDE;
+    float: left;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  input[type=radio]:checked + label {
+    color: #ffffff;
+    background: @tc-primary-color;
+    border: 1px solid @tc-primary-color;
+    cursor: not-allowed;
+  }
+
+  label + input[type=radio] + label {
+    border: 1px solid #E1DEDE;
+  }
+
+}
+
+#tc_overlay_below_header {
+  position: fixed;
+  display: none;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.tc-collapsible-parent {
+  svg.icon-plus #Layer_1 {
+    rect {
+      -webkit-transition: all 400ms;
+      -webkit-transform: scaleY(0);
+      -webkit-transform-origin: 50% 50%;
+    }
+  }
+}
+
+.collapsed, .tc-collapsed {
+  svg.icon-plus #Layer_1, svg.icon-plus #Layer_2 {
+    rect {
+      -webkit-transition: all 400ms;
+      -webkit-transform: scaleY(1);
+      -webkit-transform-origin: 50% 50%;
+    }
+  }
+}
+
+@media (min-width: @screen-sm-min) {
+
+  body {
+    padding-top: @body-padding-top-breadcrumb-not-present-desktop;
+    -webkit-transition: padding-top 0.65s ease-out;
+    -o-transition: padding-top 0.65s ease-out;
+    transition: padding-top 0.65s ease-out;
+  }
+
+  .breadcrumb-not-present {
+    body {
+      padding-top: @body-padding-top-desktop;
+      -webkit-transition: padding-top 0.65s ease-out;
+      -o-transition: padding-top 0.65s ease-out;
+      transition: padding-top 0.65s ease-out;
+    }
+  }
+
+}
+
+.display-none {
+  display: none;
+}

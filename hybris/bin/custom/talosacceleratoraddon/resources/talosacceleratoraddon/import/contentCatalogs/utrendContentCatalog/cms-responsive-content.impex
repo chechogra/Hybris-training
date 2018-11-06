@@ -1,0 +1,136 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+$contentCatalog = utrendContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$productCatalog = utrendProductCatalog
+$productCV = catalogVersion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$siteUid = utrend
+$category = category(code, $productCV)
+$product = product(code, $productCV)
+
+
+$jarResourceCms = jar:com.talos.talosacceleratoraddon.constants.TalosacceleratoraddonConstants&/talosacceleratoraddon/import/cockpit/cmscockpit
+$siteResource = jar:com.talos.talosacceleratoraddon.constants.TalosacceleratoraddonConstants&/talosacceleratoraddon/import/contentCatalogs/$contentCatalog
+$addonExtensionName = talosacceleratoraddon
+
+
+UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
+; ; MiniCartSlot        ; MiniCart
+; ; OrderToolsLinksSlot ; OrderComponent
+
+####### FOOTER START #######
+INSERT_UPDATE TCSocialAction; $contentCV[unique = true]; uid[unique = true]; &actionRef; name; iconCode(code); localizedUrl
+; ; TCSocialActionFacebook   ; TCSocialActionFacebook   ; "Facebook"  ; facebook  ; /
+; ; TCSocialActionTwitter    ; TCSocialActionTwitter    ; "Twitter"   ; twitter   ; /
+; ; TCSocialActionInstagram  ; TCSocialActionInstagram  ; "Instagram" ; instagram ; /
+; ; TCSocialActionGooglePlus ; TCSocialActionGooglePlus ; "Google+"   ; gplus     ; /
+; ; TCSocialActionYouTube    ; TCSocialActionYouTube    ; "YouTube"   ; youtube   ; /
+; ; TCSocialActionLinkedIn   ; TCSocialActionLinkedIn   ; "LinkedIn"  ; linkedin  ; /
+; ; TCSocialActionPinterest  ; TCSocialActionPinterest  ; "Pinterest" ; pinterest ; /
+
+INSERT_UPDATE TCSocialCollectionComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef; actions(&actionRef)
+; ; TCSocialCollectionComponent ; TCSocialCollectionComponent ; TCSocialActionFacebook, TCSocialActionTwitter, TCSocialActionInstagram, TCSocialActionGooglePlus, TCSocialActionYouTube, TCSocialActionLinkedIn, TCSocialActionPinterest
+
+INSERT_UPDATE TCEmailOptInComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef
+; ; TCEmailOptInComponent ; TCEmailOptInComponent
+
+INSERT_UPDATE FooterNavigationComponent; $contentCV[unique = true]; uid[unique = true]; &componentRef; navigationNode(uid, $contentCV); optInComponent(&componentRef); socialCollectionComponent(&componentRef)
+; ; TCFooterNavigationComponent ; TCFooterNavigationComponent ; FooterNavNode ; TCEmailOptInComponent ; TCSocialCollectionComponent
+
+UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
+; ; FooterSlot ; TCFooterNavigationComponent
+####### FOOTER END #######
+
+
+####### HOMEPAGE START #######
+INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realfilename; @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite = true]; folder(qualifier)[default = 'images']
+; ; grid-banner-1.jpeg                  ; image/jpeg ; grid-banner-1.jpeg                  ; $siteResource/images/grid-banner-1.jpeg                  ;
+; ; grid-banner-2.jpeg                  ; image/jpeg ; grid-banner-2.jpeg                  ; $siteResource/images/grid-banner-2.jpeg                  ;
+; ; grid-banner-3.jpeg                  ; image/jpeg ; grid-banner-3.jpeg                  ; $siteResource/images/grid-banner-3.jpeg                  ;
+; ; grid-banner-4.jpeg                  ; image/jpeg ; grid-banner-4.jpeg                  ; $siteResource/images/grid-banner-4.jpeg                  ;
+; ; large-banner-1.png                  ; image/png  ; large-banner-1.png                  ; $siteResource/images/large-banner-1.png                  ;
+; ; rotating-banner-1.jpeg              ; image/jpeg ; rotating-banner-1.jpeg              ; $siteResource/images/rotating-banner-1.jpeg              ;
+; ; rotating-banner-2.jpeg              ; image/jpeg ; rotating-banner-2.jpeg              ; $siteResource/images/rotating-banner-2.jpeg              ;
+; ; rotating-banner-3.jpeg              ; image/jpeg ; rotating-banner-3.jpeg              ; $siteResource/images/rotating-banner-3.jpeg              ;
+; ; tech-category-banner.png            ; image/png  ; tech-category-banner.png            ; $siteResource/images/tech-category-banner.png            ;
+; ; brands-category-banner.png          ; image/jpeg ; brands-category-banner.png          ; $siteResource/images/brands-category-banner.jpeg         ;
+; ; women-category-banner.jpg           ; image/jpg  ; women-category-banner.jpg           ; $siteResource/images/women-category-banner.jpg           ;
+; ; men-category-banner.jpeg            ; image/jpeg ; men-category-banner.jpeg            ; $siteResource/images/men-category-banner.jpeg            ;
+; ; home-appliances-category-banner.png ; image/png  ; home-appliances-category-banner.png ; $siteResource/images/home-appliances-category-banner.png ;
+
+INSERT_UPDATE TCBannerAction; $contentCV[unique = true]; uid[unique = true]; url; style(code)
+; ; homepageGridBanner1Action1 ; /c/men   ; BTN_LIGHT
+; ; homepageGridBanner1Action2 ; /c/women ; BTN_LIGHT
+
+INSERT_UPDATE TCResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; gridColumns; mediaXs(code, $contentCV); backgroundSizeXs; textColorXs; flexDirectionXs(code); justifyContentXs(code); alignItemsXs(code); heightXs; heightSm; heightMd; heightLg; backgroundPositionXs; actions(uid, $contentCV); contentSpacing; overlayXs
+; ; homepageGridBanner1          ; 2 ; grid-banner-1.jpeg                  ; "cover" ; "#FFF" ; COLUMN ; FLEX_END ; CENTER ; "350px" ; "350px" ; "350px" ; "600px" ; <ignore>     ; homepageGridBanner1Action1,homepageGridBanner1Action2 ; "xs-p-20 lg-p-40" ; "rgba(0,0,0,0.3)"
+; ; homepageGridBanner2          ; 1 ; grid-banner-2.jpeg                  ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "350px" ; "350px" ; "350px" ; "300px" ; <ignore>     ;                                                       ;                   ;
+; ; homepageGridBanner3          ; 1 ; grid-banner-3.jpeg                  ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "350px" ; "350px" ; "350px" ; "300px" ; "center top" ;                                                       ;                   ;
+; ; homepageGridBanner4          ; 2 ; grid-banner-4.jpeg                  ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "350px" ; "350px" ; "350px" ; "300px" ; <ignore>     ;                                                       ;                   ;
+; ; techCategoryBanner           ; 1 ; tech-category-banner.png            ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "280px" ; "230px" ; "240px" ; "270px" ; "center top" ;                                                       ;                   ;
+; ; brandsCategoryBanner         ; 1 ; brands-category-banner.png          ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "280px" ; "230px" ; "240px" ; "270px" ; "center top" ;                                                       ;                   ;
+; ; womenCategoryBanner          ; 1 ; women-category-banner.jpg           ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "280px" ; "230px" ; "240px" ; "270px" ; "center top" ;                                                       ;                   ;
+; ; menCategoryBanner            ; 1 ; men-category-banner.jpeg            ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "280px" ; "230px" ; "240px" ; "270px" ; "center top" ;                                                       ;                   ;
+; ; homeAppliancesCategoryBanner ; 1 ; home-appliances-category-banner.png ; "cover" ; "#FFF" ; COLUMN ; CENTER   ; CENTER ; "280px" ; "230px" ; "240px" ; "270px" ; "center top" ;                                                       ;                   ;
+
+INSERT_UPDATE TCResponsiveGridComponent; $contentCV[unique = true]; uid[unique = true]; gridItems($contentCV, uid)
+; ; homepageGrid ; homepageGridBanner1, homepageGridBanner2, homepageGridBanner3, homepageGridBanner4
+
+INSERT_UPDATE ProductCarouselComponent; $contentCV[unique = true]; uid[unique = true]; name; products(code, $productCV); scroll(code); popup; &componentRef; navColor; backgroundColor; rotateActiveItem
+; ; homepageProductCarousel ; TC Homepage Product Carousel ; 0501_blue,0502_navy_blue,0503_black,0504_red,0505_taupe,0505_turquoise,0505_peach,0506_black,0506_white,0506_grey,0507_green,0507_black ; allVisible ; false ; homepageProductCarousel ; "#252525" ; "#F2F2F2" ; false
+
+INSERT_UPDATE TCResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; mediaXs(code, $contentCV); contentSpacing; backgroundPositionXs; backgroundPositionSm; backgroundPositionMd; backgroundPositionLg; overlayXs; textColorXs; alignItemsXs(code); heightXs; heightSm; heightMd; heightLg
+; ; homepageLargeBanner1 ; large-banner-1.png ; "xs-p-40 sm-p-80" ; "right center" ; "right center" ; "right center" ; "65% center" ; "linear-gradient(to right, grey , transparent)" ; "#FFF" ; FLEX_START ; "300px" ; "400px" ; "400px" ; "500px"
+
+INSERT_UPDATE TCBannerAction; $contentCV[unique = true]; uid[unique = true]; url; style(code)
+; ; homepageRotatingBanner1Action1 ; / ; BTN_LIGHT
+; ; homepageRotatingBanner2Action1 ; / ; BTN_LIGHT
+; ; homepageRotatingBanner3Action1 ; / ; BTN_LIGHT
+
+INSERT_UPDATE TCResponsiveBannerComponent; $contentCV[unique = true]; uid[unique = true]; mediaXs(code, $contentCV); heightXs; heightSm; heightMd; heightLg; backgroundPositionXs; backgroundPositionSm; backgroundSizeXs; actions(uid, $contentCV); overlayXs; showContentOnHoverXs; showContentOnHoverSm; justifyContentXs(code); justifyContentSm(code)
+; ; homepageRotatingBanner1 ; rotating-banner-1.jpeg ; "400px" ; "400px" ; "400px" ; "500px" ; "center top"    ; <ignore>     ; "cover" ; homepageRotatingBanner1Action1 ; "rgba(0,0,0,0.3)" ; false ; true ; FLEX_END ; CENTER
+; ; homepageRotatingBanner2 ; rotating-banner-2.jpeg ; "400px" ; "400px" ; "400px" ; "500px" ; "center top"    ; <ignore>     ; "cover" ; homepageRotatingBanner2Action1 ; "rgba(0,0,0,0.3)" ; false ; true ; FLEX_END ; CENTER
+; ; homepageRotatingBanner3 ; rotating-banner-3.jpeg ; "400px" ; "400px" ; "400px" ; "500px" ; "center center" ; "center top" ; "cover" ; homepageRotatingBanner3Action1 ; "rgba(0,0,0,0.3)" ; false ; true ; FLEX_END ; CENTER
+
+INSERT_UPDATE TCRotatingBannerComponent; $contentCV[unique = true]; uid[unique = true]; banners(uid, $contentCV); navColor; itemsShownXs; itemsShownSm; itemsShownMd; itemsShownLg
+; ; homepageRotatingBanner ; homepageRotatingBanner1, homepageRotatingBanner2, homepageRotatingBanner3 ; "#FFF" ; 1 ; 2 ; 2 ; 3
+
+UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(uid, $contentCV)
+; ; Section1Slot-Homepage  ; homepageGrid, homepageProductCarousel, homepageLargeBanner1, homepageRotatingBanner
+; ; Section2ASlot-Homepage ;
+; ; Section2BSlot-Homepage ;
+; ; Section2CSlot-Homepage ;
+; ; Section3Slot-Homepage  ;
+; ; Section4Slot-Homepage  ;
+; ; Section5Slot-Homepage  ;
+####### HOMEPAGE END #######
+
+INSERT_UPDATE ConsentTemplate; id[unique = true]; version[unique = true]; baseSite(uid)[unique = true]
+; UTREND_CONSENT_TEMPLATE_1 ; 1.0 ; $siteUid
+
+####### Categories CMS Navigation Nodes
+UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; banner(uid, $contentCV)
+; ; BrandsNavNode         ; brandsCategoryBanner
+; ; TechNavNode           ; techCategoryBanner
+; ; WomensNavNode         ; womenCategoryBanner
+; ; MensNavNode           ; menCategoryBanner
+; ; HomeAppliancesNavNode ; homeAppliancesCategoryBanner
+
+UPDATE ProductAddToCartComponent; $contentCV[unique = true]; uid[unique = true]; actions(uid, $contentCV)
+; ; AddToCart ; PickUpInStoreAction,AddToCartAction,ShareOnSocialNetworkAction
+
+###### Common components ######
+UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; page
+; ; ProductDetailsTabComponent              ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/product/productDetailsTab.jsp
+; ; ProductSpecsTabComponent                ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/product/productSpecsTab.jsp
+; ; ProductReviewsTabComponent              ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/product/productReviewsTab.jsp
+; ; GuestCheckoutLoginComponent             ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/checkout/checkoutGuestLogin.jsp
+; ; ReturningCustomerCheckoutLoginComponent ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/checkout/checkouReturningCustomerLogin.jsp
