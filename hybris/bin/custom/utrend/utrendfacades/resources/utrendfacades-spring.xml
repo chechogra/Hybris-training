@@ -190,4 +190,13 @@
 	</bean>
 
 	<bean id="genderData" class="com.talos.utrend.facades.product.data.GenderData" scope="prototype"/>
+
+	<bean id="creationDatePopulator" class="com.talos.utrend.facades.populators.CreationDatePopulator"/>
+
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="creationDatePopulator"/>
+	</bean>
+
+
 </beans>
