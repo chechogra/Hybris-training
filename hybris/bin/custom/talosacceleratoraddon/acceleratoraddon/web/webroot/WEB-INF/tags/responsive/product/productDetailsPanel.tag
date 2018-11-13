@@ -21,6 +21,9 @@
                             <div class="name">
                                     ${fn:escapeXml(product.name)}
                             </div>
+                            <div class="creationDate">
+                                    ${fn:escapeXml(product.creationDate)}
+                            </div>
                         </ycommerce:testId>
                         <product:productPromotionSection product="${product}"/>
                         <ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
