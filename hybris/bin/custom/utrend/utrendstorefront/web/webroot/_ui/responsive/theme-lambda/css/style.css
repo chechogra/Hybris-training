@@ -27640,6 +27640,10 @@ ul.ui-autocomplete li .price {
   transition: top 0.4s cubic-bezier(0.33333, 0, 0.66667, 0.33333), transform 0.33s 0.42s cubic-bezier(0.215, 0.61, 0.355, 1);
   transform: translate3d(0, 7px, 0) rotate(-45deg);
 }
+#cboxLoadingGraphic,
+#cboxLoadingOverlay {
+  display: none !important;
+}
 /*
     Colorbox Core Style:
     The following CSS is consistent between example themes and should not be altered.
@@ -30956,6 +30960,96 @@ a.export__cart--link svg.icon {
     padding: 0;
   }
 }
+.checkout-steps {
+  margin: 0 -15px;
+  padding: 25px 0 35px;
+}
+.checkout-steps .step-head {
+  display: block;
+  padding: 0 15px;
+  line-height: 50px;
+  height: 50px;
+  text-transform: uppercase;
+  background-color: transparent;
+  border-top: 1px solid #a3a3a3;
+  border-bottom: 1px solid #a3a3a3;
+  color: #a3a3a3;
+}
+.checkout-steps .step-head.active {
+  background-color: #267f98;
+  border: none;
+  color: white;
+}
+.checkout-steps .step-head:not(:first-of-type) {
+  margin-top: 10px;
+}
+.checkout-steps .tc-checkout-step-container {
+  background-color: #F8F8F8;
+  padding: 15px;
+}
+.checkout-steps .tc-checkout-step-headline {
+  font-size: 20px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+.checkout-steps .tc-checkout-current-step-title {
+  color: #267f98;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 25px;
+}
+.checkout-steps .tc-clean {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+.checkout-help .tc-checkout-help {
+  text-align: center;
+  padding: 50px;
+  font-size: 16px;
+  text-transform: uppercase;
+}
+.checkout-help .tc-checkout-help .tc-brand-color {
+  color: #267f98;
+}
+#addressbook,
+#savedpayments,
+#savedpaymentsbody {
+  display: none;
+  padding-bottom: 20px;
+}
+#colorbox #addressbook,
+#colorbox #savedpayments,
+#colorbox #savedpaymentsbody {
+  display: block;
+}
+#addressbook ul,
+#savedpayments ul,
+#savedpaymentsbody ul {
+  margin: 0;
+}
+#addressbook ul li,
+#savedpayments ul li,
+#savedpaymentsbody ul li {
+  padding: 5px 0;
+}
+@media (min-width: 768px) {
+  .checkout-help .tc-checkout-help {
+    padding: 60px;
+    font-size: 18px;
+  }
+  .checkout-steps {
+    margin: 0;
+    padding-bottom: 0;
+  }
+  .checkout-steps .step-head {
+    padding: 0 20px;
+    border: 1px solid #a3a3a3;
+  }
+  .checkout-steps .tc-checkout-step-container {
+    padding: 20px;
+  }
+}
 .tc-os-title {
   font-size: 20px;
   text-transform: uppercase;
@@ -31056,4 +31150,54 @@ a.export__cart--link svg.icon {
 }
 .tc-os-totals-container .tc-os-taxes {
   font-size: 16px;
+}
+#cboxLoadedContent #addressbook .tc-saved-info-container,
+#cboxLoadedContent #savedpaymentsbody .tc-saved-info-container {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #e1dede;
+}
+#cboxLoadedContent #addressbook .tc-saved-info-container:first-of-type,
+#cboxLoadedContent #savedpaymentsbody .tc-saved-info-container:first-of-type {
+  margin-top: 0;
+}
+#cboxLoadedContent #addressbook .tc-saved-info-container:last-of-type,
+#cboxLoadedContent #savedpaymentsbody .tc-saved-info-container:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+#cboxLoadedContent #addressbook .tc-saved-info-container .tc-saved-info-list,
+#cboxLoadedContent #savedpaymentsbody .tc-saved-info-container .tc-saved-info-list {
+  list-style: none;
+  padding: 0;
+}
+#cboxLoadedContent #addressbook .tc-saved-info-container .tc-saved-info-list .tc-saved-info-details,
+#cboxLoadedContent #savedpaymentsbody .tc-saved-info-container .tc-saved-info-list .tc-saved-info-details {
+  font-size: 14px;
+  line-height: 25px;
+}
+.tc-checkout-shipment-header {
+  font-size: 20px;
+  color: #267f98;
+  margin-bottom: 20px;
+}
+.tc-checkout-shipment-container {
+  margin-bottom: 20px;
+}
+.tc-clean-list {
+  list-style: none;
+  padding: 0;
+  line-height: 25px;
+}
+.tc-checkout-shipment-name {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+.tc-checkout-shipment-qty {
+  text-align: right;
+  font-weight: 400;
+}
+.tc-checkout-shipment-address {
+  line-height: 24px;
+  font-weight: 400;
 }
