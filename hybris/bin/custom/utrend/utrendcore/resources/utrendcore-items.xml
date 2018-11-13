@@ -116,6 +116,22 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+
+
+        </typegroup>
+
+        <typegroup name="Utrend">
+            <itemtype code="Product" autocreate="false" generate="false">
+                <description>Extending the Product type from core with additional attributes.</description>
+                <attributes>
+                    <attribute type="java.util.Date" qualifier="utrendCreationDate">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Attribute is used in batch import process for avoiding multiple imports.</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
     </itemtypes>
