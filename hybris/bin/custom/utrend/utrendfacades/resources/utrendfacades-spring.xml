@@ -198,5 +198,10 @@
 		<property name="add" ref="creationDatePopulator"/>
 	</bean>
 
+	<alias name="UtrendProductFacade" alias="UTproductFacade"/>
+	<bean id="UtrendProductFacade"
+		  class="com.talos.utrend.facades.product.UtrendProductFacade"
+		  parent="productFacade">
+	</bean>
 
 </beans>

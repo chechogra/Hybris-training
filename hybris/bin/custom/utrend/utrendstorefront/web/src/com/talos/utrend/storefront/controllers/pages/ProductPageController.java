@@ -10,6 +10,8 @@
  */
 package com.talos.utrend.storefront.controllers.pages;
 
+import com.talos.utrend.storefront.forms.CreationDateForm;
+import com.talos.utrend.facades.product.UtrendProductFacade;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -42,13 +44,7 @@ import de.hybris.platform.util.Config;
 import com.talos.utrend.storefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -118,6 +114,9 @@ public class ProductPageController extends AbstractPageController
 	@Resource(name = "futureStockFacade")
 	private FutureStockFacade futureStockFacade;
 
+	@Resource(name = "UTproductFacade")
+	private UtrendProductFacade UTproductFacade;
+
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	public String productDetail(@PathVariable("productCode") final String productCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response)
@@ -140,6 +139,7 @@ public class ProductPageController extends AbstractPageController
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
 
 		model.addAttribute(new ReviewForm());
+		model.addAttribute(new CreationDateForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
 
@@ -516,6 +516,36 @@ public class ProductPageController extends AbstractPageController
 		return cmsPageService.getPageForProduct(productModel);
 	}
 
+	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/creationDate", method =
+			{ RequestMethod.GET, RequestMethod.POST })
+	public String postCreationDate(@PathVariable final String productCode, final CreationDateForm form, final BindingResult result,
+			final Model model, final HttpServletRequest request, final RedirectAttributes redirectAttrs)
+			throws CMSItemNotFoundException
+	{
+		//getReviewValidator().validate(form, result);
 
+		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
+		if (result.hasErrors())
+		{
+			updatePageTitle(productCode, model);
+			GlobalMessages.addErrorMessage(model, "review.general.error");
+			model.addAttribute("showReviewForm", Boolean.TRUE);
+			populateProductDetailForDisplay(productCode, model, request, Collections.emptyList());
+			storeCmsPageInModel(model, getPageForProduct(productCode));
+			return getViewForPage(model);
+		}
+
+		productData.setCreationDate(form.getCreationDate());
+		//UTproductFacade
+//		final ReviewData review = new ReviewData();
+//		review.setHeadline(XSSFilterUtil.filter(form.getHeadline()));
+//		review.setComment(XSSFilterUtil.filter(form.getComment()));
+//		review.setRating(form.getRating());
+//		review.setAlias(XSSFilterUtil.filter(form.getAlias()));
+		UTproductFacade.postCreationDate(productCode, productData);
+		GlobalMessages.addFlashMessage(redirectAttrs, GlobalMessages.CONF_MESSAGES_HOLDER, "review.confirmation.thank.you.title");
+
+		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
+	}
 
 }
