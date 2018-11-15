@@ -5,6 +5,13 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/talosacceleratoraddon/responsive/formElement" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
+<c:url value="${product.url}/updateCreationDate" var="updateCreationDateUrl"/>
+
 <div class="product-details-main-wp">
     <div class="row">
         <div class="col col-md-6 col-lg-7">
@@ -24,6 +31,7 @@
                             <div class="creation-date">
                                     <u>Created on</u> ${fn:escapeXml(product.creationDate)}
                             </div>
+
                         </ycommerce:testId>
                         <product:productPromotionSection product="${product}"/>
                         <ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
@@ -35,6 +43,24 @@
                             <tc-product:productReviewSummary product="${product}" showLinks="true"/>
                             <div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
                         </div>
+
+
+                        <div class="creation-date-form">
+                            <form:form method="post" action="${updateCreationDateUrl}" commandName="creationDateForm">
+                                <div class="form-group tab-review-card">
+                                    <formElement:formInputBox idKey="product.creationDate" labelKey="product.creationDate" path="creationDate"
+                                                              inputCSS="form-control" mandatory="true"/>
+                                </div>
+
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <button type="submit" class="btn btn-primary btn-block" value="<spring:theme code='product.submit'/>"><spring:theme
+                                            code="product.submit"/></button>
+
+                                </div>
+                            </form:form>
+
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-12">
@@ -49,6 +75,8 @@
                                        class="yComponentWrapper page-details-add-to-cart-component"/>
                     </cms:pageSlot>
                 </div>
+
+
             </div>
         </div>
     </div>

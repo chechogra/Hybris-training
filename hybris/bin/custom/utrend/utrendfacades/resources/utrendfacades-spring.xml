@@ -198,4 +198,22 @@
 		<property name="add" ref="productCreationDatePopulator"/>
 	</bean>
 
+	<alias name="defaultProductCreationDateFacade" alias="productCreationDateFacade"/>
+	<bean id="defaultProductCreationDateFacade" class="com.talos.utrend.facades.product.impl.DefaultProductCreationDateFacade"
+	parent="productFacade">
+	</bean>
+
+
+
+	<!--alias name="defaultProductCreationDateService" alias="productCreationDateService"/>
+	<bean id="defaultProductCreationDateFacade" class="com.talos.utrend.core.product.impl.DefaultProductCreationDateService" >
+		<property name="defaultProductCreationDateDao" ref="productCreationDateDao"></property>
+	</bean>
+
+	<alias name="defaultProductCreationDateDao" alias="productCreationDateDao"/>
+	<bean id="defaultProductCreationDateDao" class="com.talos.utrend.core.product.dao.impl.DefaultProductCreationDateDao" >
+	</bean-->
+
+
+
 </beans>
