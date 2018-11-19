@@ -128,7 +128,12 @@
                     <attribute type="java.util.Date" qualifier="utrendCreationDate">
                         <modifiers optional="true" />
                         <persistence type="property" />
-                        <description>Attribute is used in batch import process for avoiding multiple imports.</description>
+                        <description>Custom creation date placeholder.</description>
+                    </attribute>
+
+                    <attribute qualifier="daysPast" type="java.lang.Integer">
+                        <persistence type="dynamic" attributeHandler="daysPastAttributeHandler" />
+                        <description>This attribute holds the calculated amount of days past since utrendCreationDate until today</description>
                     </attribute>
                 </attributes>
             </itemtype>

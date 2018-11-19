@@ -61,6 +61,10 @@
 
                         </div>
 
+                        <div class="days-past">
+                            <b>The days that have passed since the creation date are: </b> ${fn:escapeXml(product.daysPast)}
+                        </div>
+
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-12">
