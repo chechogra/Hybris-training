@@ -161,6 +161,10 @@
                     <persistence type="property" />
                     <description>Creation date of the product.</description>
                 </attribute>
+                <attribute type="java.lang.String" qualifier="daysPast">
+                    <persistence type="dynamic" attributeHandler="dynamicAttributesStringSample"/>
+                    <modifiers read="true" write="true" optional="true" unique="false"/>
+                </attribute>
             </attributes>
         </itemtype>
     </typegroup>

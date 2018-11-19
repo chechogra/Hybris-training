@@ -485,6 +485,9 @@
 		<property name="timeService" ref="timeService" />
 	</bean>
 
+	<alias alias="dynamicAttributesStringSample" name="defaultProductHandlerDaysPast"/>
+	<bean id="defaultProductHandlerDaysPast" class="com.talos.utrend.core.handlers.ProductHandlerDaysPast"></bean>
+
 	<import resource="/utrendcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/utrendcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/utrendcore/processes/quote/quote-seller-approval-process-spring.xml"/>
@@ -493,5 +496,6 @@
 	<import resource="/utrendcore/processes/quote/quote-expired-email-process-spring.xml"/>
 
 	<import resource="/utrendcore/processes/quote/quote-post-cancellation-process-spring.xml"/>
+
 
 </beans>

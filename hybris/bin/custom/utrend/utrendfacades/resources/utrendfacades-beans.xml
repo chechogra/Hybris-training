@@ -14,7 +14,7 @@
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;com.talos.utrend.facades.product.data.GenderData>"/>
 		<property name="creationDate" type="java.util.Date"/>
-
+		<property name="daysPast" type="java.lang.String"/>
 	</bean>
 
 	<bean class="com.talos.utrend.facades.product.data.GenderData">

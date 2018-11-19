@@ -45,9 +45,15 @@
                             <div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
                         </div>
                     </div>
-                    <div>
+                    <div class="product-main-info">
+                        <div class="product-details">
+                            <tc-product:productReviewSummary product="${product}" showLinks="true"/>
+                            <div class="description">Created ${ycommerce:sanitizeHTML(product.daysPast)} days ago</div>
+                        </div>
+                    </div>
+                    <div class="form-creation-date">
                         <form:form method="post" action="${productCreationDateActionUrl}" commandName="creationDateForm">
-                            <div class="form-group">
+                            <div class="form-group tab-review-card">
                             <formElement:formInputBox idKey="product.creationDate" labelKey="product.creationDate" path="creationDate" inputCSS="form-control" mandatory="true"/>
                             </div>
 			                <button type="submit" class="btn btn-primary" value="<spring:theme code='product.submit'/>"><spring:theme code="product.submit"/></button>
