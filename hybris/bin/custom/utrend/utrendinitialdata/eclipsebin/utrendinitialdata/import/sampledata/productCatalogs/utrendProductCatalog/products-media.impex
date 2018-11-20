@@ -1,0 +1,462 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImPex for Importing Product Media
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog]
+$media = @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$thumbnail = thumbnail(code, $catalogVersion)
+$picture = picture(code, $catalogVersion)
+$thumbnails = thumbnails(code, $catalogVersion)
+$detail = detail(code, $catalogVersion)
+$normal = normal(code, $catalogVersion)
+$others = others(code, $catalogVersion)
+$data_sheet = data_sheet(code, $catalogVersion)
+$medias = medias(code, $catalogVersion)
+$galleryImages = galleryImages(qualifier, $catalogVersion)
+$siteResource = jar:com.talos.utrend.initialdata.setup.InitialDataSystemSetup&/utrendinitialdata/import/sampledata/productCatalogs/$productCatalog
+$conversionGroup = conversionGroup(code)[default = 'utrend-ConversionGroup']
+
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+
+INSERT_UPDATE MediaConversionCronJob; code[unique = true]; job(code); sessionLanguage(isocode); maxThreads; includedFormats(qualifier); $catalogVersion
+; $config-imagemagick.cronjob.id ; mediaConversionJob ; en ; 1 ; 1200Wx1200H, 515Wx515H, 300Wx300H, 96Wx96H, 65Wx65H, 30Wx30H
+
+
+# Create Media
+INSERT_UPDATE Media; mediaFormat(qualifier)[default = '1200Wx1200H']; code[unique = true]; $media; mime[default = 'image/png']; $catalogVersion; folder(qualifier)
+# Tech - Cameras - DSLR
+; ; 0001-Media-1           ; $siteResource/images/tech/cameras/dslr/nikon-d750.png                         ; ; ; product-images
+; ; 0002-Media-1           ; $siteResource/images/tech/cameras/dslr/nikon-d850.png                         ; ; ; product-images
+; ; 0003-Media-1           ; $siteResource/images/tech/cameras/dslr/nikon-d3300.png                        ; ; ; product-images
+; ; 0004-Media-1           ; $siteResource/images/tech/cameras/dslr/nikon-d5500.png                        ; ; ; product-images
+; ; 0005-Media-1           ; $siteResource/images/tech/cameras/dslr/nikon-d5600.png                        ; ; ; product-images
+; ; 0006-Media-1           ; $siteResource/images/tech/cameras/dslr/nikon-d7200.png                        ; ; ; product-images
+; ; 0007-Media-1           ; $siteResource/images/tech/cameras/dslr/canon-rebel-t5.png                     ; ; ; product-images
+; ; 0008-Media-1           ; $siteResource/images/tech/cameras/dslr/canon-rebel-t5i.png                    ; ; ; product-images
+; ; 0009-Media-1           ; $siteResource/images/tech/cameras/dslr/canon-rebel-t6.png                     ; ; ; product-images
+; ; 0010-Media-1           ; $siteResource/images/tech/cameras/dslr/canon-rebel-t6i.png                    ; ; ; product-images
+# Tech - Cameras - Mirrorless
+; ; 0101-Media-1           ; $siteResource/images/tech/cameras/mirrorless/canon-eos-m3.png                 ; ; ; product-images
+; ; 0102-Media-1           ; $siteResource/images/tech/cameras/mirrorless/canon-eos-m5.png                 ; ; ; product-images
+; ; 0103-Media-1           ; $siteResource/images/tech/cameras/mirrorless/canon-eos-m10.png                ; ; ; product-images
+; ; 0104-Media-1           ; $siteResource/images/tech/cameras/mirrorless/sony-alpha-a5000.png             ; ; ; product-images
+; ; 0105-Media-1           ; $siteResource/images/tech/cameras/mirrorless/sony-alpha-a5100.png             ; ; ; product-images
+; ; 0106-Media-1           ; $siteResource/images/tech/cameras/mirrorless/sony-alpha-a6000.png             ; ; ; product-images
+; ; 0107-Media-1           ; $siteResource/images/tech/cameras/mirrorless/nikon-1-j4.png                   ; ; ; product-images
+; ; 0108-Media-1           ; $siteResource/images/tech/cameras/mirrorless/nikon-1-j5.png                   ; ; ; product-images
+; ; 0109-Media-1           ; $siteResource/images/tech/cameras/mirrorless/nikon-1-v3.png                   ; ; ; product-images
+; ; 0110-Media-1           ; $siteResource/images/tech/cameras/mirrorless/nikon-1-aw1.png                  ; ; ; product-images
+# Tech - Headphones - On-ear
+; ; 020101-Media-1         ; $siteResource/images/tech/headphones/on-ear/jbl-t450-black.png                ; ; ; product-images
+; ; 020102-Media-1         ; $siteResource/images/tech/headphones/on-ear/jbl-t450-blue.png                 ; ; ; product-images
+; ; 020103-Media-1         ; $siteResource/images/tech/headphones/on-ear/jbl-t450-white.png                ; ; ; product-images
+; ; 0202-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-t250.png                      ; ; ; product-images
+; ; 0203-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-e40.png                       ; ; ; product-images
+; ; 0204-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-310.png                       ; ; ; product-images
+; ; 0205-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-e45bt.png                     ; ; ; product-images
+; ; 0206-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-jr300.png                     ; ; ; product-images
+; ; 0207-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-e35.png                       ; ; ; product-images
+; ; 0208-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-or300.png                     ; ; ; product-images
+; ; 0209-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-s300.png                      ; ; ; product-images
+; ; 0210-Media-1           ; $siteResource/images/tech/headphones/on-ear/jbl-duetBT.png                    ; ; ; product-images
+# Tech - Headphones - In-ear
+; ; 0301-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-everest110.png                ; ; ; product-images
+; ; 0302-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-e25BT.png                     ; ; ; product-images
+; ; 0303-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-reflect-contour.png           ; ; ; product-images
+; ; 0304-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-everest100.png                ; ; ; product-images
+; ; 0305-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-free.png                      ; ; ; product-images
+; ; 0306-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-reflect-fit.png               ; ; ; product-images
+; ; 0307-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-t110bt.png                    ; ; ; product-images
+; ; 0308-Media-1           ; $siteResource/images/tech/headphones/in-ear/under-armour.png                  ; ; ; product-images
+; ; 0309-Media-1           ; $siteResource/images/tech/headphones/in-ear/jbl-focus-500.png                 ; ; ; product-images
+; ; 0310-Media-1           ; $siteResource/images/tech/headphones/in-ear/synchros-reflect-i.png            ; ; ; product-images
+# Tech - Headphones - Over-ear
+; ; 0401-Media-1           ; $siteResource/images/tech/headphones/over-ear/jbl-everest-710.png             ; ; ; product-images
+; ; 0402-Media-1           ; $siteResource/images/tech/headphones/over-ear/jbl-everest-elite-750nc.png     ; ; ; product-images
+; ; 0403-Media-1           ; $siteResource/images/tech/headphones/over-ear/jbl-e55bt.png                   ; ; ; product-images
+; ; 0404-Media-1           ; $siteResource/images/tech/headphones/over-ear/jbl-e65bt.png                   ; ; ; product-images
+; ; 0405-Media-1           ; $siteResource/images/tech/headphones/over-ear/jbl-everest-elite-700.png       ; ; ; product-images
+; ; 0406-Media-1           ; $siteResource/images/tech/headphones/over-ear/jbl-e55bt-quincy-edition.png    ; ; ; product-images
+; ; 0407-Media-1           ; $siteResource/images/tech/headphones/over-ear/synchros-e50bt.png              ; ; ; product-images
+; ; 0408-Media-1           ; $siteResource/images/tech/headphones/over-ear/JBL-synchros-chrome-edition.png ; ; ; product-images
+; ; 0409-Media-1           ; $siteResource/images/tech/headphones/over-ear/bose-qc-wireless-ii.png         ; ; ; product-images
+; ; 0410-Media-1           ; $siteResource/images/tech/headphones/over-ear/bose-soundlink.png              ; ; ; product-images
+# Women - Tops
+; ; 0501_blue-Media-1      ; $siteResource/images/women/tops/rome.png                                      ; ; ; product-images
+; ; 0502_navy_blue-Media-1 ; $siteResource/images/women/tops/mumbai.png                                    ; ; ; product-images
+; ; 0503_black-Media-1     ; $siteResource/images/women/tops/boston.png                                    ; ; ; product-images
+; ; 0504_red-Media-1       ; $siteResource/images/women/tops/moscow.png                                    ; ; ; product-images
+; ; 0505_taupe-Media-1     ; $siteResource/images/women/tops/los-angeles-taupe.png                         ; ; ; product-images
+; ; 0505_turquoise-Media-1 ; $siteResource/images/women/tops/los-angeles-turquoise.png                     ; ; ; product-images
+; ; 0505_peach-Media-1     ; $siteResource/images/women/tops/los-angeles-peach.png                         ; ; ; product-images
+; ; 0506_black-Media-1     ; $siteResource/images/women/tops/chicago-black.png                             ; ; ; product-images
+; ; 0506_white-Media-1     ; $siteResource/images/women/tops/chicago-white.png                             ; ; ; product-images
+; ; 0506_grey-Media-1      ; $siteResource/images/women/tops/chicago-grey.png                              ; ; ; product-images
+; ; 0507_green-Media-1     ; $siteResource/images/women/tops/sydney-green.png                              ; ; ; product-images
+; ; 0507_black-Media-1     ; $siteResource/images/women/tops/sidney-black.png                              ; ; ; product-images
+# Women - Bottoms
+; ; 0601_red-Media-1       ; $siteResource/images/women/bottoms/budapest.png                               ; ; ; product-images
+; ; 0602_green-Media-1     ; $siteResource/images/women/bottoms/portland.png                               ; ; ; product-images
+; ; 0603_blue-Media-1      ; $siteResource/images/women/bottoms/memphis.png                                ; ; ; product-images
+; ; 0604_grey-Media-1      ; $siteResource/images/women/bottoms/beirut-grey.png                            ; ; ; product-images
+; ; 0604_green-Media-1     ; $siteResource/images/women/bottoms/beirut-camouflage.png                      ; ; ; product-images
+; ; 0605_blue-Media-1      ; $siteResource/images/women/bottoms/patagonia-blue.png                         ; ; ; product-images
+; ; 0605_black-Media-1     ; $siteResource/images/women/bottoms/patagonia-black.png                        ; ; ; product-images
+; ; 0605_grey-Media-1      ; $siteResource/images/women/bottoms/patagonia-grey.png                         ; ; ; product-images
+# Men - Pants
+; ; 0701_beige-Media-1     ; $siteResource/images/men/pants/berlin.png                                     ; ; ; product-images
+; ; 0702_grey-Media-1      ; $siteResource/images/men/pants/new-york.png                                   ; ; ; product-images
+; ; 0703_navy_blue-Media-1 ; $siteResource/images/men/pants/tokyo.png                                      ; ; ; product-images
+; ; 0704_grey-Media-1      ; $siteResource/images/men/pants/sao-paulo-grey.png                             ; ; ; product-images
+; ; 0704_navy_blue-Media-1 ; $siteResource/images/men/pants/sao-paulo-navy-blue.png                        ; ; ; product-images
+; ; 0705_brown-Media-1     ; $siteResource/images/men/pants/madrid-brown.png                               ; ; ; product-images
+; ; 0705_steel-Media-1     ; $siteResource/images/men/pants/madrid-steel.png                               ; ; ; product-images
+# Men - Shirts
+; ; 0801_white-Media-1     ; $siteResource/images/men/shirts/miami.png                                     ; ; ; product-images
+; ; 0802_green-Media-1     ; $siteResource/images/men/shirts/santiago.png                                  ; ; ; product-images
+; ; 0803_black-Media-1     ; $siteResource/images/men/shirts/milan.png                                     ; ; ; product-images
+; ; 0804_black-Media-1     ; $siteResource/images/men/shirts/barcelona-black.png                           ; ; ; product-images
+; ; 0804_navy_blue-Media-1 ; $siteResource/images/men/shirts/barcelona-navy-blue.png                       ; ; ; product-images
+; ; 0805_red-Media-1       ; $siteResource/images/men/shirts/denver-red.png                                ; ; ; product-images
+; ; 0805_navy_blue-Media-1 ; $siteResource/images/men/shirts/denver-navy-blue.png                          ; ; ; product-images
+; ; 0806_blue-Media-1      ; $siteResource/images/men/shirts/vancouver.png                                 ; ; ; product-images
+; ; 0807_black-Media-1     ; $siteResource/images/men/shirts/buenos-aires-black.png                        ; ; ; product-images
+; ; 0807_navy_blue-Media-1 ; $siteResource/images/men/shirts/buenos-aires-navy-blue.png                    ; ; ; product-images
+
+# Create Media Containers
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $catalogVersion; $conversionGroup
+# Tech - Cameras - DSLR
+; 0001-MediaContainer-1           ; 0001-Media-1           ; ;
+; 0002-MediaContainer-1           ; 0002-Media-1           ; ;
+; 0003-MediaContainer-1           ; 0003-Media-1           ; ;
+; 0004-MediaContainer-1           ; 0004-Media-1           ; ;
+; 0005-MediaContainer-1           ; 0005-Media-1           ; ;
+; 0006-MediaContainer-1           ; 0006-Media-1           ; ;
+; 0007-MediaContainer-1           ; 0007-Media-1           ; ;
+; 0008-MediaContainer-1           ; 0008-Media-1           ; ;
+; 0009-MediaContainer-1           ; 0009-Media-1           ; ;
+; 0010-MediaContainer-1           ; 0010-Media-1           ; ;
+# Tech - Cameras - Mirrorless
+; 0101-MediaContainer-1           ; 0101-Media-1           ; ;
+; 0102-MediaContainer-1           ; 0102-Media-1           ; ;
+; 0103-MediaContainer-1           ; 0103-Media-1           ; ;
+; 0104-MediaContainer-1           ; 0104-Media-1           ; ;
+; 0105-MediaContainer-1           ; 0105-Media-1           ; ;
+; 0106-MediaContainer-1           ; 0106-Media-1           ; ;
+; 0107-MediaContainer-1           ; 0107-Media-1           ; ;
+; 0108-MediaContainer-1           ; 0108-Media-1           ; ;
+; 0109-MediaContainer-1           ; 0109-Media-1           ; ;
+; 0110-MediaContainer-1           ; 0110-Media-1           ; ;
+# Tech - Headphones - On-ear
+; 020101-MediaContainer-1         ; 020101-Media-1         ; ;
+; 020102-MediaContainer-1         ; 020102-Media-1         ; ;
+; 020103-MediaContainer-1         ; 020103-Media-1         ; ;
+; 0202-MediaContainer-1           ; 0202-Media-1           ; ;
+; 0203-MediaContainer-1           ; 0203-Media-1           ; ;
+; 0204-MediaContainer-1           ; 0204-Media-1           ; ;
+; 0205-MediaContainer-1           ; 0205-Media-1           ; ;
+; 0206-MediaContainer-1           ; 0206-Media-1           ; ;
+; 0207-MediaContainer-1           ; 0207-Media-1           ; ;
+; 0208-MediaContainer-1           ; 0208-Media-1           ; ;
+; 0209-MediaContainer-1           ; 0209-Media-1           ; ;
+; 0210-MediaContainer-1           ; 0210-Media-1           ; ;
+# Tech - Headphones - In-ear
+; 0301-MediaContainer-1           ; 0301-Media-1           ; ;
+; 0302-MediaContainer-1           ; 0302-Media-1           ; ;
+; 0303-MediaContainer-1           ; 0303-Media-1           ; ;
+; 0304-MediaContainer-1           ; 0304-Media-1           ; ;
+; 0305-MediaContainer-1           ; 0305-Media-1           ; ;
+; 0306-MediaContainer-1           ; 0306-Media-1           ; ;
+; 0307-MediaContainer-1           ; 0307-Media-1           ; ;
+; 0308-MediaContainer-1           ; 0308-Media-1           ; ;
+; 0309-MediaContainer-1           ; 0309-Media-1           ; ;
+; 0310-MediaContainer-1           ; 0310-Media-1           ; ;
+# Tech - Headphones - Over-ear
+; 0401-MediaContainer-1           ; 0401-Media-1           ; ;
+; 0402-MediaContainer-1           ; 0402-Media-1           ; ;
+; 0403-MediaContainer-1           ; 0403-Media-1           ; ;
+; 0404-MediaContainer-1           ; 0404-Media-1           ; ;
+; 0405-MediaContainer-1           ; 0405-Media-1           ; ;
+; 0406-MediaContainer-1           ; 0406-Media-1           ; ;
+; 0407-MediaContainer-1           ; 0407-Media-1           ; ;
+; 0408-MediaContainer-1           ; 0408-Media-1           ; ;
+; 0409-MediaContainer-1           ; 0409-Media-1           ; ;
+; 0410-MediaContainer-1           ; 0410-Media-1           ; ;
+# Women - Tops
+; 0501_blue-MediaContainer-1      ; 0501_blue-Media-1      ; ;
+; 0502_navy_blue-MediaContainer-1 ; 0502_navy_blue-Media-1 ; ;
+; 0503_black-MediaContainer-1     ; 0503_black-Media-1     ; ;
+; 0504_red-MediaContainer-1       ; 0504_red-Media-1       ; ;
+; 0505_taupe-MediaContainer-1     ; 0505_taupe-Media-1     ; ;
+; 0505_turquoise-MediaContainer-1 ; 0505_turquoise-Media-1 ; ;
+; 0505_peach-MediaContainer-1     ; 0505_peach-Media-1     ; ;
+; 0506_black-MediaContainer-1     ; 0506_black-Media-1     ; ;
+; 0506_white-MediaContainer-1     ; 0506_white-Media-1     ; ;
+; 0506_grey-MediaContainer-1      ; 0506_grey-Media-1      ; ;
+; 0507_green-MediaContainer-1     ; 0507_green-Media-1     ; ;
+; 0507_black-MediaContainer-1     ; 0507_black-Media-1     ; ;
+# Women - Bottoms
+; 0601_red-MediaContainer-1       ; 0601_red-Media-1       ; ;
+; 0602_green-MediaContainer-1     ; 0602_green-Media-1     ; ;
+; 0603_blue-MediaContainer-1      ; 0603_blue-Media-1      ; ;
+; 0604_grey-MediaContainer-1      ; 0604_grey-Media-1      ; ;
+; 0604_green-MediaContainer-1     ; 0604_green-Media-1     ; ;
+; 0605_blue-MediaContainer-1      ; 0605_blue-Media-1      ; ;
+; 0605_black-MediaContainer-1     ; 0605_black-Media-1     ; ;
+; 0605_grey-MediaContainer-1      ; 0605_grey-Media-1      ; ;
+# Men - Pants
+; 0701_beige-MediaContainer-1     ; 0701_beige-Media-1     ; ;
+; 0702_grey-MediaContainer-1      ; 0702_grey-Media-1      ; ;
+; 0703_navy_blue-MediaContainer-1 ; 0703_navy_blue-Media-1 ; ;
+; 0704_grey-MediaContainer-1      ; 0704_grey-Media-1      ; ;
+; 0704_navy_blue-MediaContainer-1 ; 0704_navy_blue-Media-1 ; ;
+; 0705_brown-MediaContainer-1     ; 0705_brown-Media-1     ; ;
+; 0705_steel-MediaContainer-1     ; 0705_steel-Media-1     ; ;
+# Men - Shirts
+; 0801_white-MediaContainer-1     ; 0801_white-Media-1     ; ;
+; 0802_green-MediaContainer-1     ; 0802_green-Media-1     ; ;
+; 0803_black-MediaContainer-1     ; 0803_black-Media-1     ; ;
+; 0804_black-MediaContainer-1     ; 0804_black-Media-1     ; ;
+; 0804_navy_blue-MediaContainer-1 ; 0804_navy_blue-Media-1 ; ;
+; 0805_red-MediaContainer-1       ; 0805_red-Media-1       ; ;
+; 0805_navy_blue-MediaContainer-1 ; 0805_navy_blue-Media-1 ; ;
+; 0806_blue-MediaContainer-1      ; 0806_blue-Media-1      ; ;
+; 0807_black-MediaContainer-1     ; 0807_black-Media-1     ; ;
+; 0807_navy_blue-MediaContainer-1 ; 0807_navy_blue-Media-1 ; ;
+
+# Update Products with Media and Media Containers
+UPDATE Product; code[unique = true]; $picture; $thumbnail; $detail; $others; $normal; $thumbnails; $galleryImages; $catalogVersion
+# Tech - Cameras - DSLR
+; 0001           ; 0001-Media-1           ; ; ; ; ; ; 0001-MediaContainer-1                                                                   ;
+; 0002           ; 0002-Media-1           ; ; ; ; ; ; 0002-MediaContainer-1                                                                   ;
+; 0003           ; 0003-Media-1           ; ; ; ; ; ; 0003-MediaContainer-1                                                                   ;
+; 0004           ; 0004-Media-1           ; ; ; ; ; ; 0004-MediaContainer-1                                                                   ;
+; 0005           ; 0005-Media-1           ; ; ; ; ; ; 0005-MediaContainer-1                                                                   ;
+; 0006           ; 0006-Media-1           ; ; ; ; ; ; 0006-MediaContainer-1                                                                   ;
+; 0007           ; 0007-Media-1           ; ; ; ; ; ; 0007-MediaContainer-1                                                                   ;
+; 0008           ; 0008-Media-1           ; ; ; ; ; ; 0008-MediaContainer-1                                                                   ;
+; 0009           ; 0009-Media-1           ; ; ; ; ; ; 0009-MediaContainer-1                                                                   ;
+; 0010           ; 0010-Media-1           ; ; ; ; ; ; 0010-MediaContainer-1                                                                   ;
+# Tech - Cameras - Mirrorless
+; 0101           ; 0101-Media-1           ; ; ; ; ; ; 0101-MediaContainer-1                                                                   ;
+; 0102           ; 0102-Media-1           ; ; ; ; ; ; 0102-MediaContainer-1                                                                   ;
+; 0103           ; 0103-Media-1           ; ; ; ; ; ; 0103-MediaContainer-1                                                                   ;
+; 0104           ; 0104-Media-1           ; ; ; ; ; ; 0104-MediaContainer-1                                                                   ;
+; 0105           ; 0105-Media-1           ; ; ; ; ; ; 0105-MediaContainer-1                                                                   ;
+; 0106           ; 0106-Media-1           ; ; ; ; ; ; 0106-MediaContainer-1                                                                   ;
+; 0107           ; 0107-Media-1           ; ; ; ; ; ; 0107-MediaContainer-1                                                                   ;
+; 0108           ; 0108-Media-1           ; ; ; ; ; ; 0108-MediaContainer-1                                                                   ;
+; 0109           ; 0109-Media-1           ; ; ; ; ; ; 0109-MediaContainer-1                                                                   ;
+; 0110           ; 0110-Media-1           ; ; ; ; ; ; 0110-MediaContainer-1                                                                   ;
+# Tech - Headphones - On-ear
+; 0201           ; 020101-Media-1         ; ; ; ; ; ; 020101-MediaContainer-1,020102-MediaContainer-1,020103-MediaContainer-1                 ;
+; 020101         ; 020101-Media-1         ; ; ; ; ; ; 020101-MediaContainer-1                                                                 ;
+; 020102         ; 020102-Media-1         ; ; ; ; ; ; 020102-MediaContainer-1                                                                 ;
+; 020103         ; 020103-Media-1         ; ; ; ; ; ; 020103-MediaContainer-1                                                                 ;
+; 0202           ; 0202-Media-1           ; ; ; ; ; ; 0202-MediaContainer-1                                                                   ;
+; 0203           ; 0203-Media-1           ; ; ; ; ; ; 0203-MediaContainer-1                                                                   ;
+; 0204           ; 0204-Media-1           ; ; ; ; ; ; 0204-MediaContainer-1                                                                   ;
+; 0205           ; 0205-Media-1           ; ; ; ; ; ; 0205-MediaContainer-1                                                                   ;
+; 0206           ; 0206-Media-1           ; ; ; ; ; ; 0206-MediaContainer-1                                                                   ;
+; 0207           ; 0207-Media-1           ; ; ; ; ; ; 0207-MediaContainer-1                                                                   ;
+; 0208           ; 0208-Media-1           ; ; ; ; ; ; 0208-MediaContainer-1                                                                   ;
+; 0209           ; 0209-Media-1           ; ; ; ; ; ; 0209-MediaContainer-1                                                                   ;
+; 0210           ; 0210-Media-1           ; ; ; ; ; ; 0210-MediaContainer-1                                                                   ;
+# Tech - Headphones - In-ear
+; 0301           ; 0301-Media-1           ; ; ; ; ; ; 0301-MediaContainer-1                                                                   ;
+; 0302           ; 0302-Media-1           ; ; ; ; ; ; 0302-MediaContainer-1                                                                   ;
+; 0303           ; 0303-Media-1           ; ; ; ; ; ; 0303-MediaContainer-1                                                                   ;
+; 0304           ; 0304-Media-1           ; ; ; ; ; ; 0304-MediaContainer-1                                                                   ;
+; 0305           ; 0305-Media-1           ; ; ; ; ; ; 0305-MediaContainer-1                                                                   ;
+; 0306           ; 0306-Media-1           ; ; ; ; ; ; 0306-MediaContainer-1                                                                   ;
+; 0307           ; 0307-Media-1           ; ; ; ; ; ; 0307-MediaContainer-1                                                                   ;
+; 0308           ; 0308-Media-1           ; ; ; ; ; ; 0308-MediaContainer-1                                                                   ;
+; 0309           ; 0309-Media-1           ; ; ; ; ; ; 0309-MediaContainer-1                                                                   ;
+; 0310           ; 0310-Media-1           ; ; ; ; ; ; 0310-MediaContainer-1                                                                   ;
+# Tech - Headphones - Over-ear
+; 0401           ; 0401-Media-1           ; ; ; ; ; ; 0401-MediaContainer-1                                                                   ;
+; 0402           ; 0402-Media-1           ; ; ; ; ; ; 0402-MediaContainer-1                                                                   ;
+; 0403           ; 0403-Media-1           ; ; ; ; ; ; 0403-MediaContainer-1                                                                   ;
+; 0404           ; 0404-Media-1           ; ; ; ; ; ; 0404-MediaContainer-1                                                                   ;
+; 0405           ; 0405-Media-1           ; ; ; ; ; ; 0405-MediaContainer-1                                                                   ;
+; 0406           ; 0406-Media-1           ; ; ; ; ; ; 0406-MediaContainer-1                                                                   ;
+; 0407           ; 0407-Media-1           ; ; ; ; ; ; 0407-MediaContainer-1                                                                   ;
+; 0408           ; 0408-Media-1           ; ; ; ; ; ; 0408-MediaContainer-1                                                                   ;
+; 0409           ; 0409-Media-1           ; ; ; ; ; ; 0409-MediaContainer-1                                                                   ;
+; 0410           ; 0410-Media-1           ; ; ; ; ; ; 0410-MediaContainer-1                                                                   ;
+# Women - Tops
+; 0501           ; 0501_blue-Media-1      ; ; ; ; ; ; 0501_blue-MediaContainer-1                                                              ;
+; 0501_blue      ; 0501_blue-Media-1      ; ; ; ; ; ; 0501_blue-MediaContainer-1                                                              ;
+; 0502           ; 0502_navy_blue-Media-1 ; ; ; ; ; ; 0502_navy_blue-MediaContainer-1                                                         ;
+; 0502_navy_blue ; 0502_navy_blue-Media-1 ; ; ; ; ; ; 0502_navy_blue-MediaContainer-1                                                         ;
+; 0503           ; 0503_black-Media-1     ; ; ; ; ; ; 0503_black-MediaContainer-1                                                             ;
+; 0503_black     ; 0503_black-Media-1     ; ; ; ; ; ; 0503_black-MediaContainer-1                                                             ;
+; 0504           ; 0504_red-Media-1       ; ; ; ; ; ; 0504_red-MediaContainer-1                                                               ;
+; 0504_red       ; 0504_red-Media-1       ; ; ; ; ; ; 0504_red-MediaContainer-1                                                               ;
+; 0505           ; 0505_taupe-Media-1     ; ; ; ; ; ; 0505_taupe-MediaContainer-1,0505_turquoise-MediaContainer-1,0505_peach-MediaContainer-1 ;
+; 0505_taupe     ; 0505_taupe-Media-1     ; ; ; ; ; ; 0505_taupe-MediaContainer-1                                                             ;
+; 0505_turquoise ; 0505_turquoise-Media-1 ; ; ; ; ; ; 0505_turquoise-MediaContainer-1                                                         ;
+; 0505_peach     ; 0505_peach-Media-1     ; ; ; ; ; ; 0505_peach-MediaContainer-1                                                             ;
+; 0506           ; 0506_black-Media-1     ; ; ; ; ; ; 0506_black-MediaContainer-1,0506_white-MediaContainer-1,0506_grey-MediaContainer-1      ;
+; 0506_black     ; 0506_black-Media-1     ; ; ; ; ; ; 0506_black-MediaContainer-1                                                             ;
+; 0506_white     ; 0506_white-Media-1     ; ; ; ; ; ; 0506_white-MediaContainer-1                                                             ;
+; 0506_grey      ; 0506_grey-Media-1      ; ; ; ; ; ; 0506_grey-MediaContainer-1                                                              ;
+; 0507           ; 0507_green-Media-1     ; ; ; ; ; ; 0507_green-MediaContainer-1,0507_black-MediaContainer-1                                 ;
+; 0507_green     ; 0507_green-Media-1     ; ; ; ; ; ; 0507_green-MediaContainer-1                                                             ;
+; 0507_black     ; 0507_black-Media-1     ; ; ; ; ; ; 0507_black-MediaContainer-1                                                             ;
+# Women - Bottoms
+; 0601           ; 0601_red-Media-1       ; ; ; ; ; ; 0601_red-MediaContainer-1                                                               ;
+; 0601_red       ; 0601_red-Media-1       ; ; ; ; ; ; 0601_red-MediaContainer-1                                                               ;
+; 0602           ; 0602_green-Media-1     ; ; ; ; ; ; 0602_green-MediaContainer-1                                                             ;
+; 0602_green     ; 0602_green-Media-1     ; ; ; ; ; ; 0602_green-MediaContainer-1                                                             ;
+; 0603           ; 0603_blue-Media-1      ; ; ; ; ; ; 0603_blue-MediaContainer-1                                                              ;
+; 0603_blue      ; 0603_blue-Media-1      ; ; ; ; ; ; 0603_blue-MediaContainer-1                                                              ;
+; 0604           ; 0604_grey-Media-1      ; ; ; ; ; ; 0604_grey-MediaContainer-1,0604_green-MediaContainer-1                                  ;
+; 0604_grey      ; 0604_grey-Media-1      ; ; ; ; ; ; 0604_grey-MediaContainer-1                                                              ;
+; 0604_green     ; 0604_green-Media-1     ; ; ; ; ; ; 0604_green-MediaContainer-1                                                             ;
+; 0605           ; 0605_blue-Media-1      ; ; ; ; ; ; 0605_blue-MediaContainer-1,0605_black-MediaContainer-1,0605_grey-MediaContainer-1       ;
+; 0605_blue      ; 0605_blue-Media-1      ; ; ; ; ; ; 0605_blue-MediaContainer-1                                                              ;
+; 0605_black     ; 0605_black-Media-1     ; ; ; ; ; ; 0605_black-MediaContainer-1                                                             ;
+; 0605_grey      ; 0605_grey-Media-1      ; ; ; ; ; ; 0605_grey-MediaContainer-1                                                              ;
+# Men - Pants
+; 0701           ; 0701_beige-Media-1     ; ; ; ; ; ; 0701_beige-MediaContainer-1                                                             ;
+; 0701_beige     ; 0701_beige-Media-1     ; ; ; ; ; ; 0701_beige-MediaContainer-1                                                             ;
+; 0702           ; 0702_grey-Media-1      ; ; ; ; ; ; 0702_grey-MediaContainer-1                                                              ;
+; 0702_grey      ; 0702_grey-Media-1      ; ; ; ; ; ; 0702_grey-MediaContainer-1                                                              ;
+; 0703           ; 0703_navy_blue-Media-1 ; ; ; ; ; ; 0703_navy_blue-MediaContainer-1                                                         ;
+; 0703_navy_blue ; 0703_navy_blue-Media-1 ; ; ; ; ; ; 0703_navy_blue-MediaContainer-1                                                         ;
+; 0704           ; 0704_navy_blue-Media-1 ; ; ; ; ; ; 0704_grey-MediaContainer-1,0704_navy_blue-MediaContainer-1                              ;
+; 0704_grey      ; 0704_grey-Media-1      ; ; ; ; ; ; 0704_grey-MediaContainer-1                                                              ;
+; 0704_navy_blue ; 0704_navy_blue-Media-1 ; ; ; ; ; ; 0704_navy_blue-MediaContainer-1                                                         ;
+; 0705           ; 0705_brown-Media-1     ; ; ; ; ; ; 0705_brown-MediaContainer-1,0705_steel-MediaContainer-1                                 ;
+; 0705_brown     ; 0705_brown-Media-1     ; ; ; ; ; ; 0705_brown-MediaContainer-1                                                             ;
+; 0705_steel     ; 0705_steel-Media-1     ; ; ; ; ; ; 0705_steel-MediaContainer-1                                                             ;
+# Men - Shirts
+; 0801           ; 0801_white-Media-1     ; ; ; ; ; ; 0801_white-MediaContainer-1                                                             ;
+; 0801_white     ; 0801_white-Media-1     ; ; ; ; ; ; 0801_white-MediaContainer-1                                                             ;
+; 0802           ; 0802_green-Media-1     ; ; ; ; ; ; 0802_green-MediaContainer-1                                                             ;
+; 0802_green     ; 0802_green-Media-1     ; ; ; ; ; ; 0802_green-MediaContainer-1                                                             ;
+; 0803           ; 0803_black-Media-1     ; ; ; ; ; ; 0803_black-MediaContainer-1                                                             ;
+; 0803_black     ; 0803_black-Media-1     ; ; ; ; ; ; 0803_black-MediaContainer-1                                                             ;
+; 0804           ; 0804_black-Media-1     ; ; ; ; ; ; 0804_black-MediaContainer-1,0804_navy_blue-MediaContainer-1                             ;
+; 0804_black     ; 0804_black-Media-1     ; ; ; ; ; ; 0804_black-MediaContainer-1                                                             ;
+; 0804_navy_blue ; 0804_navy_blue-Media-1 ; ; ; ; ; ; 0804_navy_blue-MediaContainer-1                                                         ;
+; 0805           ; 0805_red-Media-1       ; ; ; ; ; ; 0805_red-MediaContainer-1,0805_navy_blue-MediaContainer-1                               ;
+; 0805_red       ; 0805_red-Media-1       ; ; ; ; ; ; 0805_red-MediaContainer-1                                                               ;
+; 0805_navy_blue ; 0805_navy_blue-Media-1 ; ; ; ; ; ; 0805_navy_blue-MediaContainer-1                                                         ;
+; 0806           ; 0806_blue-Media-1      ; ; ; ; ; ; 0806_blue-MediaContainer-1                                                              ;
+; 0806_blue      ; 0806_blue-Media-1      ; ; ; ; ; ; 0806_blue-MediaContainer-1                                                              ;
+; 0807           ; 0807_black-Media-1     ; ; ; ; ; ; 0807_black-MediaContainer-1,0807_navy_blue-MediaContainer-1                             ;
+; 0807_black     ; 0807_black-Media-1     ; ; ; ; ; ; 0807_black-MediaContainer-1                                                             ;
+; 0807_navy_blue ; 0807_navy_blue-Media-1 ; ; ; ; ; ; 0807_navy_blue-MediaContainer-1                                                         ;
+
+
+# Home Appliances Media
+INSERT_UPDATE Media; mediaFormat(qualifier)[default = '1200Wx1200H']; code[unique = true]; $media; mime[default = 'image/png']; $catalogVersion; folder(qualifier)
+# Home Appliances - Refrigerators - French Door Refrigerators
+; ; 0901-Media-1 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0901.png    ; ; ; product-images
+; ; 0902-Media-1 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0902.png    ; ; ; product-images
+; ; 0902-Media-2 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0902_2.png  ; ; ; product-images
+; ; 0903-Media-1 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0903.png    ; ; ; product-images
+; ; 0903-Media-2 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0903_2.png  ; ; ; product-images
+; ; 0903-Media-3 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0903_3.png  ; ; ; product-images
+; ; 0903-Media-4 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0903_4.png  ; ; ; product-images
+; ; 0903-Media-5 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0903_5.png  ; ; ; product-images
+; ; 0904-Media-1 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0904.png    ; ; ; product-images
+; ; 0904-Media-2 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0904_2.png  ; ; ; product-images
+; ; 0904-Media-3 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0904_3.png  ; ; ; product-images
+; ; 0904-Media-4 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0904_4.png  ; ; ; product-images
+; ; 0904-Media-5 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0904_5.png  ; ; ; product-images
+; ; 0905-Media-1 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0905.png    ; ; ; product-images
+; ; 0905-Media-2 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0905_2.png  ; ; ; product-images
+; ; 0905-Media-3 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0905_3.png  ; ; ; product-images
+; ; 0905-Media-4 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0905_4.png  ; ; ; product-images
+; ; 0906-Media-1 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0906.png    ; ; ; product-images
+; ; 0906-Media-2 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0906_2.png  ; ; ; product-images
+; ; 0906-Media-3 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0906_3.png  ; ; ; product-images
+; ; 0906-Media-4 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0906_4.png  ; ; ; product-images
+; ; 0906-Media-5 ; $siteResource/images/home-appliances/refrigerators/french-door-refrigerators/0906_5.png  ; ; ; product-images
+# Home Appliances - Refrigerators - Side by Side Refrigerators
+; ; 0920-Media-1 ; $siteResource/images/home-appliances/refrigerators/side-by-side-refrigerators/0920.png   ; ; ; product-images
+; ; 0921-Media-1 ; $siteResource/images/home-appliances/refrigerators/side-by-side-refrigerators/0921.png   ; ; ; product-images
+; ; 0921-Media-2 ; $siteResource/images/home-appliances/refrigerators/side-by-side-refrigerators/0921_2.png ; ; ; product-images
+; ; 0921-Media-3 ; $siteResource/images/home-appliances/refrigerators/side-by-side-refrigerators/0921_3.png ; ; ; product-images
+# Home Appliances - Refrigerators - Wine Coolers
+; ; 0940-Media-1 ; $siteResource/images/home-appliances/refrigerators/wine-coolers/0940.png                 ; ; ; product-images
+; ; 0940-Media-2 ; $siteResource/images/home-appliances/refrigerators/wine-coolers/0940_2.png               ; ; ; product-images
+; ; 0940-Media-3 ; $siteResource/images/home-appliances/refrigerators/wine-coolers/0940_3.png               ; ; ; product-images
+; ; 0940-Media-4 ; $siteResource/images/home-appliances/refrigerators/wine-coolers/0940_4.png               ; ; ; product-images
+; ; 0940-Media-5 ; $siteResource/images/home-appliances/refrigerators/wine-coolers/0940_5.png               ; ; ; product-images
+# Home Appliances - Refrigerators - Water dispensers
+; ; 0950-Media-1 ; $siteResource/images/home-appliances/refrigerators/water-dispensers/0950.png             ; ; ; product-images
+; ; 0950-Media-2 ; $siteResource/images/home-appliances/refrigerators/water-dispensers/0950_2.png           ; ; ; product-images
+; ; 0950-Media-3 ; $siteResource/images/home-appliances/refrigerators/water-dispensers/0950_3.png           ; ; ; product-images
+
+# Home Appliances Media Containers
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $catalogVersion; $conversionGroup
+# Home Appliances - Refrigerators - French Door Refrigerators
+; 0901-MediaContainer-1 ; 0901-Media-1 ; ;
+; 0902-MediaContainer-1 ; 0902-Media-1 ; ;
+; 0902-MediaContainer-2 ; 0902-Media-2 ; ;
+; 0903-MediaContainer-1 ; 0903-Media-1 ; ;
+; 0903-MediaContainer-2 ; 0903-Media-2 ; ;
+; 0903-MediaContainer-3 ; 0903-Media-3 ; ;
+; 0903-MediaContainer-4 ; 0903-Media-4 ; ;
+; 0903-MediaContainer-5 ; 0903-Media-5 ; ;
+; 0904-MediaContainer-1 ; 0904-Media-1 ; ;
+; 0904-MediaContainer-2 ; 0904-Media-2 ; ;
+; 0904-MediaContainer-3 ; 0904-Media-3 ; ;
+; 0904-MediaContainer-4 ; 0904-Media-4 ; ;
+; 0904-MediaContainer-5 ; 0904-Media-5 ; ;
+; 0905-MediaContainer-1 ; 0905-Media-1 ; ;
+; 0905-MediaContainer-2 ; 0905-Media-2 ; ;
+; 0905-MediaContainer-3 ; 0905-Media-3 ; ;
+; 0905-MediaContainer-4 ; 0905-Media-4 ; ;
+; 0906-MediaContainer-1 ; 0906-Media-1 ; ;
+; 0906-MediaContainer-2 ; 0906-Media-2 ; ;
+; 0906-MediaContainer-3 ; 0906-Media-3 ; ;
+; 0906-MediaContainer-4 ; 0906-Media-4 ; ;
+; 0906-MediaContainer-5 ; 0906-Media-5 ; ;
+# Home Appliances - Refrigerators - Side by Side Refrigerators
+; 0920-MediaContainer-1 ; 0920-Media-1 ; ;
+; 0921-MediaContainer-1 ; 0921-Media-1 ; ;
+; 0921-MediaContainer-2 ; 0921-Media-2 ; ;
+; 0921-MediaContainer-3 ; 0921-Media-3 ; ;
+# Home Appliances - Refrigerators - Wine Coolers
+; 0940-MediaContainer-1 ; 0940-Media-1 ; ;
+; 0940-MediaContainer-2 ; 0940-Media-2 ; ;
+; 0940-MediaContainer-3 ; 0940-Media-3 ; ;
+; 0940-MediaContainer-4 ; 0940-Media-4 ; ;
+; 0940-MediaContainer-5 ; 0940-Media-5 ; ;
+# Home Appliances - Refrigerators - Water dispensers
+; 0950-MediaContainer-1 ; 0950-Media-1 ; ;
+; 0950-MediaContainer-2 ; 0950-Media-2 ; ;
+; 0950-MediaContainer-3 ; 0950-Media-3 ; ;
+
+# Update Home Appliances Products with Media and Media Containers
+UPDATE Product; code[unique = true]; $picture; $thumbnail; $detail; $others; $normal; $thumbnails; $galleryImages; $catalogVersion
+# Home Appliances - Refrigerators - French Door Refrigerators
+; 0901 ; 0901-Media-1 ; ; ; ; ; ; 0901-MediaContainer-1                                                                                         ;
+; 0902 ; 0902-Media-1 ; ; ; ; ; ; 0902-MediaContainer-1,0902-MediaContainer-2                                                                   ;
+; 0903 ; 0903-Media-1 ; ; ; ; ; ; 0903-MediaContainer-1,0903-MediaContainer-2,0903-MediaContainer-3,0903-MediaContainer-4,0903-MediaContainer-5 ;
+; 0904 ; 0904-Media-1 ; ; ; ; ; ; 0904-MediaContainer-1,0904-MediaContainer-2,0904-MediaContainer-3,0904-MediaContainer-4,0904-MediaContainer-5 ;
+; 0905 ; 0905-Media-1 ; ; ; ; ; ; 0905-MediaContainer-1,0905-MediaContainer-2,0905-MediaContainer-3,0905-MediaContainer-4                       ;
+; 0906 ; 0906-Media-1 ; ; ; ; ; ; 0906-MediaContainer-1,0906-MediaContainer-2,0906-MediaContainer-3,0906-MediaContainer-4,0906-MediaContainer-5 ;
+# Home Appliances - Refrigerators - Side by Side Refrigerators
+; 0920 ; 0920-Media-1 ; ; ; ; ; ; 0920-MediaContainer-1                                                                                         ;
+; 0921 ; 0921-Media-1 ; ; ; ; ; ; 0921-MediaContainer-1,0921-MediaContainer-2,0921-MediaContainer-3                                             ;
+# Home Appliances - Refrigerators - Wine Coolers
+; 0940 ; 0940-Media-1 ; ; ; ; ; ; 0940-MediaContainer-1,0940-MediaContainer-2,0940-MediaContainer-3,0940-MediaContainer-4,0940-MediaContainer-5 ;
+# Home Appliances - Refrigerators - Water dispensers
+; 0950 ; 0950-Media-1 ; ; ; ; ; ; 0950-MediaContainer-1,0950-MediaContainer-2,0950-MediaContainer-3                                             ;

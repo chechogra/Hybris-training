@@ -1,0 +1,93 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for SOLR Configuration
+
+# Macros / Replacement Parameter definitions
+$classificationCatalog = utrendClassificationCatalog
+$contentCatalog = utrendContentCatalog
+
+$classSystemVersion = systemVersion(catalog(id[default = '$classificationCatalog']), version[default = '1.0'])
+$classCatalogVersion = catalogVersion(catalog(id[default = '$classificationCatalog']), version[default = '1.0'])
+$classAttribute = classificationAttribute(code, $classSystemVersion)
+$classClass = classificationClass(code, $classCatalogVersion)
+$classAttributeAssignment = classAttributeAssignment($classClass, $classAttribute, $classSystemVersion)
+$contentCatalogVersion = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalogName]), CatalogVersion.version[default = Staged])[default = $contentCatalogName:Staged]
+$productCatalog = utrendProductCatalog
+$productCatalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+$solrIndexedType = utrendProductType
+
+# Define Range Set
+INSERT_UPDATE SolrValueRangeSet; name[unique = true]; qualifier; type; solrValueRanges(&rangeValueRefID)
+; resolutionRange  ; ; double ; resolutionRangeRef1,resolutionRangeRef2,resolutionRangeRef3,resolutionRangeRef4,resolutionRangeRef5
+; measurementRange ; ; double ; measurementRangeRef1,measurementRangeRef2,measurementRangeRef3,measurementRangeRef4,measurementRangeRef5,measurementRangeRef6,measurementRangeRef7
+; volumeRange      ; ; double ; volumeRangeRef1,volumeRangeRef2,volumeRangeRef3,volumeRangeRef4,volumeRangeRef5,volumeRangeRef6
+# Define Ranges
+INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique = true]; name[unique = true]; from; to
+# Resolution Range
+; resolutionRangeRef1  ; resolutionRange  ; "<10 mp"          ; 0   ; 9.9999
+; resolutionRangeRef2  ; resolutionRange  ; "10 - 14.9 mp"    ; 10  ; 14.9999
+; resolutionRangeRef3  ; resolutionRange  ; "14.9 - 19.9 mp"  ; 15  ; 19.9999
+; resolutionRangeRef4  ; resolutionRange  ; "20 - 24.9 mp"    ; 20  ; 24.9999
+; resolutionRangeRef5  ; resolutionRange  ; "25+ mp"          ; 25  ; 9999
+# Measurement Range
+; measurementRangeRef1 ; measurementRange ; "< 50cm"          ; 0   ; 49.9999
+; measurementRangeRef2 ; measurementRange ; "50cm - 64.9cm"   ; 50  ; 64.9999
+; measurementRangeRef3 ; measurementRange ; "65cm - 79.9cm"   ; 65  ; 79.9999
+; measurementRangeRef4 ; measurementRange ; "80cm - 99.9cm"   ; 80  ; 99.9999
+; measurementRangeRef5 ; measurementRange ; "100cm - 124.9cm" ; 100 ; 124.9999
+; measurementRangeRef6 ; measurementRange ; "125cm - 149.9cm" ; 125 ; 149.9999
+; measurementRangeRef7 ; measurementRange ; "150cm +"         ; 150 ; 9999
+# Volume Range
+; volumeRangeRef1      ; volumeRange      ; "< 50L"           ; 0   ; 49.9999
+; volumeRangeRef2      ; volumeRange      ; "50L - 99.9L"     ; 50  ; 99.9999
+; volumeRangeRef3      ; volumeRange      ; "100L - 199.9L"   ; 100 ; 199.9999
+; volumeRangeRef4      ; volumeRange      ; "200L - 299.9L"   ; 200 ; 299.9999
+; volumeRangeRef5      ; volumeRange      ; "300L - 399.9L"   ; 300 ; 399.9999
+; volumeRangeRef6      ; volumeRange      ; "400L +"          ; 400 ; 9999
+
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; facet[default = false]; facetType(code); facetSort(code); priority; visible; fieldValueProvider; customFacetSortProvider; rangeSets(name); $classAttributeAssignment
+; $solrIndexedType ; resolution        ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; resolutionRange  ; photography:::resolution::::
+; $solrIndexedType ; frequencyResponse ; string ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; facetNameSortProviderAscending ;                  ; audio:::frequencyResponse::::
+; $solrIndexedType ; bootStyle         ; string ; ; ; true ; ; true ; MultiSelectOr ;        ; 1000 ; true ; commerceClassificationPropertyValueProvider ;                                ;                  ; style:::bootStyle::::
+; $solrIndexedType ; neckStyle         ; string ; ; ; true ; ; true ; MultiSelectOr ;        ; 1000 ; true ; commerceClassificationPropertyValueProvider ;                                ;                  ; style:::neckStyle::::
+; $solrIndexedType ; width             ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; measurementRange ; dimensions:::width::::
+; $solrIndexedType ; height            ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; measurementRange ; dimensions:::height::::
+; $solrIndexedType ; depth             ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; measurementRange ; dimensions:::depth::::
+; $solrIndexedType ; volume            ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; volumeRange      ; dimensions:::volume::::
+
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); localized[default = true]; multiValue[default = false]; fieldValueProvider; $classAttributeAssignment
+
+# Import Classification Features
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); localized[default = true]; multiValue[default = false]; fieldValueProvider; $classAttributeAssignment
+
+# Show the Classification Features in the Product List View Category /Search Pages
+INSERT_UPDATE ClassAttributeAssignment; $classClass[unique = true]; $classAttribute[unique = true]; $classSystemVersion[unique = true]; listable[default = true]
+
+# Redirect page URL
+INSERT_UPDATE SolrURIRedirect; url[unique = true]
+
+INSERT_UPDATE SolrPageRedirect; redirectItem(uid, $contentCatalogVersion)[unique = true]
+
+INSERT_UPDATE SolrCategoryRedirect; redirectItem(code, $productCatalogVersion)[unique = true]
+
+INSERT_UPDATE SolrProductRedirect; redirectItem(code, $productCatalogVersion)[unique = true]
+
+# Classification facets
+INSERT_UPDATE SolrSearchQueryProperty; indexedProperty(name, solrIndexedType(identifier))[unique = true]; facet[default = true]; facetType(code); priority; facetDisplayNameProvider; facetSortProvider; facetTopValuesProvider; includeInResponse[default = true]; searchQueryTemplate(name, indexedType(identifier))[unique = true][default = DEFAULT:$solrIndexedType]
+; resolution:$solrIndexedType        ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; frequencyResponse:$solrIndexedType ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; bootStyle:$solrIndexedType         ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; neckStyle:$solrIndexedType         ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; width:$solrIndexedType             ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; height:$solrIndexedType            ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; depth:$solrIndexedType             ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; volume:$solrIndexedType            ; ; MultiSelectOr ; 1000 ; ; ; ; ;

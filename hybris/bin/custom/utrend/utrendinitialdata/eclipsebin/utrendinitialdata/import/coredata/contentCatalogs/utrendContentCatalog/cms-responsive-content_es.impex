@@ -1,0 +1,41 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import CMS content for the site
+#
+
+$contentCatalog = utrendContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+# Language
+$lang = es
+
+# Content Pages
+UPDATE ContentPage; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
+; ; account                      ; "Mi Cuenta"
+; ; add-edit-address             ; "Agregar/Editar Dirección"
+; ; address-book                 ; "Libreta de Direcciones"
+; ; cartPage                     ; "Carrito de Compras"
+; ; checkout-login               ; "Proceder al Pago"
+; ; faq                          ; "Preguntas Frecuentes"
+; ; homepage                     ; "Página de Inicio"
+; ; login                        ; "Iniciar Sesión"
+; ; multiStepCheckoutSummaryPage ; "Checkout"
+; ; notFound                     ; "No Encontrado"
+; ; order                        ; "Detalles de la Orden"
+; ; orderConfirmationPage        ; "Confirmación de la Orden"
+; ; orders                       ; "Historial de Órdenes"
+; ; payment-details              ; "Detalles de Pagos"
+; ; profile                      ; "Perfil"
+; ; searchEmpty                  ; "Sin Resultados"
+; ; storefinderPage              ; "Localizador de Tiendas"
+; ; termsAndConditions           ; "Términos y Condiciones"
+; ; updatePassword               ; "Actualizar Contraseña Olvidada"

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<editor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="editor.xsd">
+	<group qualifier="General" visible="true" initially-opened="true">
+		<label key="cockpit.config.label.General" />
+		<property qualifier="CMSItem.name"/>
+		<property qualifier="CMSItem.catalogVersion" editor="shortListEditor"/>
+		<property qualifier="AbstractCMSComponent.visible"/>
+	</group>
+
+	<group qualifier="editorial" visible="true" initially-opened="false">
+		<label key="config.general.editorial" />
+		<property qualifier="TCResponsiveBannerComponent.contentSpacing"/>
+		<property qualifier="AbstractCMSComponent.actions"/>
+	</group>
+
+	<group qualifier="xs" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.xs" />
+		<property qualifier="TCResponsiveBannerComponent.titleXs" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.descriptionXs" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.mediaXs" editor="simpleMediaReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>
+					image/jpeg;image/gif;image/png
+				</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>imageMediaPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="TCResponsiveBannerComponent.showContentOnHoverXs" editor="checkbox"/>
+		<property qualifier="TCResponsiveBannerComponent.heightXs"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundSizeXs"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundPositionXs"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundColorXs"/>
+		<property qualifier="TCResponsiveBannerComponent.overlayColorXs"/>
+		<property qualifier="TCResponsiveBannerComponent.textColorXs"/>
+		<property qualifier="TCResponsiveBannerComponent.flexDirectionXs"/>
+		<property qualifier="TCResponsiveBannerComponent.justifyContentXs"/>
+		<property qualifier="TCResponsiveBannerComponent.alignItemsXs"/>
+	</group>
+
+	<group qualifier="sm" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.sm" />
+		<property qualifier="TCResponsiveBannerComponent.titleSm" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.descriptionSm" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.mediaSm" editor="simpleMediaReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>
+					image/jpeg;image/gif;image/png
+				</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>imageMediaPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="TCResponsiveBannerComponent.showContentOnHoverSm" editor="checkbox"/>
+		<property qualifier="TCResponsiveBannerComponent.heightSm"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundSizeSm"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundPositionSm"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundColorSm"/>
+		<property qualifier="TCResponsiveBannerComponent.overlayColorSm"/>
+		<property qualifier="TCResponsiveBannerComponent.textColorSm"/>
+		<property qualifier="TCResponsiveBannerComponent.flexDirectionSm"/>
+		<property qualifier="TCResponsiveBannerComponent.justifyContentSm"/>
+		<property qualifier="TCResponsiveBannerComponent.alignItemsSm"/>
+	</group>
+
+	<group qualifier="md" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.md" />
+		<property qualifier="TCResponsiveBannerComponent.titleMd" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.descriptionMd" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.mediaMd" editor="simpleMediaReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>
+					image/jpeg;image/gif;image/png
+				</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>imageMediaPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="TCResponsiveBannerComponent.showContentOnHoverMd" editor="checkbox"/>
+		<property qualifier="TCResponsiveBannerComponent.heightMd"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundSizeMd"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundPositionMd"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundColorMd"/>
+		<property qualifier="TCResponsiveBannerComponent.overlayColorMd"/>
+		<property qualifier="TCResponsiveBannerComponent.textColorMd"/>
+		<property qualifier="TCResponsiveBannerComponent.flexDirectionMd"/>
+		<property qualifier="TCResponsiveBannerComponent.justifyContentMd"/>
+		<property qualifier="TCResponsiveBannerComponent.alignItemsMd"/>
+	</group>
+
+	<group qualifier="lg" visible="true" initially-opened="false">
+		<label key="cockpit.config.label.lg" />
+		<property qualifier="TCResponsiveBannerComponent.titleLg" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.descriptionLg" editor="wysiwyg"/>
+		<property qualifier="TCResponsiveBannerComponent.mediaLg" editor="simpleMediaReferenceSelector">
+			<parameter>
+				<name>mimeTypes</name>
+				<value>
+					image/jpeg;image/gif;image/png
+				</value>
+			</parameter>
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+			<parameter>
+				<name>restrictToCreateTypes</name>
+				<value>Media</value>
+			</parameter>
+			<parameter>
+				<name>celumMediaFormat</name>
+				<value>picture</value>
+			</parameter>
+			<parameter>
+				<name>predefinedValuesStrategy</name>
+				<value>imageMediaPredefinedValuesStrategy</value>
+			</parameter>
+		</property>
+		<property qualifier="TCResponsiveBannerComponent.showContentOnHoverLg" editor="checkbox"/>
+		<property qualifier="TCResponsiveBannerComponent.heightLg"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundSizeLg"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundPositionLg"/>
+		<property qualifier="TCResponsiveBannerComponent.backgroundColorLg"/>
+		<property qualifier="TCResponsiveBannerComponent.overlayColorLg"/>
+		<property qualifier="TCResponsiveBannerComponent.textColorLg"/>
+		<property qualifier="TCResponsiveBannerComponent.flexDirectionLg"/>
+		<property qualifier="TCResponsiveBannerComponent.justifyContentLg"/>
+		<property qualifier="TCResponsiveBannerComponent.alignItemsLg"/>
+	</group>
+
+	<group qualifier="visibility" visible="true" initially-opened="false">
+		<label key="config.general.contextvisibility" />
+		<property qualifier="AbstractCMSComponent.restrictions">
+			<parameter>
+				<name>allowCreate</name>
+				<value>true</value>
+			</parameter>
+		</property>
+		<property qualifier="AbstractCMSComponent.onlyOneRestrictionMustApply"/>
+	</group>
+
+	<group qualifier="admin" visible="true" initially-opened="false">
+		<label key="config.general.administration" />
+		<property qualifier="CMSItem.uid"/>
+		<property qualifier="AbstractCMSComponent.slots"/>
+		<property qualifier="AbstractCMSComponent.container"/>
+		<property qualifier="Item.pk" />
+		<property qualifier="Item.creationTime" />
+		<property qualifier="Item.modifiedtime" />
+	</group>
+	
+	<custom-group 
+		class="de.hybris.platform.cockpit.services.config.impl.UnassignedEditorSectionConfiguration" 
+		qualifier="unassigned"
+		initially-opened="false"
+		visible="false">
+		<label key="cockpit.config.label.Other" />
+	</custom-group>
+</editor>

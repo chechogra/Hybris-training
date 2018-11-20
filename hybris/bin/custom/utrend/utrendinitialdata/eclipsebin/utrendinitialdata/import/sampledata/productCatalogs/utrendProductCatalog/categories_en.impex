@@ -1,0 +1,49 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+# Language
+$lang = en
+
+# Create Categories
+UPDATE Category; code[unique = true]; $catalogVersion; name[lang = $lang]
+; collections                ; ; "Collections"
+; brands                     ; ; "Brands"
+; categories                 ; ; "Categories"
+; tech                       ; ; "Tech"
+; cameras                    ; ; "Cameras"
+; dslr                       ; ; "DSLR"
+; mirrorless                 ; ; "Mirrorless"
+; headphones                 ; ; "Headphones"
+; on-ear                     ; ; "On-ear"
+; in-ear                     ; ; "In-ear"
+; over-ear                   ; ; "Over-ear"
+; women                      ; ; "Women"
+; tops                       ; ; "Tops"
+; bottoms                    ; ; "Bottoms"
+; men                        ; ; "Men"
+; shirts                     ; ; "Shirts"
+; pants                      ; ; "Pants"
+; kids                       ; ; "kids"
+; home-appliances            ; ; "Home Appliances"
+; refrigerators              ; ; "Refrigerators"
+; french-door-refrigerators  ; ; "French Door Refrigerators"
+; side-by-side-refrigerators ; ; "Side by Side Refrigerators"
+; wine-coolers               ; ; "Wine Coolers"
+; water-dispensers           ; ; "Water Dispensers"
+
+

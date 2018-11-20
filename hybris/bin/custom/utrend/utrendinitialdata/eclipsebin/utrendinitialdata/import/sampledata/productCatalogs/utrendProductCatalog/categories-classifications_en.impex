@@ -1,0 +1,77 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+$classificationCatalog = utrendClassificationCatalog
+
+$classCatalogVersion = catalogversion(catalog(id[default = '$classificationCatalog']), version[default = '1.0'])[unique = true, default = '$classificationCatalog:1.0']
+$classSystemVersion = systemVersion(catalog(id[default = '$classificationCatalog']), version[default = '1.0'])[unique = true]
+
+# Language
+$lang = en
+
+# Insert Classifications
+UPDATE ClassificationClass; code[unique = true]; $classCatalogVersion; name[lang = $lang]
+; devices     ; ; "General"
+; photography ; ; "Parameters"
+; audio       ; ; "Audio"
+; clothing    ; ; "General"
+; style       ; ; "Style"
+; dimensions  ; ; "Dimensions"
+
+# Insert Classification Attributes
+UPDATE ClassificationAttribute; code[unique = true]; $classSystemVersion; name[lang = $lang]
+; weight            ; ; "Weight"
+; resolution        ; ; "Resolution"
+; sensorSize        ; ; "Sensor size"
+; isoRange          ; ; "ISO range"
+; dynamicDriver     ; ; "Dynamic driver"
+; frequencyResponse ; ; "Frequency response"
+; material          ; ; "Material"
+; pocketsNumber     ; ; "Number of pockets"
+; closure           ; ; "Closure"
+; bootStyle         ; ; "Boot"
+; neckStyle         ; ; "Neck"
+; width             ; ; "Width"
+; height            ; ; "Height"
+; depth             ; ; "Depth"
+; volume            ; ; "Volume"
+
+# Insert Values for Classification Attributes
+UPDATE ClassificationAttributeValue; code[unique = true]; $classSystemVersion; name[lang = $lang]
+; none                   ; ; "None"
+; material_denim         ; ; "Denim"
+; material_cotton        ; ; "Cotton"
+; material_wool          ; ; "Wool"
+; material_silk          ; ; "Silk"
+; material_spandex       ; ; "Spandex"
+; material_corduroy      ; ; "Corduroy"
+; material_rayon         ; ; "Rayon"
+; material_drill         ; ; "Drill"
+; material_polyester     ; ; "Polyester"
+; material_chiffon       ; ; "Chiffon"
+; material_jersey        ; ; "Jersey"
+; closure_buttons        ; ; "Buttons"
+; closure_button_zipper  ; ; "Button & Zipper"
+; closure_laced_up       ; ; "Laced up"
+; neckStyle_button_up    ; ; "Button up"
+; neckStyle_off_shoulder ; ; "Off shoulder"
+; neckStyle_cowl_neck    ; ; "Cowl neck"
+; neckStyle_vneck        ; ; "V-Neck"
+; neckStyle_round_neck   ; ; "Round neck"
+; neckStyle_polo         ; ; "Polo"
+; bootStyle_wide_leg     ; ; "Wide leg"
+; bootStyle_fitted_leg   ; ; "Fitted leg"
+; bootStyle_straight_leg ; ; "Straight leg"
+; bootStyle_skinny_leg   ; ; "Skinny leg"

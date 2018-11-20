@@ -1,0 +1,23 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+$contentCatalog = utrendContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$jarResourceCms = jar:com.talos.talosacceleratoraddon.constants.TalosacceleratoraddonConstants&/talosacceleratoraddon/import/cockpit/cmscockpit
+$lang = es
+
+UPDATE FooterNavigationComponent; $contentCV[unique = true]; uid[unique = true]; notice[lang = $lang]
+; ; TCFooterNavigationComponent ; "@2018 Talos Commerce"
+
+UPDATE ConsentTemplate; id[unique = true]; name[lang = $lang]; description[lang = $lang]
+; UTREND_CONSENT_TEMPLATE_1 ; "Suscribirse al boletín" ; "Apruebo el uso de mis datos personales para recibir boletines por correo electrónico para campañas de marketing."
+
+UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang]
+; ; HelpParagraphComponent ; "<div class=""tc-checkout-help""><span class=""tc-brand-color"">¿Necesita ayuda con su proceso de pago?</span>&nbsp;<span>Contáctenos o llame al número de teléfono.</span></div>"
