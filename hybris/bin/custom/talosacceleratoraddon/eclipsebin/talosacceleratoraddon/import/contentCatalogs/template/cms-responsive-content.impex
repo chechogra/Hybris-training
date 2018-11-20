@@ -1,0 +1,177 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+######
+## PARAMETERS REQUIRED FOR THIS SCRIPT
+##
+##   * contentCatalog   - content catalog id
+##   * addonExtensionName - extension name of the ui addon
+#######
+$contentCatalog = utrendContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+$jarResourceCmsCockpit = jar:com.talos.talosacceleratoraddon.constants.TalosacceleratoraddonConstants&/talosacceleratoraddon/import/cockpit/cmscockpit
+
+# Error Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ErrorPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Product Details Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ProductDetailsPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Product List Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ProductListPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Product Grid Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ProductGridPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Search Results List Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'SearchResultsListPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Search Results Grid Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'SearchResultsGridPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Search Results Empty Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'SearchResultsEmptyPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Category Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'CategoryPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Landing Page Templates
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LandingPage1Template']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LandingPage2Template']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LandingPage3Template']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LandingPage4Template']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LandingPage5Template']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LandingPage6Template']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Simple Content Page Templates
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ContentPage1Template']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Cart Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'CartPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Login Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'LoginPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Checkout Login Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'CheckoutLoginPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'MultiStepCheckoutSummaryPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Order Confirmation Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'OrderConfirmationPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Account Page Template
+# Template used for all of the Account pages
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'AccountPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+# Store Finder/Locator Page Template
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'StoreFinderPageTemplate']; validComponentTypes(code); compTypeGroup(code)
+; OrderToolsLinks ; ; ; orderToolsLinks
+
+
+# Create Content Slots
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active
+; ; OrderToolsLinksSlot ; Order Tools links ; true
+
+
+# Bind Content Slots to Page Templates
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ProductDetailsPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-ProductDetails ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'SearchResultsListPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-SearchResultsList ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'SearchResultsGridPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-SearchResultsGrid ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'SearchResultsEmptyPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-SearchResultsEmpty ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'CategoryPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-CategoryPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPage1Template']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-LandingPage1 ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPage2Template']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-LandingPage2 ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPage3Template']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-LandingPage3 ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPage4Template']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-LandingPage4 ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPage5Template']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-LandingPage5 ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LandingPage6Template']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-LandingPage6 ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ContentPage1Template']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-ContentPage1 ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ProductGridPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-ProductGridPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ProductListPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-ProductListPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'CartPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-CartPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'LoginPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-LoginPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'CheckoutLoginPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-CheckoutLoginPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+# Bind Content Slots to Multi Step Checkout Summary Page Templates
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'MultiStepCheckoutSummaryPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-MultiStepCheckoutSummaryPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'OrderConfirmationPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-OrderConfirmationPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'AccountPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-AccountPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'StoreFinderPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-StoreFinderPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'ErrorPageTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; OrderToolsLinks-ErrorPage ; OrderToolsLinks ; ; OrderToolsLinksSlot ; true

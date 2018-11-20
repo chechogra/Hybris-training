@@ -1,0 +1,279 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Product Classifications
+
+#% impex.setLocale(Locale.ENGLISH);
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+$classificationCatalog = utrendClassificationCatalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$systemName = $classificationCatalog
+$systemVersion = 1.0
+
+# Insert Product Classifications
+UPDATE Product; code[unique = true]; C@weight; C@resolution; C@sensorSize; C@isoRange; $catalogVersion;
+# Tech - Cameras - DSLR
+; 0001 ; "40.7 oz (755 g)"   ; 24.3  ; "CMOS (23.2 x 15.4 mm)"         ; "100 -12800"  ;
+; 0002 ; "53 oz (1,050 g)"   ; 45.75 ; "CMOS (35.9 x 23.9mm)"          ; "64 - 25600"  ;
+; 0003 ; "17.8 oz (570 g)"   ; 24.2  ; "CMOS (23.2 x 15.4 mm)"         ; "100 - 12800" ;
+; 0004 ; "23.7 oz (650 g)"   ; 24.2  ; "APS-C (23.5 x 15.6mm)"         ; "100 - 25600" ;
+; 0005 ; "23.7 oz (650 g)"   ; 24.2  ; "APS-C (23.5 x 15.6mm)"         ; "100 - 25600" ;
+; 0006 ; "59.7 oz (1,650 g)" ; 24.2  ; "APS-C (23.5 x 15.6mm)"         ; "100 - 25600" ;
+; 0007 ; "45.4 oz (903 g)"   ; 18    ; "APS-C (22.3mm x 14.9mm)"       ; "100 - 6400"  ;
+; 0008 ; "47.8 oz (960 g)"   ; 18    ; "APS-C (22.3 x 14.9 mm)"        ; "100 - 6400"  ;
+; 0009 ; "45 oz (902 g)"     ; 18    ; "14.9 x 22.3mm"                 ; "100 - 6400"  ;
+; 0010 ; "50.1 oz (998 g)"   ; 18    ; "14.9 x 22.3mm"                 ; "100 - 6400"  ;
+# Tech - Cameras - Mirrorless
+; 0101 ; "48.2 oz (888 g)"   ; 24.2  ; "APS-C (22.3 x 14.9 mm)"        ; "100 - 12800" ;
+; 0102 ; "53.7 oz (1,450 g)" ; 24.2  ; "APS-C (22.3 x 14.9 mm)"        ; "100 - 25600" ;
+; 0103 ; "45.2 oz (860 g)"   ; 18    ; "APS-C (22.3 x 14.9 mm)"        ; "100 - 12800" ;
+; 0104 ; "58.7 oz (1,650 g)" ; 20.1  ; "APS-C (23.5 x 15.6mm)"         ; "100 - 16000" ;
+; 0105 ; "54.7 oz (1,550 g)" ; 24.3  ; "APS-C (23.2 x 15.4mm)"         ; "100 - 25600" ;
+; 0106 ; "52.7 oz (1,350 g)" ; 24.3  ; "Exmor (23.5 x 15.6mm)"         ; "100 - 12800" ;
+; 0107 ; "46.2 oz (1,350 g)" ; 18.4  ; "CMOS (13.2 mm x 8.8 mm)"       ; "160 - 12800" ;
+; 0108 ; "47.4 oz (1,450 g)" ; 20.8  ; "CMOS (13.2 mm x 8.8 mm)"       ; "160 - 12800" ;
+; 0109 ; "50.7 oz (1,150 g)" ; 18.4  ; "1 inch - type (13.2 x 8.8 mm)" ; "160 - 12800" ;
+; 0110 ; "48.5 oz (956 g)"   ; 14.2  ; "1 inch - type (13.2 x 8.8 mm)" ; "100 - 6400"  ;
+
+UPDATE Product; code[unique = true]; C@weight; C@dynamicDriver; C@frequencyResponse; $catalogVersion;
+# Tech - Headphones - On-ear
+; 0201   ; "146 g" ; 32   ; "20Hz-20kHz" ;
+; 020101 ; "146 g" ; 32   ; "20Hz-20kHz" ;
+; 020102 ; "146 g" ; 32   ; "20Hz-20kHz" ;
+; 020103 ; "146 g" ; 32   ; "20Hz-20kHz" ;
+; 0202   ; "140 g" ; 50   ; "20Hz-22kHz" ;
+; 0203   ; "100 g" ; 40   ; "20Hz-22kHz" ;
+; 0204   ; "100 g" ; 40   ; "10Hz-20kHz" ;
+; 0205   ; "200 g" ; 40   ; "20Hz-20kHz" ;
+; 0206   ; "108 g" ; 32   ; "20Hz-20kHz" ;
+; 0207   ; "130 g" ; 40   ; "20Hz-20kHz" ;
+; 0208   ; "122 g" ; 40   ; "10Hz-20kHz" ;
+; 0209   ; "210 g" ; 40   ; "10Hz-20kHz" ;
+; 0210   ; "101 g" ; 40   ; "20Hz-20kHz" ;
+# Tech - Headphones - In-ear
+; 0301   ; "73 g"  ; 5.8  ; "10Hz-22kHz" ;
+; 0302   ; "33 g"  ; 8    ; "20Hz-20kHz" ;
+; 0303   ; "51 g"  ; 5.8  ; "10Hz-22kHz" ;
+; 0304   ; "48 g"  ; 5.8  ; "10Hz-22kHz" ;
+; 0305   ; "30 g"  ; 5.6  ; "10Hz-22kHz" ;
+; 0306   ; "22 g"  ; 5.8  ; "10Hz-22kHz" ;
+; 0307   ; "30 g"  ; 8.6  ; "20Hz-20kHz" ;
+; 0308   ; "55 g"  ; 5.8  ; "10Hz-22kHz" ;
+; 0310   ; "23 g"  ; 8.5  ; "20Hz-20kHz" ;
+; 0309   ; "20 g"  ; 15.4 ; "10Hz-22kHz" ;
+# Tech - Headphones - Over-ear
+; 0401   ; "190 g" ; 40   ; "10Hz-22kHz" ;
+; 0402   ; "200 g" ; 40   ; "10Hz-22kHz" ;
+; 0403   ; "169 g" ; 50   ; "20Hz-20kHz" ;
+; 0404   ; "198 g" ; 40   ; "20Hz-20kHz" ;
+; 0405   ; "123 g" ; 40   ; "10Hz-22kHz" ;
+; 0406   ; "160 g" ; 50   ; "20Hz-20kHz" ;
+; 0407   ; "144 g" ; 50   ; "20Hz-22kHz" ;
+; 0408   ; "133 g" ; 50   ; "10Hz-22kHz" ;
+; 0409   ; "130 g" ; 50   ; "10Hz-22kHz" ;
+; 0410   ; "149 g" ; 50   ; "10Hz-22kHz" ;
+
+UPDATE Product; code[unique = true]; C@material; C@closure; C@neckStyle; C@bootStyle; $catalogVersion;
+# Women - Tops
+; 0501           ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0501_blue      ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 050101         ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 050102         ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 050103         ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0502           ; material_denim     ; closure_buttons       ; neckStyle_off_shoulder ; <ignore>               ;
+; 0502_navy_blue ; material_denim     ; closure_buttons       ; neckStyle_off_shoulder ; <ignore>               ;
+; 050201         ; material_denim     ; closure_buttons       ; neckStyle_off_shoulder ; <ignore>               ;
+; 050202         ; material_denim     ; closure_buttons       ; neckStyle_off_shoulder ; <ignore>               ;
+; 050203         ; material_denim     ; closure_buttons       ; neckStyle_off_shoulder ; <ignore>               ;
+; 0503           ; material_cotton    ; <ignore>              ; neckStyle_cowl_neck    ; <ignore>               ;
+; 0503_black     ; material_cotton    ; <ignore>              ; neckStyle_cowl_neck    ; <ignore>               ;
+; 050301         ; material_cotton    ; <ignore>              ; neckStyle_cowl_neck    ; <ignore>               ;
+; 050302         ; material_cotton    ; <ignore>              ; neckStyle_cowl_neck    ; <ignore>               ;
+; 050303         ; material_cotton    ; <ignore>              ; neckStyle_cowl_neck    ; <ignore>               ;
+; 0504           ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0504_red       ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 050401         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 050402         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 050403         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0505           ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 0505_taupe     ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 0505_turquoise ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 0505_peach     ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050501         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050502         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050503         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050510         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050511         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050512         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050520         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050521         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 050522         ; material_silk      ; <ignore>              ; neckStyle_vneck        ; <ignore>               ;
+; 0506           ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 0506_black     ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 0506_white     ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 0506_grey      ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050601         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050602         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050603         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050610         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050611         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050612         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050620         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050621         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050622         ; material_cotton    ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 0507           ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 0507_green     ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 0507_black     ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050701         ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050702         ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050703         ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050710         ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050711         ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+; 050712         ; material_spandex   ; <ignore>              ; neckStyle_round_neck   ; <ignore>               ;
+# Women - Bottoms
+; 0601           ; material_corduroy  ; closure_button_zipper ; <ignore>               ; <ignore>               ;
+; 0601_red       ; material_corduroy  ; closure_button_zipper ; <ignore>               ; <ignore>               ;
+; 060101         ; material_corduroy  ; closure_button_zipper ; <ignore>               ; <ignore>               ;
+; 060102         ; material_corduroy  ; closure_button_zipper ; <ignore>               ; <ignore>               ;
+; 060103         ; material_corduroy  ; closure_button_zipper ; <ignore>               ; <ignore>               ;
+; 0602           ; material_rayon     ; <ignore>              ; <ignore>               ; <ignore>               ;
+; 0602_green     ; material_rayon     ; <ignore>              ; <ignore>               ; <ignore>               ;
+; 060201         ; material_rayon     ; <ignore>              ; <ignore>               ; <ignore>               ;
+; 060202         ; material_rayon     ; <ignore>              ; <ignore>               ; <ignore>               ;
+; 060203         ; material_rayon     ; <ignore>              ; <ignore>               ; <ignore>               ;
+; 0603           ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_wide_leg     ;
+; 0603_blue      ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_wide_leg     ;
+; 060301         ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_wide_leg     ;
+; 060302         ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_wide_leg     ;
+; 060303         ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_wide_leg     ;
+; 0604           ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 0604_grey      ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 0604_green     ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 060401         ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 060402         ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 060403         ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 060410         ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 060411         ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 060412         ; material_drill     ; closure_laced_up      ; <ignore>               ; <ignore>               ;
+; 0605           ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 0605_blue      ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 0605_black     ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 0605_grey      ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060501         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060502         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060503         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060510         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060511         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060512         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060520         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060521         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+; 060522         ; material_cotton    ; closure_laced_up      ; <ignore>               ; bootStyle_fitted_leg   ;
+# Men - Pants
+; 0701           ; material_drill     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 0701_beige     ; material_drill     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070101         ; material_drill     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070102         ; material_drill     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070103         ; material_drill     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 0702           ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 0702_grey      ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070201         ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070202         ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070203         ; material_denim     ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 0703           ; material_cotton    ; closure_button_zipper ; <ignore>               ; bootStyle_skinny_leg   ;
+; 0703_navy_blue ; material_cotton    ; closure_button_zipper ; <ignore>               ; bootStyle_skinny_leg   ;
+; 070301         ; material_cotton    ; closure_button_zipper ; <ignore>               ; bootStyle_skinny_leg   ;
+; 070302         ; material_cotton    ; closure_button_zipper ; <ignore>               ; bootStyle_skinny_leg   ;
+; 070303         ; material_cotton    ; closure_button_zipper ; <ignore>               ; bootStyle_skinny_leg   ;
+; 0704           ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 0704_grey      ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 0704_navy_blue ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070401         ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070402         ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070403         ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070410         ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070411         ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 070412         ; material_polyester ; closure_button_zipper ; <ignore>               ; bootStyle_straight_leg ;
+; 0705           ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 0705_brown     ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 0705_steel     ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 070501         ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 070502         ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 070503         ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 070510         ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 070511         ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+; 070512         ; material_chiffon   ; closure_laced_up      ; <ignore>               ; bootStyle_wide_leg     ;
+# Men - Shirts
+; 0801           ; material_jersey    ; none                  ; neckStyle_polo         ; <ignore>               ;
+; 0801_white     ; material_jersey    ; none                  ; neckStyle_polo         ; <ignore>               ;
+; 080101         ; material_jersey    ; none                  ; neckStyle_polo         ; <ignore>               ;
+; 080102         ; material_jersey    ; none                  ; neckStyle_polo         ; <ignore>               ;
+; 080103         ; material_jersey    ; none                  ; neckStyle_polo         ; <ignore>               ;
+; 0802           ; material_cotton    ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0802_green     ; material_cotton    ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080201         ; material_cotton    ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080202         ; material_cotton    ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080203         ; material_cotton    ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0803           ; material_spandex   ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 0803_black     ; material_spandex   ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080301         ; material_spandex   ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080302         ; material_spandex   ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080303         ; material_spandex   ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 0804           ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0804_black     ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0804_navy_blue ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080401         ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080402         ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080403         ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080410         ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080411         ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080412         ; material_chiffon   ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0805           ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0805_red       ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0805_navy_blue ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080501         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080502         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080503         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080510         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080511         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080512         ; material_wool      ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0806           ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0806_blue      ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080601         ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080602         ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 080603         ; material_denim     ; closure_buttons       ; neckStyle_button_up    ; <ignore>               ;
+; 0807           ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 0807_black     ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 0807_navy_blue ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080701         ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080702         ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080703         ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080710         ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080711         ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+; 080712         ; material_cotton    ; none                  ; neckStyle_round_neck   ; <ignore>               ;
+
+UPDATE Product; code[unique = true]; C@width; C@height; C@depth; C@volume
+# Home Appliances - Refrigerators - French Door Refrigerators
+; 0901 ; 47.2 ; 49.2  ; 45    ; 44.57
+; 0902 ; 47.2 ; 49.2  ; 45    ; 44.57
+; 0903 ; 46.9 ; 77    ; 53    ; 87
+; 0904 ; 61   ; 122   ; 69    ; 204.97
+; 0905 ; 61   ; 122   ; 69    ; 204.97
+; 0906 ; 61   ; 147   ; 69    ; 229.21
+# Home Appliances - Refrigerators - Side by Side Refrigerators
+; 0920 ; 94.2 ; 181.2 ; 80.3  ; 553.22
+; 0921 ; 90.3 ; 179   ; 73.45 ; 527.23
+# Home Appliances - Refrigerators - Wine Coolers
+; 0940 ; 47   ; 49    ; 45    ; 50
+# Home Appliances - Refrigerators - Water dispensers
+; 0950 ; 39   ; 53    ; 32    ; 2

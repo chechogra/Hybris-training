@@ -1,0 +1,68 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import the CMS content for the site emails
+#
+$contentCatalog = utrendContentCatalog
+$contentCV = catalogVersion(CatalogVersion.catalog(Catalog.id[default = $contentCatalog]), CatalogVersion.version[default = Staged])[default = $contentCatalog:Staged]
+
+# Import config properties into impex macros
+UPDATE GenericItem[processor = de.hybris.platform.commerceservices.impex.impl.ConfigPropertyImportProcessor]; pk[unique = true]
+$emailResource = $config-emailResourceValue
+
+# Language
+$lang = es
+
+# CMS components and Email velocity templates
+UPDATE RendererTemplate; code[unique = true]; description[lang = $lang]; templateScript[lang = $lang, translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+; utrend-BannerComponent-template                      ; "Plantilla CMSBannerComponent"                     ; $emailResource/email-bannerComponentTemplate.vm
+; utrend-CMSImageComponent-template                    ; "Plantilla CMSImageComponent"                      ; $emailResource/email-cmsImageComponentTemplate.vm
+; utrend-CMSLinkComponent-template                     ; "Plantilla CMSLinkComponent"                       ; $emailResource/email-cmsLinkComponentTemplate.vm
+; utrend-CMSParagraphComponent-template                ; "Plantilla CMSParagraphComponent "                 ; $emailResource/email-cmsParagraphComponentTemplate.vm
+; utrend-SimpleBannerComponent-template                ; "Plantilla CMSSimpleBannerComponent "              ; $emailResource/email-bannerComponentTemplate.vm
+; utrend_Email_Customer_Registration_Body              ; "Cuerpo del Email Registro del Cliente"            ; $emailResource/email-customerRegistrationBody.vm
+; utrend_Email_Customer_Registration_Subject           ; "Asunto del Email Registro del Cliente"            ; $emailResource/email-customerRegistrationSubject.vm
+; utrend_Email_Delivery_Sent_Body                      ; "Cuerpo del Email Enviado"                         ; $emailResource/email-deliverySentBody.vm
+; utrend_Email_Delivery_Sent_Subject                   ; "Asunto del Email Enviado"                         ; $emailResource/email-deliverySentSubject.vm
+; utrend_Email_Forgotten_Password_Body                 ; "Cuerpo del Email Contraseña Olvidada"             ; $emailResource/email-forgottenPasswordBody.vm
+; utrend_Email_Forgotten_Password_Subject              ; "Asunto del Email Contraseña Olvidada"             ; $emailResource/email-forgottenPasswordSubject.vm
+; utrend_Email_NotPickedUpConsignment_Canceled_Body    ; "Cuerpo del Email No Recogido Envío Cancelado"     ; $emailResource/email-notPickedUpConsignmentCanceledBody.vm
+; utrend_Email_NotPickedUpConsignment_Canceled_Subject ; "Asunto del Email No Recogido Envío Cancelado"     ; $emailResource/email-notPickedUpConsignmentCanceledSubject.vm
+; utrend_Email_Order_Cancelled_Body                    ; "Cuerpo del Email Orden Cancelada"                 ; $emailResource/email-orderCancelledBody.vm
+; utrend_Email_Order_Cancelled_Subject                 ; "Asunto del Email Orden Cancelada"                 ; $emailResource/email-orderCancelledSubject.vm
+; utrend_Email_Order_Collection_Reminder_Body          ; "Cuerpo del Email Recordatorio recogida de Ordern" ; $emailResource/email-orderCollectionReminderBody.vm
+; utrend_Email_Order_Collection_Reminder_Subject       ; "Asunto del Email Recordatorio recogida de Ordern" ; $emailResource/email-orderCollectionReminderSubject.vm
+; utrend_Email_Order_Confirmation_Body                 ; "Cuerpo del Email Confirmación de la Orden"        ; $emailResource/email-orderConfirmationBody.vm
+; utrend_Email_Order_Confirmation_Subject              ; "Asunto del Email Confirmación de la Orden"        ; $emailResource/email-orderConfirmationSubject.vm
+; utrend_Email_Order_Move_To_CS_Body                   ; "Cuerpo del Email Mover Orden a CS"                ; $emailResource/email-orderMoveToCsBody.vm
+; utrend_Email_Order_Move_To_CS_Subject                ; "Asunto del Email Mover Orden a CS"                ; $emailResource/email-orderMoveToCsSubject.vm
+; utrend_Email_Order_Partially_Canceled_Body           ; "Cuerpo del Email Orden Parcialmente Cancelada"    ; $emailResource/email-orderPartiallyCanceledBody.vm
+; utrend_Email_Order_Partially_Canceled_Subject        ; "Asunto del Email Orden Parcialmente Cancelada"    ; $emailResource/email-orderPartiallyCanceledSubject.vm
+; utrend_Email_Order_Partially_Refunded_Body           ; "Cuerpo del Email Orden Parcialmente Reembolsada"  ; $emailResource/email-orderPartiallyRefundedBody.vm
+; utrend_Email_Order_Partially_Refunded_Subject        ; "Asunto del Email Orden Parcialmente Reembolsada"  ; $emailResource/email-orderPartiallyRefundedSubject.vm
+; utrend_Email_Order_Refund_Body                       ; "Cuerpo del Email Reembolso de la Orden"           ; $emailResource/email-orderRefundBody.vm
+; utrend_Email_Order_Refund_Subject                    ; "Asunto del Email Reembolso de la Orden"           ; $emailResource/email-orderRefundSubject.vm
+; utrend_Email_Ready_For_Pickup_Body                   ; "Cuerpo del Email Listo para Recoger"              ; $emailResource/email-readyForPickupBody.vm
+; utrend_Email_Ready_For_Pickup_Subject                ; "Asunto del Email Listo para Recoger"              ; $emailResource/email-readyForPickupSubject.vm
+
+# Email Pages
+UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; fromEmail[lang = $lang]; fromName[lang = $lang]
+; ; CustomerRegistrationEmail    ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; DeliverySentEmail            ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; ForgottenPasswordEmail       ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; OrderCancelledEmail          ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; OrderCollectionReminderEmail ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; OrderConfirmationEmail       ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; OrderMoveToCsEmail           ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; OrderPartiallyCanceledEmail  ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; OrderPartiallyRefundedEmail  ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; OrderRefundEmail             ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; ReadyForPickupEmail          ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"

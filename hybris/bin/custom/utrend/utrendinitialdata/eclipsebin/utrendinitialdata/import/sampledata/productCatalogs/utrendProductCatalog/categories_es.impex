@@ -1,0 +1,49 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Categories
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+
+# Language
+$lang = es
+
+# Create Categories
+UPDATE Category; code[unique = true]; $catalogVersion; name[lang = $lang]
+; collections                ; ; "Colecciones"
+; brands                     ; ; "Marcas"
+; categories                 ; ; "Categorías"
+; tech                       ; ; "Tecnología"
+; cameras                    ; ; "Cámaras"
+; dslr                       ; ; "DSLR"
+; mirrorless                 ; ; "Mirrorless"
+; headphones                 ; ; "Audífonos"
+; in-ear                     ; ; "Intrauditivos"
+; on-ear                     ; ; "Supraaurales"
+; over-ear                   ; ; "Circumaurales"
+; women                      ; ; "Mujeres"
+; tops                       ; ; "Tops"
+; bottoms                    ; ; "Bottoms"
+; men                        ; ; "Hombres"
+; shirts                     ; ; "Camisetas"
+; pants                      ; ; "Pantalones"
+; kids                       ; ; "Niños"
+; home-appliances            ; ; "Electrodomésticos"
+; refrigerators              ; ; "Refrigeración"
+; french-door-refrigerators  ; ; "Neveras"
+; side-by-side-refrigerators ; ; "Nevecones"
+; wine-coolers               ; ; "Cavas de vino"
+; water-dispensers           ; ; "Dispensadores de agua"
+
+

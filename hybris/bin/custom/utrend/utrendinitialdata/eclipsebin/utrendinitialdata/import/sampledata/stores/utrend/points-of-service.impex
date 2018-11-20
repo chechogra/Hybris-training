@@ -1,0 +1,79 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Points of Service
+
+# Macros / Replacement Parameter definitions
+$storeUid = utrend
+$productCatalog = utrendProductCatalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$storeImage = storeImage(qualifier, $catalogVersion)
+
+$standardHours = utrend-us-standard-hours
+$philadelphiaHours = utrend-us-philadelphia-hours
+
+INSERT_UPDATE OpeningSchedule; code[unique = true];
+; $standardHours     ;
+; $philadelphiaHours ;
+
+INSERT_UPDATE WeekdayOpeningDay; openingSchedule(code)[unique = true]; dayOfWeek(code)[unique = true]; openingTime[dateformat = hh:mm]; closingTime[dateformat = hh:mm];
+; $standardHours     ; MONDAY    ; 09:00 ; 19:00
+; $standardHours     ; TUESDAY   ; 09:00 ; 19:00
+; $standardHours     ; WEDNESDAY ; 09:00 ; 19:00
+; $standardHours     ; THURSDAY  ; 09:00 ; 19:00
+; $standardHours     ; FRIDAY    ; 09:00 ; 19:00
+; $standardHours     ; SATURDAY  ; 09:00 ; 17:00
+
+; $philadelphiaHours ; MONDAY    ; 10:00 ; 18:00
+; $philadelphiaHours ; TUESDAY   ; 10:00 ; 18:00
+; $philadelphiaHours ; WEDNESDAY ; 10:00 ; 18:00
+; $philadelphiaHours ; THURSDAY  ; 10:00 ; 18:00
+; $philadelphiaHours ; FRIDAY    ; 10:00 ; 18:00
+; $philadelphiaHours ; SATURDAY  ; 11:00 ; 18:00
+; $philadelphiaHours ; SUNDAY    ; 11:00 ; 16:00
+
+INSERT_UPDATE SpecialOpeningDay; openingSchedule(code)[unique = true]; date[unique = true, dateformat = dd.MM.yyyy]; closed; openingTime[dateformat = hh:mm]; closingTime[dateformat = hh:mm]
+; $standardHours     ; 03.11.2017 ; true
+; $standardHours     ; 23.11.2017 ; true
+; $standardHours     ; 23.12.2017 ; true
+
+; $philadelphiaHours ; 03.11.2017 ; true
+; $philadelphiaHours ; 23.11.2017 ; true
+; $philadelphiaHours ; 23.12.2017 ; true
+
+INSERT_UPDATE StoreLocatorFeature; code[unique = true]
+; wheelchair
+; elevator
+; buyOnlinePickupInStore
+
+INSERT_UPDATE PointOfService; name[unique = true]; type(code); address(&addrID); latitude; longitude; geocodeTimestamp[dateformat = dd-MM-yyyy]; $storeImage; openingSchedule(code); basestore(uid)[default = $storeUid]; features(code)
+; Times Square        ; STORE ; addr1 ; 40.755587 ; -73.987530 ; 29-04-2025 ; utrend_store_times_square        ; $standardHours
+; Queens              ; STORE ; addr2 ; 40.735307 ; -73.874761 ; 29-04-2025 ; utrend_store_queens              ; $standardHours
+; Brooklyn            ; POS   ; addr3 ; 40.650916 ; -73.870045 ; 29-04-2025 ; utrend_store_brooklyn            ; $standardHours
+; Liberty Bell Center ; STORE ; addr4 ; 40.076037 ; -75.036555 ; 29-04-2025 ; utrend_store_liberty_bell_center ; $philadelphiaHours
+
+INSERT_UPDATE Address; &addrID; streetname; streetnumber; postalcode[unique = true]; town[unique = true]; country(isocode); region(isocode); phone1; owner(PointOfService.name)[unique = true]
+; addr1 ; Times Square   ; 5     ; 10036 ; New York     ; US ; US-NY ; +1 718 760 3051 ; Times Square
+; addr2 ; Queens Blvd    ; 88-01 ; 11371 ; New York     ; US ; US-NY ; +1 718 760 3050 ; Queens
+; addr3 ; Gateway Dr     ; 455   ; 11239 ; New York     ; US ; US-NY ; +1 718 760 3052 ; Brooklyn
+; addr4 ; Roosevelt Blvd ; 9140  ; 19115 ; Philadelphia ; US ; US-PA ; +1 718 760 3053 ; Liberty Bell Center
+
+UPDATE PointOfService; name[unique = true]; features(code);
+; Times Square        ; elevator,buyOnlinePickupInStore
+; Queens              ; wheelchair,elevator,buyOnlinePickupInStore
+; Brooklyn            ; wheelchair,buyOnlinePickupInStore
+; Liberty Bell Center ; wheelchair,buyOnlinePickupInStore
+
+INSERT_UPDATE PoS2WarehouseRel; source(name)[unique = true]; target(code)[unique = true]
+; Times Square        ; Manhattan
+; Queens              ; Manhattan
+; Brooklyn            ; Manhattan
+; Liberty Bell Center ; Philadelphia
