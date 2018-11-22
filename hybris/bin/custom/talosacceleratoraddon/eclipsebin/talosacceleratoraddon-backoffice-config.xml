@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<config xmlns="http://www.hybris.com/cockpit/config">
+    <context merge-by="type" parent="SimpleCMSAction" type="TCSocialAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute qualifier="iconCode"/>
+                    <editorArea:attribute qualifier="localizedUrl"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <context merge-by="type" parent="SimpleCMSComponent" type="TCSocialCollectionComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute qualifier="actions"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <context merge-by="type" parent="SimpleCMSComponent" type="FooterNavigationComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute qualifier="optInComponent"/>
+                    <editorArea:attribute qualifier="socialCollectionComponent"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <context merge-by="type" parent="SimpleCMSAction" type="TCBannerAction" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute qualifier="text"/>
+                    <editorArea:attribute qualifier="style"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <context merge-by="type" parent="SimpleCMSComponent" type="TCResponsiveBannerComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute qualifier="contentSpacing"/>
+                    <editorArea:attribute qualifier="maxContentWidth"/>
+                    <editorArea:attribute qualifier="gridColumns"/>
+                    <editorArea:attribute qualifier="actions"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="tc.viewport.xs">
+                <editorArea:section name="tc.properties.xs">
+                    <editorArea:attribute qualifier="titleXs" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="descriptionXs" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="mediaXs"/>
+                    <editorArea:attribute qualifier="showContentOnHoverXs" editor="com.hybris.cockpitng.editor.boolean.checkbox"/>
+                    <editorArea:attribute qualifier="heightXs"/>
+                    <editorArea:attribute qualifier="backgroundSizeXs"/>
+                    <editorArea:attribute qualifier="backgroundPositionXs"/>
+                    <editorArea:attribute qualifier="backgroundColorXs"/>
+                    <editorArea:attribute qualifier="overlayXs"/>
+                    <editorArea:attribute qualifier="textColorXs"/>
+                    <editorArea:attribute qualifier="flexDirectionXs"/>
+                    <editorArea:attribute qualifier="justifyContentXs"/>
+                    <editorArea:attribute qualifier="alignItemsXs"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="tc.viewport.sm">
+                <editorArea:section name="tc.properties.sm">
+                    <editorArea:attribute qualifier="titleSm" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="descriptionSm" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="mediaSm"/>
+                    <editorArea:attribute qualifier="showContentOnHoverSm" editor="com.hybris.cockpitng.editor.boolean.checkbox"/>
+                    <editorArea:attribute qualifier="heightSm"/>
+                    <editorArea:attribute qualifier="backgroundSizeSm"/>
+                    <editorArea:attribute qualifier="backgroundPositionSm"/>
+                    <editorArea:attribute qualifier="backgroundColorSm"/>
+                    <editorArea:attribute qualifier="overlaySm"/>
+                    <editorArea:attribute qualifier="textColorSm"/>
+                    <editorArea:attribute qualifier="flexDirectionSm"/>
+                    <editorArea:attribute qualifier="justifyContentSm"/>
+                    <editorArea:attribute qualifier="alignItemsSm"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="tc.viewport.md">
+                <editorArea:section name="tc.properties.md">
+                    <editorArea:attribute qualifier="titleMd" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="descriptionMd" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="mediaMd"/>
+                    <editorArea:attribute qualifier="showContentOnHoverMd" editor="com.hybris.cockpitng.editor.boolean.checkbox"/>
+                    <editorArea:attribute qualifier="heightMd"/>
+                    <editorArea:attribute qualifier="backgroundSizeMd"/>
+                    <editorArea:attribute qualifier="backgroundPositionMd"/>
+                    <editorArea:attribute qualifier="backgroundColorMd"/>
+                    <editorArea:attribute qualifier="overlayMd"/>
+                    <editorArea:attribute qualifier="textColorMd"/>
+                    <editorArea:attribute qualifier="flexDirectionMd"/>
+                    <editorArea:attribute qualifier="justifyContentMd"/>
+                    <editorArea:attribute qualifier="alignItemsMd"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="tc.viewport.lg">
+                <editorArea:section name="tc.properties.lg">
+                    <editorArea:attribute qualifier="titleLg" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="descriptionLg" editor="com.hybris.cockpitng.editor.localized(com.hybris.cockpitng.editor.wysiwyg)"/>
+                    <editorArea:attribute qualifier="mediaLg"/>
+                    <editorArea:attribute qualifier="showContentOnHoverLg" editor="com.hybris.cockpitng.editor.boolean.checkbox"/>
+                    <editorArea:attribute qualifier="heightLg"/>
+                    <editorArea:attribute qualifier="backgroundSizeLg"/>
+                    <editorArea:attribute qualifier="backgroundPositionLg"/>
+                    <editorArea:attribute qualifier="backgroundColorLg"/>
+                    <editorArea:attribute qualifier="overlayLg"/>
+                    <editorArea:attribute qualifier="textColorLg"/>
+                    <editorArea:attribute qualifier="flexDirectionLg"/>
+                    <editorArea:attribute qualifier="justifyContentLg"/>
+                    <editorArea:attribute qualifier="alignItemsLg"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+
+    <context merge-by="type" parent="SimpleCMSComponent" type="TCResponsiveGridComponent" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.properties">
+                    <editorArea:attribute qualifier="gridItems"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+</config>

@@ -1,0 +1,101 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# Import essential data for the Accelerator
+#
+# Includes:
+# * Languages
+# * Currencies
+# * Titles
+# * Vendors
+# * Warehouses
+# * Supported Credit/Debit cards
+# * User Groups
+# * DistanceUnits for Storelocator
+# * MediaFolders
+# * MediaFormats
+# * Tax & Tax Groups
+# * Jobs
+
+# Languages
+INSERT_UPDATE Language; isocode[unique = true]; fallbackLanguages(isocode); active[default = true]
+; en ;    ; ;
+; es ; en ; ;
+
+# Currencies
+INSERT_UPDATE Currency; isocode[unique = true]; conversion; digits; symbol
+; USD ; 1   ; 2 ; $
+; EUR ; 0,8 ; 2 ; €
+
+# SiteMap Language Currencies
+INSERT_UPDATE SiteMapLanguageCurrency; &siteMapLanguageCurrency; language(isoCode)[unique = true]; currency(isocode)[unique = true];
+; enUsd ; en ; USD
+; esUsd ; es ; USD
+
+# Vendor
+INSERT_UPDATE Vendor; code[unique = true]; name
+; utrendVendor ; UTrend Vendor
+
+# Warehouse
+INSERT_UPDATE Warehouse; code[unique = true]; name; vendor(code)[default = utrendVendor]; default[default = true]
+; Manhattan    ; Manhattan Warehouse    ; ;
+; Philadelphia ; Philadelphia Warehouse ; ;
+
+# Disable preview for email pages
+UPDATE CMSPageType; code[unique = true]; previewDisabled
+; EmailPage ; true
+
+# Titles
+INSERT_UPDATE Title; code[unique = true]
+; mr
+; mrs
+; miss
+; ms
+; dr
+; rev
+
+# Media Folders
+INSERT_UPDATE MediaFolder; qualifier[unique = true]; path[unique = true]
+; images            ; images
+; email-body        ; email-body
+; email-attachments ; email-attachments
+; product-images    ; product-images
+
+# Media formats
+INSERT_UPDATE MediaFormat; qualifier[unique = true]
+; 365Wx246H
+
+# Conversion media formats
+INSERT_UPDATE ConversionMediaFormat; qualifier[unique = true]; conversionStrategy; conversion; inputFormat(qualifier)
+; 1200Wx1200H ; imageMagickMediaConversionStrategy ; -resize 1200x1200 -background none ;             ;
+; 515Wx515H   ; imageMagickMediaConversionStrategy ; -resize 515x515 -background none   ; 1200Wx1200H ;
+; 300Wx300H   ; imageMagickMediaConversionStrategy ; -resize 300x300 -background none   ; 1200Wx1200H ;
+; 96Wx96H     ; imageMagickMediaConversionStrategy ; -resize 96x96 -background none     ; 1200Wx1200H ;
+; 65Wx65H     ; imageMagickMediaConversionStrategy ; -resize 65x65 -background none     ; 1200Wx1200H ;
+; 30Wx30H     ; imageMagickMediaConversionStrategy ; -resize 30x30 -background none     ; 1200Wx1200H ;
+
+# Conversion Group
+INSERT_UPDATE ConversionGroup; code[unique = true]; supportedFormats(qualifier)
+; utrend-ConversionGroup        ; 1200Wx1200H, 515Wx515H, 300Wx300H, 96Wx96H, 65Wx65H, 30Wx30H
+; utrend-stores-ConversionGroup ;
+
+# Tax & Tax Groups
+INSERT_UPDATE UserTaxGroup; code[unique = true]
+; us-taxes
+
+INSERT_UPDATE ProductTaxGroup; code[unique = true]
+; us-sales-tax-full
+
+INSERT_UPDATE Tax; code[unique = true]; value; currency(isocode)
+; us-sales-tax-full ; 0
+
+INSERT_UPDATE ServicelayerJob; code[unique = true]; springId[unique = true]
+; cartRemovalJob  ; cartRemovalJob
+; siteMapMediaJob ; siteMapMediaJob

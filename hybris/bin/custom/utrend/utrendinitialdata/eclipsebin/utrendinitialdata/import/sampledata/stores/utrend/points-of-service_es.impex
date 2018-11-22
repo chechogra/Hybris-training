@@ -1,0 +1,43 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Store / Point of Service
+# English localisations
+
+$lang = es
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$storeImage = storeImage(qualifier, $catalogVersion)
+
+$standardHours = utrend-us-standard-hours
+$philadelphiaHours = utrend-us-philadelphia-hours
+
+UPDATE StoreLocatorFeature; code[unique = true]; name[lang = $lang]
+; buyOnlinePickupInStore ; "Compre en línea Recoja en tienda"
+; elevator               ; "Ascensor"
+; wheelchair             ; "Acceso en silla de ruedas"
+
+UPDATE SpecialOpeningDay; openingSchedule(code)[unique = true]; date[unique = true, dateformat = dd.MM.yyyy]; name[lang = $lang]; message[lang = $lang]
+; $standardHours     ; 03.11.2017 ; "Día de la Cultura"        ; ""
+; $standardHours     ; 23.11.2017 ; "Día de acción de gracias" ; ""
+; $standardHours     ; 23.12.2017 ; "Cumpleaños del Emperador" ; ""
+
+; $philadelphiaHours ; 03.11.2017 ; "Día de la Cultura"        ; ""
+; $philadelphiaHours ; 23.11.2017 ; "Día de acción de gracias" ; ""
+; $philadelphiaHours ; 23.12.2017 ; "Cumpleaños del Emperador" ; ""
+
+UPDATE PointOfService; name[unique = true]; displayName
+; Times Square        ; Times Square
+; Queens              ; Queens
+; Brooklyn            ; Brooklyn
+; Liberty Bell Center ; Liberty Bell Center

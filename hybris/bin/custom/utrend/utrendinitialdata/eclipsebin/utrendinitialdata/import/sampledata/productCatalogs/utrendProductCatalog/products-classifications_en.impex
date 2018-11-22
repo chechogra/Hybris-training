@@ -1,0 +1,203 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Product Classifications
+
+#% impex.setLocale(Locale.ENGLISH);
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+$classificationCatalog = utrendClassificationCatalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$systemName = $classificationCatalog
+$systemVersion = 1.0
+$lang = en
+
+# Insert Product Classifications
+UPDATE Product; code[unique = true]; C@pocketsNumber[lang = $lang]; $catalogVersion;
+# Women - Tops
+; 0501           ; 2      ;
+; 0501_blue      ; 2      ;
+; 050101         ; 2      ;
+; 050102         ; 2      ;
+; 050103         ; 2      ;
+; 0502           ; 2      ;
+; 0502_navy_blue ; 2      ;
+; 050201         ; 2      ;
+; 050202         ; 2      ;
+; 050203         ; 2      ;
+; 0503           ; "None" ;
+; 0503_black     ; "None" ;
+; 050301         ; "None" ;
+; 050302         ; "None" ;
+; 050303         ; "None" ;
+; 0504           ; 2      ;
+; 0504_red       ; 2      ;
+; 050401         ; 2      ;
+; 050402         ; 2      ;
+; 050403         ; 2      ;
+; 0505           ; "None" ;
+; 0505_taupe     ; "None" ;
+; 0505_turquoise ; "None" ;
+; 0505_peach     ; "None" ;
+; 050501         ; "None" ;
+; 050502         ; "None" ;
+; 050503         ; "None" ;
+; 050510         ; "None" ;
+; 050511         ; "None" ;
+; 050512         ; "None" ;
+; 050520         ; "None" ;
+; 050521         ; "None" ;
+; 050522         ; "None" ;
+; 0506           ; "None" ;
+; 0506_black     ; "None" ;
+; 0506_white     ; "None" ;
+; 0506_grey      ; "None" ;
+; 050601         ; "None" ;
+; 050602         ; "None" ;
+; 050603         ; "None" ;
+; 050610         ; "None" ;
+; 050611         ; "None" ;
+; 050612         ; "None" ;
+; 050620         ; "None" ;
+; 050621         ; "None" ;
+; 050622         ; "None" ;
+; 0507           ; "None" ;
+; 0507_green     ; "None" ;
+; 0507_black     ; "None" ;
+; 050701         ; "None" ;
+; 050702         ; "None" ;
+; 050703         ; "None" ;
+; 050710         ; "None" ;
+; 050711         ; "None" ;
+; 050712         ; "None" ;
+# Women - Bottoms
+; 0601           ; 5      ;
+; 0601_red       ; 5      ;
+; 060101         ; 5      ;
+; 060102         ; 5      ;
+; 060103         ; 5      ;
+; 0602           ; "None" ;
+; 0602_green     ; "None" ;
+; 060201         ; "None" ;
+; 060202         ; "None" ;
+; 060203         ; "None" ;
+; 0603           ; 4      ;
+; 0603_blue      ; 4      ;
+; 060301         ; 4      ;
+; 060302         ; 4      ;
+; 060303         ; 4      ;
+; 0604           ; 6      ;
+; 0604_grey      ; 6      ;
+; 0604_green     ; 6      ;
+; 060401         ; 6      ;
+; 060402         ; 6      ;
+; 060403         ; 6      ;
+; 060410         ; 6      ;
+; 060411         ; 6      ;
+; 060412         ; 6      ;
+; 0605           ; 2      ;
+; 0605_blue      ; 2      ;
+; 0605_black     ; 2      ;
+; 0605_grey      ; 2      ;
+; 060501         ; 2      ;
+; 060502         ; 2      ;
+; 060503         ; 2      ;
+; 060510         ; 2      ;
+; 060511         ; 2      ;
+; 060512         ; 2      ;
+; 060520         ; 2      ;
+; 060521         ; 2      ;
+; 060522         ; 2      ;
+# Men - Pants
+; 0701           ; 4      ;
+; 0701_beige     ; 4      ;
+; 070101         ; 4      ;
+; 070102         ; 4      ;
+; 070103         ; 4      ;
+; 0702           ; 4      ;
+; 0702_grey      ; 4      ;
+; 070201         ; 4      ;
+; 070202         ; 4      ;
+; 070203         ; 4      ;
+; 0703           ; 4      ;
+; 0703_navy_blue ; 4      ;
+; 070301         ; 4      ;
+; 070302         ; 4      ;
+; 070303         ; 4      ;
+; 0704           ; 4      ;
+; 0704_grey      ; 4      ;
+; 0704_navy_blue ; 4      ;
+; 070401         ; 4      ;
+; 070402         ; 4      ;
+; 070403         ; 4      ;
+; 070410         ; 4      ;
+; 070411         ; 4      ;
+; 070412         ; 4      ;
+; 0705           ; 4      ;
+; 0705_brown     ; 4      ;
+; 0705_steel     ; 4      ;
+; 070501         ; 4      ;
+; 070502         ; 4      ;
+; 070503         ; 4      ;
+; 070510         ; 4      ;
+; 070511         ; 4      ;
+; 070512         ; 4      ;
+# Men - Shirts
+; 0801           ; "None" ;
+; 0801_white     ; "None" ;
+; 080101         ; "None" ;
+; 080102         ; "None" ;
+; 080103         ; "None" ;
+; 0802           ; 1      ;
+; 0802_green     ; 1      ;
+; 080201         ; 1      ;
+; 080202         ; 1      ;
+; 080203         ; 1      ;
+; 0803           ; "None" ;
+; 0803_black     ; "None" ;
+; 080301         ; "None" ;
+; 080302         ; "None" ;
+; 080303         ; "None" ;
+; 0804           ; "None" ;
+; 0804_black     ; "None" ;
+; 0804_navy_blue ; "None" ;
+; 080401         ; "None" ;
+; 080402         ; "None" ;
+; 080403         ; "None" ;
+; 080410         ; "None" ;
+; 080411         ; "None" ;
+; 080412         ; "None" ;
+; 0805           ; "None" ;
+; 0805_red       ; "None" ;
+; 0805_navy_blue ; "None" ;
+; 080501         ; "None" ;
+; 080502         ; "None" ;
+; 080503         ; "None" ;
+; 080510         ; "None" ;
+; 080511         ; "None" ;
+; 080512         ; "None" ;
+; 0806           ; 2      ;
+; 0806_blue      ; 2      ;
+; 080601         ; 2      ;
+; 080602         ; 2      ;
+; 080603         ; 2      ;
+; 0807           ; "None" ;
+; 0807_black     ; "None" ;
+; 0807_navy_blue ; "None" ;
+; 080701         ; "None" ;
+; 080702         ; "None" ;
+; 080703         ; "None" ;
+; 080710         ; "None" ;
+; 080711         ; "None" ;
+; 080712         ; "None" ;
+

@@ -1,0 +1,115 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Category Classifications
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$productCatalogName = UTrend Product Catalog
+$classificationCatalog = utrendClassificationCatalog
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$classCatalogVersion = catalogversion(catalog(id[default = '$classificationCatalog']), version[default = '1.0'])[unique = true, default = '$classificationCatalog:1.0']
+$classSystemVersion = systemVersion(catalog(id[default = '$classificationCatalog']), version[default = '1.0'])[unique = true]
+$class = classificationClass(ClassificationClass.code, $classCatalogVersion)[unique = true]
+$supercategories = source(code, $classCatalogVersion)[unique = true]
+$categories = target(code, $catalogVersion)[unique = true]
+$attribute = classificationAttribute(code, $classSystemVersion)[unique = true]
+$unit = unit(code, $classSystemVersion)
+
+# Insert Classifications
+INSERT_UPDATE ClassificationClass; $classCatalogVersion; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup'];
+; ; devices     ;
+; ; photography ;
+; ; audio       ;
+; ; clothing    ;
+; ; style       ;
+; ; dimensions  ;
+
+# Insert Classification Attributes
+INSERT_UPDATE ClassificationAttribute; $classSystemVersion; code[unique = true]
+; ; weight
+; ; resolution
+; ; sensorSize
+; ; isoRange
+; ; dynamicDriver
+; ; frequencyResponse
+; ; material
+; ; pocketsNumber
+; ; closure
+; ; bootStyle
+; ; neckStyle
+; ; width
+; ; height
+; ; depth
+; ; volume
+
+# Insert Values for Classification Attributes
+INSERT_UPDATE ClassificationAttributeValue; code[unique = true]; $classSystemVersion
+; none                   ;
+; material_denim         ;
+; material_cotton        ;
+; material_wool          ;
+; material_silk          ;
+; material_spandex       ;
+; material_corduroy      ;
+; material_rayon         ;
+; material_drill         ;
+; material_polyester     ;
+; material_chiffon       ;
+; material_jersey        ;
+; closure_buttons        ;
+; closure_button_zipper  ;
+; closure_laced_up       ;
+; neckStyle_button_up    ;
+; neckStyle_off_shoulder ;
+; neckStyle_cowl_neck    ;
+; neckStyle_vneck        ;
+; neckStyle_round_neck   ;
+; neckStyle_polo         ;
+; bootStyle_wide_leg     ;
+; bootStyle_fitted_leg   ;
+; bootStyle_straight_leg ;
+; bootStyle_skinny_leg   ;
+
+# Links ClassificationClasses to Categories
+INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
+# Links classes to clasess
+; cameras         ; photography
+; headphones      ; audio
+; tops            ; style
+; pants           ; style
+; bottoms         ; style
+; shirts          ; style
+; home-appliances ; dimensions
+
+# Links ClassificationClasses to ClassificationClasses
+INSERT_UPDATE CategoryCategoryRelation; target(code, $classCatalogVersion)[unique = true]; source(code, $classCatalogVersion)[unique = true]
+# Links classes to clasess
+; photography ; devices
+; audio       ; devices
+; style       ; clothing
+
+INSERT_UPDATE ClassAttributeAssignment; $class; $attribute; position; $unit; attributeType(code[default = string]); multiValued[default = false]; range[default = false]; localized[default = false]; attributeValues(code, $classSystemVersion)
+; devices     ; weight            ; 1  ;    ; string ; false ; false ;      ;
+; photography ; resolution        ; 2  ; mp ; number ; false ; false ;      ;
+; photography ; sensorSize        ; 3  ;    ; string ; false ; false ;      ;
+; photography ; isoRange          ; 4  ;    ; string ; false ; false ;      ;
+; audio       ; dynamicDriver     ; 5  ; mm ; number ; false ; false ;      ;
+; audio       ; frequencyResponse ; 6  ;    ; string ; false ; false ;      ;
+; clothing    ; material          ; 7  ;    ; enum   ; false ; false ;      ; material_denim, material_cotton, material_wool, material_silk, material_spandex, material_corduroy, material_rayon, material_drill, material_polyester, material_chiffon, material_jersey
+; style       ; pocketsNumber     ; 8  ;    ; string ; false ; false ; true ;
+; style       ; closure           ; 9  ;    ; enum   ; false ; false ;      ; none, closure_buttons, closure_button_zipper, closure_laced_up
+; style       ; bootStyle         ; 10 ;    ; enum   ; false ; false ;      ; bootStyle_wide_leg, bootStyle_fitted_leg, bootStyle_straight_leg, bootStyle_skinny_leg, bootStyle_wide_leg
+; style       ; neckStyle         ; 11 ;    ; enum   ; false ; false ;      ; neckStyle_button_up, neckStyle_off_shoulder, neckStyle_cowl_neck, neckStyle_vneck, neckStyle_round_neck, neckStyle_polo
+; dimensions  ; width             ; 12 ; cm ; number ; false ; false ;      ;
+; dimensions  ; height            ; 13 ; cm ; number ; false ; false ;      ;
+; dimensions  ; depth             ; 14 ; cm ; number ; false ; false ;      ;
+; dimensions  ; volume            ; 15 ; l  ; number ; false ; false ;      ;

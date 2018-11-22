@@ -19,52 +19,56 @@ $supercategories = source(code, $catalogVersion)[unique = true]
 $categories = target(code, $catalogVersion)[unique = true]
 
 # Insert Categories
-INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion
-; collections                ; ;
-; brands                     ; ;
-; categories                 ; ;
-; tech                       ; ;
-; cameras                    ; ;
-; dslr                       ; ;
-; mirrorless                 ; ;
-; headphones                 ; ;
-; on-ear                     ; ;
-; in-ear                     ; ;
-; over-ear                   ; ;
-; women                      ; ;
-; tops                       ; ;
-; bottoms                    ; ;
-; men                        ; ;
-; shirts                     ; ;
-; pants                      ; ;
-; kids                       ; ;
-; home-appliances            ; ;
-; refrigerators              ; ;
-; french-door-refrigerators  ; ;
-; side-by-side-refrigerators ; ;
-; wine-coolers               ; ;
-; water-dispensers           ; ;
+INSERT_UPDATE Category; code[unique = true]        ; allowedPrincipals(uid)[default = 'customergroup']; $catalogVersion
+                      ; collections                ;                                                  ;
+                      ; brands                     ;                                                  ;
+                      ; categories                 ;                                                  ;
+                      ; tech                       ;                                                  ;
+                      ; cameras                    ;                                                  ;
+                      ; dslr                       ;                                                  ;
+                      ; mirrorless                 ;                                                  ;
+                      ; headphones                 ;                                                  ;
+                      ; on-ear                     ;                                                  ;
+                      ; in-ear                     ;                                                  ;
+                      ; over-ear                   ;                                                  ;
+                      ; women                      ;                                                  ;
+                      ; tops                       ;                                                  ;
+                      ; bottoms                    ;                                                  ;
+                      ; men                        ;                                                  ;
+                      ; shirts                     ;                                                  ;
+                      ; pants                      ;                                                  ;
+                      ; kids                       ;                                                  ;
+                      ; home-appliances            ;                                                  ;
+                      ; refrigerators              ;                                                  ;
+                      ; french-door-refrigerators  ;                                                  ;
+                      ; side-by-side-refrigerators ;                                                  ;
+                      ; wine-coolers               ;                                                  ;
+                      ; water-dispensers           ;                                                  ;
+                      ; accessories                ;                                                  ;
 
 # Insert Category Structure
-INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
-; tech                       ; categories
-; cameras                    ; tech
-; dslr                       ; cameras
-; mirrorless                 ; cameras
-; headphones                 ; tech
-; on-ear                     ; headphones
-; in-ear                     ; headphones
-; over-ear                   ; headphones
-; women                      ; categories
-; tops                       ; women
-; bottoms                    ; women
-; men                        ; categories
-; shirts                     ; men
-; pants                      ; men
-; kids                       ; categories
-; home-appliances            ; categories
-; refrigerators              ; home-appliances
-; french-door-refrigerators  ; refrigerators
-; side-by-side-refrigerators ; refrigerators
-; wine-coolers               ; refrigerators
-; water-dispensers           ; refrigerators
+INSERT_UPDATE CategoryCategoryRelation; $categories                ; $supercategories
+                                      ; tech                       ; categories
+                                      ; cameras                    ; tech
+                                      ; dslr                       ; cameras
+                                      ; mirrorless                 ; cameras
+                                      ; headphones                 ; tech
+                                      ; on-ear                     ; headphones
+                                      ; in-ear                     ; headphones
+                                      ; over-ear                   ; headphones
+                                      ; women                      ; categories
+                                      ; tops                       ; women
+                                      ; bottoms                    ; women
+                                      ; men                        ; categories
+                                      ; shirts                     ; men
+                                      ; pants                      ; men
+                                      ; kids                       ; categories
+                                      ; home-appliances            ; categories
+                                      ; refrigerators              ; home-appliances
+                                      ; french-door-refrigerators  ; refrigerators
+                                      ; side-by-side-refrigerators ; refrigerators
+                                      ; wine-coolers               ; refrigerators
+                                      ; water-dispensers           ; refrigerators
+                                      ; accessories                ; categories
+                                      ; cameras                    ; accessories
+                                      ; headphones                 ; accessories

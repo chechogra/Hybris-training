@@ -1,0 +1,39 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Store / Point of Service Media
+
+# Macros / Replacement Parameter definitions
+$productCatalog = utrendProductCatalog
+$storeUid = utrend
+
+$catalogVersion = catalogversion(catalog(id[default = $productCatalog]), version[default = 'Staged'])[unique = true, default = $productCatalog:Staged]
+$media = @media[translator = de.hybris.platform.impex.jalo.media.MediaDataTranslator]
+$medias = medias(code, $catalogVersion)
+$siteResource = jar:com.talos.utrend.initialdata.setup.InitialDataSystemSetup&/utrendinitialdata/import/sampledata/stores/$storeUid
+$conversionGroup = conversionGroup(code)[default = 'utrend-stores-ConversionGroup']
+
+# Create Media
+INSERT_UPDATE Media; mediaFormat(qualifier); code[unique = true]; $media; mime[default = 'image/jpeg']; $catalogVersion; folder(qualifier)
+; 365Wx246H ; /365Wx246H/utrend_store_times_square        ; $siteResource/images/storefinder/utrend_store_365x246_times_square.jpg        ; ; ; images
+; 365Wx246H ; /365Wx246H/utrend_store_queens              ; $siteResource/images/storefinder/utrend_store_365x246_queens.jpg              ; ; ; images
+; 365Wx246H ; /365Wx246H/utrend_store_brooklyn            ; $siteResource/images/storefinder/utrend_store_365x246_brooklyn.jpg            ; ; ; images
+; 365Wx246H ; /365Wx246H/utrend_store_liberty_bell_center ; $siteResource/images/storefinder/utrend_store_365x246_liberty_bell_center.jpg ; ; ; images
+; 65Wx65H   ; /65Wx65H/utrend_store_times_square          ; $siteResource/images/storefinder/utrend_store_65x65_times_square.jpg          ; ; ; images
+; 65Wx65H   ; /65Wx65H/utrend_store_queens                ; $siteResource/images/storefinder/utrend_store_65x65_queens.jpg                ; ; ; images
+; 65Wx65H   ; /65Wx65H/utrend_store_brooklyn              ; $siteResource/images/storefinder/utrend_store_65x65_brooklyn.jpg              ; ; ; images
+; 65Wx65H   ; /65Wx65H/utrend_store_liberty_bell_center   ; $siteResource/images/storefinder/utrend_store_65x65_liberty_bell_center.jpg   ; ; ; images
+
+# Create Media Containers
+INSERT_UPDATE MediaContainer; qualifier[unique = true]; $medias; $catalogVersion; $conversionGroup
+; utrend_store_times_square        ; /365Wx246H/utrend_store_times_square,/65Wx65H/utrend_store_times_square               ; ;
+; utrend_store_queens              ; /365Wx246H/utrend_store_queens,/65Wx65H/utrend_store_queens                           ; ;
+; utrend_store_brooklyn            ; /365Wx246H/utrend_store_brooklyn,/65Wx65H/utrend_store_brooklyn                       ; ;
+; utrend_store_liberty_bell_center ; /365Wx246H/utrend_store_liberty_bell_center,/65Wx65H/utrend_store_liberty_bell_center ; ;
