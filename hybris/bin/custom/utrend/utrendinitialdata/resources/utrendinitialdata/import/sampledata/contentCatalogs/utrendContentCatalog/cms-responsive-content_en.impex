@@ -38,6 +38,9 @@ UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName
 ; ; JBLBrandCategoryLink   ; "JBL"
 ; ; BoseBrandCategoryLink  ; "Bose"
 
+UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
+                       ; ; AllAccessoriesCategoryLink; "Accessories"
+
 UPDATE MiniCartComponent; $contentCV[unique = true]; uid[unique = true]; name; title[lang = $lang]
 ; ; MiniCart ; Mini Cart ; "YOUR SHOPPING CART"
 

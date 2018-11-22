@@ -47,3 +47,6 @@ UPDATE Category; code[unique = true]; $catalogVersion; name[lang = $lang]
 ; water-dispensers           ; ; "Water Dispensers"
 
 
+UPDATE Category; code[unique = true]; $catalogVersion; name[lang = $lang]
+               ; accessories        ;                ; "Accessories"
+
