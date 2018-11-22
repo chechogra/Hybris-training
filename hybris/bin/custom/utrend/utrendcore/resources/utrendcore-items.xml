@@ -116,6 +116,27 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
+
+
+        </typegroup>
+
+        <typegroup name="Utrend">
+            <itemtype code="Product" autocreate="false" generate="false">
+                <description>Extending the Product type from core with additional attributes.</description>
+                <attributes>
+                    <attribute type="java.util.Date" qualifier="utrendCreationDate">
+                        <modifiers optional="true" />
+                        <persistence type="property" />
+                        <description>Custom creation date placeholder.</description>
+                    </attribute>
+
+                    <attribute qualifier="daysPast" type="java.lang.Integer">
+                        <persistence type="dynamic" attributeHandler="daysPastAttributeHandler" />
+                        <description>This attribute holds the calculated amount of days past since utrendCreationDate until today</description>
+                    </attribute>
+                </attributes>
+            </itemtype>
         </typegroup>
 
     </itemtypes>

@@ -485,6 +485,8 @@
 		<property name="timeService" ref="timeService" />
 	</bean>
 
+	<bean id="daysPastAttributeHandler" class="com.talos.utrend.core.attributehandlers.DaysPastAttributeHandler" />
+
 	<import resource="/utrendcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/utrendcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/utrendcore/processes/quote/quote-seller-approval-process-spring.xml"/>
