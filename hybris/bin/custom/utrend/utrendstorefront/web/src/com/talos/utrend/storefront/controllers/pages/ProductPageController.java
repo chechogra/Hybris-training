@@ -10,7 +10,6 @@
  */
 package com.talos.utrend.storefront.controllers.pages;
 
-import com.talos.utrend.facades.product.ProductCreationDateFacade;
 import com.talos.utrend.facades.product.impl.DefaultProductCreationDateFacade;
 import com.talos.utrend.storefront.form.CreationDateForm;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
