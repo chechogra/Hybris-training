@@ -250,6 +250,8 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; CountertopsCategoryLink                 ; Countertops Category Link                 ; /                     ; CountertopsCategoryLink                 ; CountertopsCategoryLink                 ; ;                            ; ;
 ; ; AirConditionersCategoryLink             ; Air Conditioners Category Link            ; /                     ; AirConditionersCategoryLink             ; AirConditionersCategoryLink             ; ;                            ; ;
 ; ; WaterHeatersCategoryLink                ; Water Heaters Category Link               ; /                     ; WaterHeatersCategoryLink                ; WaterHeatersCategoryLink                ; ;                            ; ;
+; ; AllAccessoriesCategoryLink              ; All Accessories Link                      ; /Accessories/c/accessories      ; AllAccessoriesCategoryLink          ; AllAccessoriesCategoryLink         ; ; accessories               ; ;
+#; ; AllAccessoriesCategoryLink              ; All Accessories Link                      ; /Accessories/c/accessories      ; AllAccessoriesCategoryLink          ; AllAccessoriesCategoryLink         ; ; accessories               ; ;
 
 
 ####### Common CMS Navigation Nodes
@@ -264,6 +266,8 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; UTrendNavNode     ; ; UTrend Site  ; SiteRootNode  ; HomepageNavLink                                                                                                ; UTrendNavNode
 ; BrandsNavNode     ; ; Brand Links  ; UTrendNavNode ; AllBrandsCategoryLink                                                                                          ; BrandsNavNode
 ; BrandLinksNavNode ; ; Brand Links  ; BrandsNavNode ; NikonBrandCategoryLink,CanonBrandCategoryLink,SonyBrandCategoryLink,JBLBrandCategoryLink,BoseBrandCategoryLink ; BrandLinksNavNode
+; AccessoriesNavNode ;                          ; Accessories Category ; AccessoriesNavNode ; CamerasNavNode,HeadphonesNavNode
+#; AccessoriesNavNode ;  ; Accessories Category ; AccessoriesNavNode ; CamerasCategoryLink,HeadphonesCategoryLink
 
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); &nodeRef; children(uid, $contentCV)
 ; UTrendCategoryNavNode ; ; Categories ; UTrendNavNode ; UTrendCategoryNavNode ; BrandsNavNode,TechNavNode,WomensNavNode,MensNavNode,HomeAppliancesNavNode
@@ -450,7 +454,6 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; AirConditionersNavNode             ; ; Air Conditioners Category              ; AirConditionersNavNode             ;
 ; WaterHeatersNavNode                ; ; Water Heaters Category                 ; WaterHeatersNavNode                ;
 
-
 ####### Categories CMS Navigation Entries
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
 ; BrandLinksNavNodeEntry                  ; ; BrandLinks Nav Node Entry                  ; BrandsNavNode                      ; AllBrandsCategoryLink
@@ -632,6 +635,9 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 ; CountertopsNavNodeEntry                 ; ; Countertops Nav Node Entry                 ; CountertopsNavNode                 ; CountertopsCategoryLink
 ; AirConditionersNavNodeEntry             ; ; Air Conditioners Nav Node Entry            ; AirConditionersNavNode             ; AirConditionersCategoryLink
 ; WaterHeatersNavNodeEntry                ; ; Water Heaters Nav Node Entry               ; WaterHeatersNavNode                ; WaterHeatersCategoryLink
+; AccessoriesNavNodeEntry ;                          ; Accessories Nav Node Entry ; AccessoriesNavNode      ; AllAccessoriesCategoryLink
+#; AccessoriesNavNodeEntry ;                 ; Accessories Nav Node Entry                 ; AccessoriesNavNode      ; AllAccessoriesCategoryLink
+
 
 ####### Footer CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); &nodeRef; children(uid, $contentCV)
@@ -658,6 +664,9 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; PressNavNode            ; ; Press Page             ; PressNavNode
 ; NewYorkNavNode          ; ; New York Page          ; NewYorkNavNode
 ; PhiladelphiaNavNode     ; ; Philadelphia Page      ; PhiladelphiaNavNode
+
+UPDATE CMSNavigationNode; uid[unique = true]    ; $contentCV[unique = true]; name       ; parent(uid, $contentCV); &nodeRef              ; children(uid, $contentCV)
+; UTrendCategoryNavNode ;                          ; Categories ; UTrendNavNode          ; UTrendCategoryNavNode ; BrandsNavNode,TechNavNode,WomensNavNode,MensNavNode,HomeAppliancesNavNode,AccessoriesNavNode
 
 ####### Footer CMS Navigation Entries
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
@@ -1312,3 +1321,10 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; cmsComponents(&componentRef)
 ; ; MiniCartSlot ; OrderComponent,MiniCart
+
+
+
+#UPDATE CMSNavigationNode; uid[unique = true]    ; $contentCV[unique = true]; name       ; parent(uid, $contentCV); &nodeRef              ; children(uid, $contentCV)
+ #                       ; UTrendCategoryNavNode ;                          ; Categories ; UTrendNavNode          ; UTrendCategoryNavNode ; BrandsNavNode,TechNavNode,WomensNavNode,MensNavNode,HomeAppliancesNavNode,AccessoriesNavNode
+
+
