@@ -4,6 +4,13 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<c:url value="${product.url}/creationDate" var="productCreationDateActionUrl"/>
 
 <div class="product-details-main-wp">
     <div class="row">
@@ -21,6 +28,11 @@
                             <div class="name">
                                     ${fn:escapeXml(product.name)}
                             </div>
+                            <div class="creationDate">
+                                    ${fn:escapeXml(product.creationDate)}
+                            </div>
+
+
                         </ycommerce:testId>
                         <product:productPromotionSection product="${product}"/>
                         <ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
@@ -32,6 +44,14 @@
                             <tc-product:productReviewSummary product="${product}" showLinks="true"/>
                             <div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
                         </div>
+                    </div>
+                    <div>
+                        <form:form method="post" action="${productCreationDateActionUrl}" commandName="creationDateForm">
+                            <div class="form-group">
+                            <formElement:formInputBox idKey="product.creationDate" labelKey="product.creationDate" path="creationDate" inputCSS="form-control" mandatory="true"/>
+                            </div>
+			                <button type="submit" class="btn btn-primary" value="<spring:theme code='product.submit'/>"><spring:theme code="product.submit"/></button>
+                         </form:form>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-12">

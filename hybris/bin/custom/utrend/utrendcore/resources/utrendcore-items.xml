@@ -48,6 +48,40 @@
 
         <!-- TypeGroups are for structure of this file only -->
 
+        <!--<typegroup>-->
+            <!--<itemtype code="UtrendCreationDateVariantProduct" extends="VariantProduct"-->
+                      <!--autocreate="true" generate="true"-->
+                      <!--jaloclass="com.talos.utrend.core.jalo.UtrendCreationDateVariantProduct">-->
+                <!--<description></description>-->
+                <!--<attributes>-->
+                    <!--<attribute qualifier="creationDate" type="localized:java.util.Date"-->
+                               <!--metatype="VariantAttributeDescriptor">-->
+                        <!--<description>Creation date of the product</description>-->
+                        <!--<modifiers/>-->
+                        <!--<persistence type="property"/>-->
+                    <!--</attribute>-->
+                <!--</attributes>-->
+
+            <!--</itemtype>-->
+
+            <!--<itemtype code="UtrendCreationDateProduct" extends="Product"-->
+                      <!--autocreate="true" generate="true"-->
+                      <!--jaloclass="com.talos.utrend.core.jalo.UtrendCreationDateProduct">-->
+                <!--<description></description>-->
+                <!--<attributes>-->
+                    <!--<attribute qualifier="creationDate" type="localized:java.util.Date">-->
+                               <!--&lt;!&ndash;metatype="VariantAttributeDescriptor">&ndash;&gt;-->
+
+                        <!--<description>Creation date of the product</description>-->
+                        <!--<modifiers/>-->
+                        <!--<persistence type="property"/>-->
+                    <!--</attribute>-->
+                <!--</attributes>-->
+
+            <!--</itemtype>-->
+        <!--</typegroup>-->
+
+
         <typegroup name="Apparel">
             <itemtype code="ApparelProduct" extends="Product"
                       autocreate="true" generate="true"
@@ -117,6 +151,20 @@
                 </attributes>
             </itemtype>
         </typegroup>
+
+    <typegroup name="Utrend">
+        <itemtype code="Product" autocreate="false" generate="false">
+            <description>Extends product type</description>
+            <attributes>
+                <attribute type="java.util.Date" qualifier="creationDate">
+                    <modifiers optional="true" />
+                    <persistence type="property" />
+                    <description>Creation date of the product.</description>
+                </attribute>
+            </attributes>
+        </itemtype>
+    </typegroup>
+
 
     </itemtypes>
 </items>
