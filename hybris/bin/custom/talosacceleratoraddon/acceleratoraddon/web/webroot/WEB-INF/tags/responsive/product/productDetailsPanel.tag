@@ -5,6 +5,10 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:url value="${product.url}/updateCreationDate" var="productUpdateCreationDate"/>
 
 <div class="product-details-main-wp">
     <div class="row">
@@ -33,6 +37,21 @@
                             <product:productPricePanel product="${product}"/>
                         </ycommerce:testId>
                     </div>
+
+                      <form:form method="post" action="${productUpdateCreationDate}" commandName="updateCreationDateForm">
+
+                      <div class="row">
+                        <div class="col-xs-6">
+                                                <form:input type="date"  path="utrendCreationDate" inputCSS= "form-control"/>
+                        </div>
+                        <div class="col-xs-6">
+                         <button type="submit" class="btn btn-primary btn-block" value="<spring:theme code="review.submit"/>">
+                                                    <spring:theme code="review.submit"/>
+                                                 </button>
+                         </div>
+                        </div>
+                      </form:form>
+
                     <div class="product-main-info">
                         <div class="product-details">
                             <tc-product:productReviewSummary product="${product}" showLinks="true"/>
