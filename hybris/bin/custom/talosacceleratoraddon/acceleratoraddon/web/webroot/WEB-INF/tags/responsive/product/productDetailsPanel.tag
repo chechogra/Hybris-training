@@ -4,6 +4,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="product-details-main-wp">
     <div class="row">
@@ -21,6 +22,11 @@
                             <div class="name">
                                     ${fn:escapeXml(product.name)}
                             </div>
+                             <div class="code">
+                                 <spring:theme code="text.product.utrendCreationDate"/>
+                                 ${fn:escapeXml(product.utrendCreationDate)}
+                             </div>
+
                         </ycommerce:testId>
                         <product:productPromotionSection product="${product}"/>
                         <ycommerce:testId code="productDetails_productNamePrice_label_${product.code}">
