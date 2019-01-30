@@ -4,6 +4,8 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <div class="product-details-main-wp">
     <div class="row">
@@ -32,6 +34,7 @@
                             <tc-product:productReviewSummary product="${product}" showLinks="true"/>
                             <div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
                         </div>
+                        <h3><spring:theme code="text.product.creationDate"/>: <fmt:formatDate value="${product.creationDate}" pattern="dd-MM-yyyy HH:mm:ss"/></h3>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-12">
