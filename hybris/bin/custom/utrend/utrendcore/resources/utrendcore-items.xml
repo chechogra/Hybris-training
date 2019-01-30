@@ -48,6 +48,20 @@
 
         <!-- TypeGroups are for structure of this file only -->
 
+        <itemtype code="Product" autocreate="false" generate="false">
+            <description>Base product extension that contains additional attributes.</description>
+            <attributes>
+                <attribute qualifier="utrendCreationDate" type="java.util.Date">
+                    <description>Creation date of the product.</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="daysPassed" type="java.lang.Long">
+                    <description>Number of days since the product was created.</description>
+                    <persistence type="dynamic" attributeHandler="productDaysPassedAttributeHandler"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
         <typegroup name="Apparel">
             <itemtype code="ApparelProduct" extends="Product"
                       autocreate="true" generate="true"
