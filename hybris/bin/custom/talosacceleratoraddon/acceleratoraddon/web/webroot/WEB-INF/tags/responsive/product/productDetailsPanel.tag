@@ -27,9 +27,14 @@
                                     ${fn:escapeXml(product.name)}
                             </div>
                              <div class="code">
-                                 <spring:theme code="text.product.utrendCreationDate"/>
+                                 <spring:theme code="text.product.utrendCreationDate"/> :
                                  ${fn:escapeXml(product.utrendCreationDate)}
                              </div>
+
+                              <div class="code">
+                              <spring:theme code="text.product.utrendDayPassed"/> :
+                              ${fn:escapeXml(product.dayPassed)}
+                              </div>
 
                         </ycommerce:testId>
                         <product:productPromotionSection product="${product}"/>

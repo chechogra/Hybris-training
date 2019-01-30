@@ -53,6 +53,11 @@
                     <modifiers/>
                     <persistence type="property"/>
                 </attribute>
+
+                <attribute qualifier="dayPassed" type="java.lang.Long" >
+                    <persistence type="dynamic" attributeHandler="productDayPassedAttributeHandler" />
+                </attribute>
+
             </attributes>
         </itemtype>
 
