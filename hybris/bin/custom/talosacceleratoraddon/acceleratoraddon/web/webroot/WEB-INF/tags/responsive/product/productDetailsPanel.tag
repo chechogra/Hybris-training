@@ -41,6 +41,7 @@
                         </div>
 
                         <h3><spring:theme code="text.product.creationDate"/>: <fmt:formatDate value="${product.creationDate}" pattern="dd-MM-yyyy HH:mm:ss"/></h3>
+                        <div class="description"><spring:theme code="text.product.daysPassed"/>: ${product.daysPassed}</div>
                         <form:form method="post" action="${productUpdateCreationDateActionUrl}" modelAttribute="creationDateForm">
                             <div class="row">
                                 <div class="col-md-5">

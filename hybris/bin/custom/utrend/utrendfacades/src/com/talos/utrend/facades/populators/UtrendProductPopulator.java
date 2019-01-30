@@ -12,5 +12,6 @@ public class UtrendProductPopulator implements Populator<ProductModel, ProductDa
 	public void populate(final ProductModel source, final ProductData target) throws ConversionException
 	{
 		target.setCreationDate(source.getUtrendCreationDate());
+		target.setDaysPassed(source.getDaysPassed());
 	}
 }

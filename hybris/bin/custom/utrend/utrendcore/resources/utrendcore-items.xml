@@ -55,6 +55,10 @@
                     <description>Creation date of the product.</description>
                     <persistence type="property"/>
                 </attribute>
+                <attribute qualifier="daysPassed" type="java.lang.Long">
+                    <description>Number of days since the product was created.</description>
+                    <persistence type="dynamic" attributeHandler="productDaysPassedAttributeHandler"/>
+                </attribute>
             </attributes>
         </itemtype>
 
