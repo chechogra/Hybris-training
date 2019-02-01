@@ -23,8 +23,8 @@ public class ProductDaysPassedAttributeHandler implements DynamicAttributeHandle
 	}
 
 	@Override
-	public void set(ProductModel product, Long daysPassed)
+	public void set(ProductModel model, Long aLong)
 	{
-		product.setDaysPassed(daysPassed);
+
 	}
 }
