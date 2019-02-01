@@ -44,7 +44,17 @@
     <itemtypes>
 
         <!-- Add your item definitions here -->
-
+        <itemtype code="Product"
+                  autocreate="false" generate="false">
+            <description>Utrend product add creation date custom</description>
+            <attributes>
+                <attribute qualifier="utrendCreationDate" type="java.util.Date">
+                    <description> product creation Date</description>
+                    <modifiers/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
         <!-- TypeGroups are for structure of this file only -->
 
@@ -116,6 +126,7 @@
                     </attribute>
                 </attributes>
             </itemtype>
+
         </typegroup>
 
     </itemtypes>
