@@ -82,10 +82,21 @@
 		<property name="genderConverter" ref="genderConverter"/>
 	</bean>
 
+
+	<alias name="DefaultUtrendCreationDatePopulator" alias="UtrendCreationDatePopulator"/>
+	<bean id="DefaultUtrendCreationDatePopulator" class="com.talos.utrend.facades.populators.UtrendCreationDatePopulator">
+	</bean>
+
 	<!-- Add the apparelProductPopulator to the productConverter -->
 	<bean parent="modifyPopulatorList">
 		<property name="list" ref="productConverter"/>
 		<property name="add" ref="apparelProductPopulator"/>
+	</bean>
+
+	<!-- Add utrend creation date populator to the converter -->
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="UtrendCreationDatePopulator"/>
 	</bean>
 
 	<!-- accelerator Image Format Mappings -->
@@ -190,4 +201,11 @@
 	</bean>
 
 	<bean id="genderData" class="com.talos.utrend.facades.product.data.GenderData" scope="prototype"/>
+
+	<alias name="defaultUtrendProductFacade" alias="utrendProductFacade"/>
+	<bean id="defaultUtrendProductFacade"
+		  class="com.talos.utrend.facades.product.impl.DefaultUtrendProductFacade"
+		  parent="defaultProductVariantFacade">
+	</bean>
+
 </beans>
