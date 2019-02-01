@@ -64,6 +64,7 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; StoreFinderLink                         ; Store Finder Link                         ; /store-finder         ; StoreFinderLink                         ; StoreFinderLink                         ; ;                            ; ;
 ; ; LoginLink                               ; Login Link                                ; /login                ; LoginLink                               ; LoginLink                               ; ;                            ; ;
 ; ; AllBrandsCategoryLink                   ; All Brands Link                           ; /Brands/c/brands      ; AllBrandsCategoryLink                   ; AllBrandsCategoryLink                   ; ; brands                     ; ;
+; ; AccessoriesCategoryLink                 ; Accessories Link                          ;                       ; AccessoriesCategoryLink                 ; AccessoriesCategoryLink                 ; ; accessories                ; ;
 ; ; NikonBrandCategoryLink                  ; Nikon Link                                ; /Brands/Nikon/c/nikon ; NikonBrandCategoryLink                  ; NikonBrandCategoryLink                  ; ; nikon                      ; ;
 ; ; CanonBrandCategoryLink                  ; Canon Link                                ; /Brands/Canon/c/canon ; CanonBrandCategoryLink                  ; CanonBrandCategoryLink                  ; ; canon                      ; ;
 ; ; SonyBrandCategoryLink                   ; Sony Link                                 ; /Brands/Sony/c/sony   ; SonyBrandCategoryLink                   ; SonyBrandCategoryLink                   ; ; sony                       ; ;
@@ -264,13 +265,18 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; UTrendNavNode     ; ; UTrend Site  ; SiteRootNode  ; HomepageNavLink                                                                                                ; UTrendNavNode
 ; BrandsNavNode     ; ; Brand Links  ; UTrendNavNode ; AllBrandsCategoryLink                                                                                          ; BrandsNavNode
 ; BrandLinksNavNode ; ; Brand Links  ; BrandsNavNode ; NikonBrandCategoryLink,CanonBrandCategoryLink,SonyBrandCategoryLink,JBLBrandCategoryLink,BoseBrandCategoryLink ; BrandLinksNavNode
+##### Utrend ######
+; AccessoriesNavNode     ; ; Accessories Links  ; UTrendNavNode ; AccessoriesCategoryLink                                                                                          ; AccessoriesNavNode
+#; AccessoriesLinksNavNode ; ; Accessories Links  ; AccessoriesNavNode ; HeadphonesCategoryLink ; AccessoriesLinksNavNode
+
 
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); &nodeRef; children(uid, $contentCV)
-; UTrendCategoryNavNode ; ; Categories ; UTrendNavNode ; UTrendCategoryNavNode ; BrandsNavNode,TechNavNode,WomensNavNode,MensNavNode,HomeAppliancesNavNode
+; UTrendCategoryNavNode ; ; Categories ; UTrendNavNode ; UTrendCategoryNavNode ; BrandsNavNode,TechNavNode,WomensNavNode,MensNavNode,HomeAppliancesNavNode,AccessoriesNavNode
 
 ####### Categories CMS Navigation Nodes
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; &nodeRef; children(uid, $contentCV); links(&linkRef);
 ; BrandLinksNavNode                  ; ; Brand Links                            ; BrandLinksNavNode                  ; NikonBrandNavNode,CanonBrandNavNode,SonyBrandNavNode,JBLBrandNavNode,BoseBrandNavNode, AsusNavNode,AppleNavNode,LenovoNavNode,ToshibaNavNode,SamsungNavNode
+; AccessoriesLinksNavNode            ; ; Accessories Links                      ; AccessoriesLinksNavNode            ; HeadphonesNavNode; AccessoriesLinksNavNode
 ; NikonBrandNavNode                  ; ; Nikon Brand Link                       ; NikonBrandNavNode                  ;
 ; CanonBrandNavNode                  ; ; Canon Brand Link                       ; CanonBrandNavNode                  ;
 ; SonyBrandNavNode                   ; ; Sony Brand Link                        ; SonyBrandNavNode                   ;
@@ -454,6 +460,7 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ####### Categories CMS Navigation Entries
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
 ; BrandLinksNavNodeEntry                  ; ; BrandLinks Nav Node Entry                  ; BrandsNavNode                      ; AllBrandsCategoryLink
+; AccessoriesLinksNavNodeEntry            ; ; Accessories Nav Node Entry                 ; AccessoriesNavNode                 ; AccessoriesCategoryLink
 ; NikonBrandNavNodeEntry                  ; ; NikonBrand Nav Node Entry                  ; NikonBrandNavNode                  ; NikonBrandCategoryLink
 ; CanonBrandNavNodeEntry                  ; ; CanonBrand Nav Node Entry                  ; CanonBrandNavNode                  ; CanonBrandCategoryLink
 ; SonyBrandNavNodeEntry                   ; ; SonyBrand Nav Node Entry                   ; SonyBrandNavNode                   ; SonyBrandCategoryLink
