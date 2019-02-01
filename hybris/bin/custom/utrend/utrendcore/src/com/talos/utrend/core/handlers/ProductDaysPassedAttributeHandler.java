@@ -10,6 +10,8 @@ import java.util.concurrent.TimeUnit;
 
 public class ProductDaysPassedAttributeHandler implements DynamicAttributeHandler<Long, ProductModel>
 {
+	private static final Long DEFAULT_DAYS_PASSED = Long.valueOf(0);
+
 	@Override
 	public Long get(ProductModel product)
 	{
@@ -19,12 +21,12 @@ public class ProductDaysPassedAttributeHandler implements DynamicAttributeHandle
 					long differenceInMs = Math.abs(currentDate.getTime() - creationDate.getTime());
 					return TimeUnit.DAYS.convert(differenceInMs, TimeUnit.MILLISECONDS);
 				}
-		).orElse((Long.valueOf(0)));
+		).orElse(DEFAULT_DAYS_PASSED);
 	}
 
 	@Override
 	public void set(ProductModel product, Long daysPassed)
 	{
-		product.setDaysPassed(daysPassed);
+		product.setDaysPassed(Optional.ofNullable(daysPassed).orElse(DEFAULT_DAYS_PASSED));
 	}
 }
