@@ -369,6 +369,19 @@
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
 
+    <!-- Legacy Order Service -->
+    <alias alias="utrendLegacyOrderService" name="defaultUtrendLegacyOrderService"/>
+    <bean id="defaultUtrendLegacyOrderService"
+          class="com.talos.utrend.core.order.impl.DefaultUtrendLegacyOrderService">
+        <property name="legacyOrderDao" ref="utrendLegacyOrderDao"/>
+    </bean>
+    <!-- Legacy Order DAO -->
+    <alias alias="utrendLegacyOrderDao" name="defaultUtrendLegacyOrderDao"/>
+    <bean id="defaultUtrendLegacyOrderDao"
+          class="com.talos.utrend.core.order.dao.impl.DefaultUtrendLegacyOrderDao">
+        <property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"/>
+    </bean>
+
     <bean id="mccSiteUrlHelper" class="com.talos.utrend.core.util.MccSiteUrlHelper">
         <property name="siteChannelValidationStrategy" ref="siteChannelValidationStrategy"/>
         <property name="siteBaseUrlResolutionService" ref="siteBaseUrlResolutionService"/>
