@@ -18,7 +18,13 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.talos.utrend.facades.legacyOrder.UtrendLegacyOrderFacade;
+import com.talos.utrend.facades.legacyOrder.data.LegacyOrderData;
+import com.talos.utrend.facades.legacyOrder.data.LegacyOrderEntryData;
+import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import org.apache.commons.collections.CollectionUtils;
@@ -127,6 +133,7 @@ public class AccountPageController extends AbstractSearchPageController
 	 */
 	private static final String ORDER_CODE_PATH_VARIABLE_PATTERN = "{orderCode:.*}";
 	private static final String ADDRESS_CODE_PATH_VARIABLE_PATTERN = "{addressCode:.*}";
+	private static final String LEGACY_ORDER_NUMBER_PATH_VARIABLE_PATTERN = "/{legacyOrderNumber:.*}";
 
 	// CMS Pages
 	private static final String ACCOUNT_CMS_PAGE = "account";
@@ -138,6 +145,8 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String ADD_EDIT_ADDRESS_CMS_PAGE = "add-edit-address";
 	private static final String PAYMENT_DETAILS_CMS_PAGE = "payment-details";
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
+	private static final String LEGACY_ORDERS_HISTORY_CMS_PAGE = "legacyOrderHistory";
+	private static final String LEGACY_ORDERS_ENTRIES_CMS_PAGE = "legacyOrderEntries";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
 	private static final String CONSENT_MANAGEMENT_CMS_PAGE = "consents";
 
@@ -187,6 +196,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
+
+	@Resource(name = "utrendLegacyOrderFacade")
+	private UtrendLegacyOrderFacade utrendLegacyOrderFacade;
 
 	protected PasswordValidator getPasswordValidator()
 	{
@@ -324,7 +336,7 @@ public class AccountPageController extends AbstractSearchPageController
 			breadcrumbs.add(new Breadcrumb("/my-account/orders", getMessageSource().getMessage("text.account.orderHistory", null,
 					getI18nService().getCurrentLocale()), null));
 			breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.order.orderBreadcrumb", new Object[]
-			{ orderDetails.getCode() }, "Order {0}", getI18nService().getCurrentLocale()), null));
+					{ orderDetails.getCode() }, "Order {0}", getI18nService().getCurrentLocale()), null));
 			model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
 
 		}
@@ -340,7 +352,8 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN + "/getReadOnlyProductVariantMatrix", method = RequestMethod.GET)
+	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN
+			+ "/getReadOnlyProductVariantMatrix", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String getProductVariantMatrixForResponsive(@PathVariable("orderCode") final String orderCode,
 			@RequestParam("productCode") final String productCode, final Model model)
@@ -746,9 +759,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 		final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
 		breadcrumbs.add(new Breadcrumb(MY_ACCOUNT_ADDRESS_BOOK_URL, getMessageSource().getMessage(TEXT_ACCOUNT_ADDRESS_BOOK, null,
-                getI18nService().getCurrentLocale()), null));
+				getI18nService().getCurrentLocale()), null));
 		breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.addressBook.addEditAddress", null,
-                getI18nService().getCurrentLocale()), null));
+				getI18nService().getCurrentLocale()), null));
 		model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		model.addAttribute("edit", Boolean.TRUE);
@@ -800,7 +813,7 @@ public class AccountPageController extends AbstractSearchPageController
 		userFacade.editAddress(newAddress);
 
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.updated",
-                null);
+				null);
 		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
 	}
 
@@ -834,7 +847,7 @@ public class AccountPageController extends AbstractSearchPageController
 	}
 
 	@RequestMapping(value = "/remove-address/" + ADDRESS_CODE_PATH_VARIABLE_PATTERN, method =
-	{ RequestMethod.GET, RequestMethod.POST })
+			{ RequestMethod.GET, RequestMethod.POST })
 	@RequireHardLogIn
 	public String removeAddress(@PathVariable("addressCode") final String addressCode, final RedirectAttributes redirectModel)
 	{
@@ -893,7 +906,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		userFacade.unlinkCCPaymentInfo(paymentMethodId);
 		GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
-                "text.account.profile.paymentCart.removed");
+				"text.account.profile.paymentCart.removed");
 		return REDIRECT_TO_PAYMENT_INFO_PAGE;
 	}
 
@@ -945,5 +958,53 @@ public class AccountPageController extends AbstractSearchPageController
 					null);
 		}
 		return REDIRECT_TO_CONSENT_MANAGEMENT;
+	}
+
+	@RequestMapping(value = "/legacy-orders", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String getLegacyOrders(
+			final Model model, final HttpServletRequest request, final HttpServletResponse response,
+			@RequestParam(value = "page", defaultValue = "0") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode)
+			throws CMSItemNotFoundException
+	{
+
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
+
+		SearchPageData<LegacyOrderData> legacyOrders = utrendLegacyOrderFacade.getPagedLegacyOrderHistoryCustomer(customerData.getCustomerId(),pageableData);
+
+		populateModel(model,legacyOrders,showMode);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(LEGACY_ORDERS_HISTORY_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(LEGACY_ORDERS_HISTORY_CMS_PAGE));
+
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.LegacyOrderHistory"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/legacy-orders"+LEGACY_ORDER_NUMBER_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String getLegacyOrders(@PathVariable("legacyOrderNumber") final String legacyOrderNumber , final Model model, final HttpServletRequest request, final HttpServletResponse response)
+			throws CMSItemNotFoundException
+	{
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+
+		List<LegacyOrderEntryData> legacyOrderEntries = utrendLegacyOrderFacade.getLegacyOrderEntriesByOrder(legacyOrderNumber);
+		LegacyOrderData legacyOrder = utrendLegacyOrderFacade.getLegacyOrderByOrderNumber(legacyOrderNumber);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(LEGACY_ORDERS_ENTRIES_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(LEGACY_ORDERS_ENTRIES_CMS_PAGE));
+
+		model.addAttribute("legacyOrder", legacyOrder);
+		model.addAttribute("legacyOrderEntries", legacyOrderEntries);
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.legacyOrderEntries"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
 	}
 }
