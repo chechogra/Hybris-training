@@ -12,7 +12,9 @@ public class UtrendCreationDatePopulator implements Populator<ProductModel, Prod
 	@Override
 	public void populate(ProductModel productModel, ProductData productData) throws ConversionException
 	{
-		productData.setUtrendCreationDate(productModel.getUtrendCreationDate());
-		productData.setDayPassed(productModel.getDayPassed());
+		if(productModel.getUtrendCreationDate() != null){
+			productData.setUtrendCreationDate(productModel.getUtrendCreationDate());
+			productData.setDayPassed(productModel.getDayPassed());
+		}
 	}
 }

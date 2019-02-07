@@ -485,7 +485,25 @@
 		<property name="timeService" ref="timeService" />
 	</bean>
 
+	<!-- Day passed Handler -->
 	<bean id="productDayPassedAttributeHandler" class="com.talos.utrend.core.handlers.Product_dayPassedAttributeHandler"/>
+
+	<!-- Service and DAO Legacy Order -->
+
+	<alias name="defaultLegacyOrderService" alias="legacyOrderService"/>
+	<bean id="defaultLegacyOrderService"
+		  class="com.talos.utrend.core.legacyOrder.impl.DefaultLegacyOrderService">
+		<property name="legacyOrderDAO" ref="legacyOrderDAO"/>
+	</bean>
+
+	<alias name="defaultLegacyOrderDAO" alias="legacyOrderDAO"/>
+	<bean id="defaultLegacyOrderDAO"
+		  class="com.talos.utrend.core.legacyOrder.impl.DefaultLegacyOrderDAO">
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"/>
+	</bean>
+
+	<!-- Total Legacy Order entry Handler -->
+	<bean id="legacyOrderEntryTotalAttributeHandler" class="com.talos.utrend.core.handlers.LegacyOrderEntry_totalAttributeHandler"/>
 
 	<import resource="/utrendcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/utrendcore/processes/quote/quote-salesrep-process-spring.xml"/>

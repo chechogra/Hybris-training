@@ -208,4 +208,47 @@
 		  parent="defaultProductVariantFacade">
 	</bean>
 
+	<!-- Utrend Legacy Order Service Bean -->
+	<alias name="defaultUtrendLegacyOrderFacade" alias="utrendLegacyOrderFacade"/>
+	<bean id="defaultUtrendLegacyOrderFacade"
+		  class="com.talos.utrend.facades.legacyOrder.impl.DefaultUtrendLegacyOrderFacade">
+		<property name="legacyOrderService" ref="legacyOrderService"/>
+		<property name="legacyOrderConverter" ref="legacyOrderConverter"/>
+		<property name="legacyOrderEntryConverter" ref="legacyOrderEntryConverter"/>
+	</bean>
+
+	<!-- Converter Legacy Order -->
+	<alias name="defaultLegacyOrderConverter" alias="legacyOrderConverter"/>
+	<bean id="defaultLegacyOrderConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.talos.utrend.facades.legacyOrder.data.LegacyOrderData"/>
+		<property name="populators">
+			<list>
+				<ref bean="legacyOrderPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Legacy Orders populators -->
+	<alias name="defaultLegacyOrderPopulator" alias="legacyOrderPopulator"/>
+	<bean id="defaultLegacyOrderPopulator"
+		  class="com.talos.utrend.facades.legacyOrder.converters.populator.LegacyOrderPopulator">
+	</bean>
+
+	<!-- Converter Legacy Order Entries -->
+	<alias name="defaultLegacyOrderEntryConverter" alias="legacyOrderEntryConverter"/>
+	<bean id="defaultLegacyOrderEntryConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.talos.utrend.facades.legacyOrder.data.LegacyOrderEntryData"/>
+		<property name="populators">
+			<list>
+				<ref bean="legacyOrderEntryPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<!-- Legacy Orders Entries populators -->
+	<alias name="defaultLegacyOrderEntryPopulator" alias="legacyOrderEntryPopulator"/>
+	<bean id="defaultLegacyOrderEntryPopulator"
+		  class="com.talos.utrend.facades.legacyOrder.converters.populator.LegacyOrderEntryPopulator">
+	</bean>
+
 </beans>

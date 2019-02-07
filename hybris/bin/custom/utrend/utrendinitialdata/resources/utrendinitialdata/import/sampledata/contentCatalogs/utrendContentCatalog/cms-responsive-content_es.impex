@@ -128,6 +128,7 @@ UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName
 ; ; SavedCartsLink        ; "Carritos Guardados"
 ; ; ImportSavedCartLink   ; "Importación de Carrito Guardado"
 ; ; ConsentManagementLink ; "Administración de Consentimientos"
+; ; LegacyOrderHistoryLink ; "Historia de Ordenes Antiguas"
 
 #update navigation node title
 UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]
