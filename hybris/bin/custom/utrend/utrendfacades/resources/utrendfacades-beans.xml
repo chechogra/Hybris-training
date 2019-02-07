@@ -11,12 +11,35 @@
 -->
 <beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
 
-	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
-		<property name="genders" type="java.util.List&lt;com.talos.utrend.facades.product.data.GenderData>"/>
-	</bean>
+    <bean class="de.hybris.platform.commercefacades.product.data.ProductData">
+        <property name="genders" type="java.util.List&lt;com.talos.utrend.facades.product.data.GenderData>"/>
+        <property name="creationDate" type="java.util.Date"/>
+        <property name="daysPassed" type="java.lang.Long"/>
+    </bean>
 
-	<bean class="com.talos.utrend.facades.product.data.GenderData">
-		<property name="code" type="String"/>
-		<property name="name" type="String"/>
-	</bean>
+    <bean class="com.talos.utrend.facades.product.data.GenderData">
+        <property name="code" type="String"/>
+        <property name="name" type="String"/>
+    </bean>
+    
+    <bean class="com.talos.utrend.facades.order.data.LegacyOrderHistoryData">
+        <property name="orderNumber" type="String"/>
+        <property name="orderStatus" type="String"/>
+        <property name="orderTotal" type="Double"/>
+    </bean>
+
+    <bean class="com.talos.utrend.facades.order.data.LegacyOrderEntryData">
+        <property name="uid" type="String"/>
+        <property name="product" type="de.hybris.platform.commercefacades.product.data.ProductData"/>
+        <property name="quantity" type="Long"/>
+        <property name="basePrice" type="Double"/>
+    </bean>
+    
+    <bean class="com.talos.utrend.facades.order.data.LegacyOrderData">
+        <property name="orderNumber" type="String"/>
+        <property name="orderStatus" type="String"/>
+        <property name="orderTotal" type="Double"/>
+        <property name="customer" type="de.hybris.platform.commercefacades.user.data.CustomerData"/>
+        <property name="entries" type="java.util.List&lt;com.talos.utrend.facades.order.data.LegacyOrderEntryData>"/>
+    </bean>
 </beans>
