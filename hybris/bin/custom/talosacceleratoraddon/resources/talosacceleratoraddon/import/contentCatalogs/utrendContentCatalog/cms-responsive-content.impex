@@ -134,3 +134,11 @@ UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]; page
 ; ; ProductReviewsTabComponent              ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/product/productReviewsTab.jsp
 ; ; GuestCheckoutLoginComponent             ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/checkout/checkoutGuestLogin.jsp
 ; ; ReturningCustomerCheckoutLoginComponent ; /WEB-INF/views/addons/$addonExtensionName/responsive/pages/checkout/checkouReturningCustomerLogin.jsp
+
+
+
+####### Categories CMS Navigation Entries
+INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(CMSLinkComponent.uid, CMSLinkComponent.$contentCV);
+                                ; BrandLinksNavNodeEntry                  ; ; BrandLinks Nav Node Entry                  ; BrandsNavNode                      ; AllBrandsCategoryLink
+                                ; AccessoriesLinksNavNodeEntry                  ; ; Accessories Nav Node Entry                  ; AccessoriesNavNode                      ; AccessoriesCategoryLink
+

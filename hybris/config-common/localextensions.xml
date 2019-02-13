@@ -49,5 +49,6 @@
     <extension name='pcmbackofficesamplesaddon' />
     <extension name='mediaconversion' />
     <extension name="addonsupport"/>
+    <extension name="utrendbackoffice"/>
   </extensions>
 </hybrisconfig>

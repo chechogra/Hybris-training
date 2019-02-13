@@ -99,3 +99,10 @@ INSERT_UPDATE Tax; code[unique = true]; value; currency(isocode)
 INSERT_UPDATE ServicelayerJob; code[unique = true]; springId[unique = true]
 ; cartRemovalJob  ; cartRemovalJob
 ; siteMapMediaJob ; siteMapMediaJob
+; populateProductCreationDateJob ; populateProductCreationDateJob
+
+INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLanguage(isocode)
+;populateProductCreationDateCronJob;populateProductCreationDateJob;false;en
+
+INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
+; populateProductCreationDateCronJob; 0 0/2 * 1/1 * ? *
