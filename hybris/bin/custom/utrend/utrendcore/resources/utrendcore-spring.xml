@@ -505,6 +505,25 @@
 	<!-- Total Legacy Order entry Handler -->
 	<bean id="legacyOrderEntryTotalAttributeHandler" class="com.talos.utrend.core.handlers.LegacyOrderEntry_totalAttributeHandler"/>
 
+	<!-- Utrend ProductDAO -->
+	<alias name="defaultUtrendProductDAO" alias="utrendProductDAO"/>
+	<bean id="defaultUtrendProductDAO" class="com.talos.utrend.core.product.impl.DefaultUtrendProductDAO"> </bean>
+
+	<!-- Utrend Product Service Bean  -->
+	<alias name="defaultUtrendProductService" alias="utrendProductService"/>
+	<bean id="defaultUtrendProductService" class="com.talos.utrend.core.product.impl.DefaultUtrendProductService" parent="productService">
+		<property name="utrendProductDAO" ref="utrendProductDAO" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+	<!-- Bean Job to update all Products with creationDate -->
+	<bean id="populateProductCreationDateJob"
+		  class="com.talos.utrend.core.job.PopulateProductCreationDateJob"
+		  parent="abstractJobPerformable">
+		<property name="timeService" ref="timeService" />
+		<property name="utrendProductService" ref="utrendProductService" />
+	</bean>
+
 	<import resource="/utrendcore/processes/quote/quote-buyer-process-spring.xml"/>
 	<import resource="/utrendcore/processes/quote/quote-salesrep-process-spring.xml"/>
 	<import resource="/utrendcore/processes/quote/quote-seller-approval-process-spring.xml"/>
