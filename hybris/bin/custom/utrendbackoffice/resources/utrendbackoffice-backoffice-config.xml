@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<config
+		xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+	    xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+
+	<!-- utrendbackoffice UI configuration should be provided here -->
+
+	<!--<context component="component-code" module="utrendbackoffice">-->
+		<!--Please check documentation for code snippets for specific components-->
+	<!--</context>-->
+
+	<context component="explorer-tree" parent="auto" merge-by="module">
+		<n:explorer-tree xmlns:n="http://www.hybris.com/cockpitng/config/explorertree">
+			<n:navigation-node id="utrend" merge-mode="">
+				<n:type-node id="utrend_legacyOrder" code="LegacyOrder"/>
+				<n:type-node id="utrend_legacyOrderEntries" code="LegacyOrderEntry"/>
+			</n:navigation-node>
+		</n:explorer-tree>
+	</context>
+
+	<context type="LegacyOrder" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="orderNumber" position="1" />
+			<list-view:column qualifier="orderStatus" position="2" />
+			<list-view:column qualifier="customer" position="3" />
+			<list-view:column qualifier="orderTotal" position="4" />
+		</list-view:list-view>
+	</context>
+
+	<context type="LegacyOrderEntry" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="uid" position="1" />
+			<list-view:column qualifier="product" position="2" />
+			<list-view:column qualifier="quantity" position="3" />
+			<list-view:column qualifier="basePrice" position="4" />
+		</list-view:list-view>
+	</context>
+
+	<!-- Wizard Utrend Legacy Order -->
+	<context component="create-wizard" type="LegacyOrder">
+		<wz:flow id="LegacyOrderWizard" title="wizard.create.legacyOrder.title">
+			<wz:prepare id="legacyOrderPrepare">
+				<wz:initialize property="new_legacyOrderForm" type="LegacyOrder"/>
+			</wz:prepare>
+			<wz:step id="step1" label="wizard.create.legacyOrder.step1.label" sublabel="wizard.create.legacyOrder.step1.subLabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="new_legacyOrderForm">
+						<wz:property qualifier="orderNumber"/>
+						<wz:property qualifier="orderTotal"/>
+						<wz:property qualifier="orderStatus"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:next visible="!#empty(new_legacyOrderForm.orderNumber)"/>
+				</wz:navigation>
+			</wz:step>
+			<wz:step id="step2" label="wizard.create.legacyOrder.step2.label" sublabel="wizard.create.legacyOrder.step2.subLabel">
+				<wz:content id="step2.content">
+					<wz:property-list root="new_legacyOrderForm">
+						<wz:property qualifier="customer"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step2.navigation">
+					<wz:cancel/>
+					<wz:back/>
+					<wz:done>
+						<wz:save property="new_legacyOrderForm"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+	<!-- Wizard Utrend Legacy Order Entry -->
+	<context component="create-wizard" type="LegacyOrderEntry">
+		<wz:flow id="LegacyOrderEntryWizard" title="wizard.create.legacyOrderEntry.title">
+			<wz:prepare id="legacyOrderEntryPrepare">
+				<wz:initialize property="new_legacyOrderEntryForm" type="LegacyOrderEntry"/>
+			</wz:prepare>
+			<wz:step id="step1" label="wizard.create.legacyOrderEntry.step1.label" sublabel="wizard.create.legacyOrderEntry.step1.subLabel">
+				<wz:content id="step1.content">
+					<wz:property-list root="new_legacyOrderEntryForm">
+						<wz:property qualifier="uid"/>
+						<wz:property qualifier="product"/>
+						<wz:property qualifier="quantity"/>
+						<wz:property qualifier="basePrice"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done visible="!#empty(new_legacyOrderEntryForm.uid)">
+						<wz:save property="new_legacyOrderEntryForm"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+
+
+	<context type="LegacyOrderEntry" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="uid" selected="true"/>
+				<advanced-search:field name="product" selected="true"/>
+				<advanced-search:field name="basePrice" selected="true"/>
+				<advanced-search:field name="quantity" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+	<context type="LegacyOrder" component="advanced-search">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="orderNumber" selected="true"/>
+				<advanced-search:field name="orderTotal" selected="true"/>
+				<advanced-search:field name="orderStatus" selected="true"/>
+				<advanced-search:field name="customer" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
+
+	<context merge-by="module" type="LegacyOrderEntry" component="editor-area">
+	<editorArea:editorArea>
+		<editorArea:essentials>
+			<editorArea:essentialSection name="hmc.essential">
+				<editorArea:attribute qualifier="uid"/>
+				<editorArea:attribute qualifier="product"/>
+				<editorArea:attribute qualifier="quantity"/>
+				<editorArea:attribute qualifier="basePrice"/>
+			</editorArea:essentialSection>
+		</editorArea:essentials>
+		<editorArea:tab name="hmc.properties">
+			<editorArea:section name="hmc.properties">
+				<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="legacyOrder"/>
+			</editorArea:section>
+		</editorArea:tab>
+	</editorArea:editorArea>
+	</context>
+
+	<context merge-by="module" type="LegacyOrder" component="editor-area">
+		<editorArea:editorArea>
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute qualifier="orderNumber"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="orderTotal"/>
+					<editorArea:attribute qualifier="orderStatus"/>
+					<editorArea:attribute qualifier="customer"/>
+					<editorArea:attribute qualifier="legacyOrderEntry"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+
+	<!-- Add Action UpdateCreationTime to Product Type -->
+
+	<context type="Product" component="editorareaactions">
+		<y:actions>
+			<y:group qualifier="common">
+				<y:label>JAJAJAJA</y:label>
+				<y:action  action-id="com.talos.utrend.backoffice.action.populateProductCreationDateCronJobAction" property="currentObject"/>
+			</y:group>
+		</y:actions>
+	</context>
+
+</config>

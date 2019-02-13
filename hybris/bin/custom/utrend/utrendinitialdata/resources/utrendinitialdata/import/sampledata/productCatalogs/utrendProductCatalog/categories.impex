@@ -44,6 +44,7 @@ INSERT_UPDATE Category; code[unique = true]; allowedPrincipals(uid)[default = 'c
 ; side-by-side-refrigerators ; ;
 ; wine-coolers               ; ;
 ; water-dispensers           ; ;
+; accessories                ; ;
 
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
@@ -68,3 +69,5 @@ INSERT_UPDATE CategoryCategoryRelation; $categories; $supercategories
 ; side-by-side-refrigerators ; refrigerators
 ; wine-coolers               ; refrigerators
 ; water-dispensers           ; refrigerators
+; accessories                ; categories
+; headphones                 ; accessories
