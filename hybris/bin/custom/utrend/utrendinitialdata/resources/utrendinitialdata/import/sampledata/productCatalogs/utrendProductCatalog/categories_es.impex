@@ -45,5 +45,4 @@ UPDATE Category; code[unique = true]; $catalogVersion; name[lang = $lang]
 ; side-by-side-refrigerators ; ; "Nevecones"
 ; wine-coolers               ; ; "Cavas de vino"
 ; water-dispensers           ; ; "Dispensadores de agua"
-
-
+; accessories                ; ; "Accesorios"

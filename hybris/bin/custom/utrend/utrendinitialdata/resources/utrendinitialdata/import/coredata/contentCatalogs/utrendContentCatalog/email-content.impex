@@ -24,6 +24,7 @@ $emailPackageName = $config-emailContextPackageName
 INSERT_UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]; name; active; frontendTemplateName; subject(code); htmlTemplate(code); restrictedPageTypes(code)
 ; ; CustomerRegistrationEmailTemplate           ; Customer Registration Email Template              ; true  ; customerRegistrationEmail           ; utrend_Email_Customer_Registration_Subject           ; utrend_Email_Customer_Registration_Body           ; EmailPage
 ; ; ForgottenPasswordEmailTemplate              ; Forgotten Password Email Template                 ; true  ; forgottenPasswordEmail              ; utrend_Email_Forgotten_Password_Subject              ; utrend_Email_Forgotten_Password_Body              ; EmailPage
+; ; WishListEmailTemplate                       ; Wish List Email Template                          ; true  ; wishListEmail                       ; utrend_Email_Wish_List_Subject                       ; utrend_Email_Wish_List_Body                       ; EmailPage
 ; ; OrderConfirmationEmailTemplate              ; Order Confirmation Email Template                 ; true  ; orderConfirmationEmail              ; utrend_Email_Order_Confirmation_Subject              ; utrend_Email_Order_Confirmation_Body              ; EmailPage
 ; ; DeliverySentEmailTemplate                   ; Delivery Sent Email Template                      ; true  ; deliverySentEmail                   ; utrend_Email_Delivery_Sent_Subject                   ; utrend_Email_Delivery_Sent_Body                   ; EmailPage
 ; ; ReadyForPickupEmailTemplate                 ; Ready For Pickup Email Template                   ; true  ; readyForPickupEmail                 ; utrend_Email_Ready_For_Pickup_Subject                ; utrend_Email_Ready_For_Pickup_Body                ; EmailPage
@@ -43,6 +44,7 @@ INSERT_UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]; 
 UPDATE EmailPageTemplate; $contentCV[unique = true]; uid[unique = true]; velocityTemplate[translator = de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
 ; ; CustomerRegistrationEmailTemplate           ; $jarResourceCms/structure-view/structure_customerRegistrationEmailTemplate.vm
 ; ; ForgottenPasswordEmailTemplate              ; $jarResourceCms/structure-view/structure_forgottenPasswordEmailTemplate.vm
+; ; WishListEmailTemplate                       ; $jarResourceCms/structure-view/structure_wishListEmailTemplate.vm
 ; ; OrderConfirmationEmailTemplate              ; $jarResourceCms/structure-view/structure_orderConfirmationEmailTemplate.vm
 ; ; DeliverySentEmailTemplate                   ; $jarResourceCms/structure-view/structure_deliverySentEmailTemplate.vm
 ; ; ReadyForPickupEmailTemplate                 ; $jarResourceCms/structure-view/structure_readyForPickupEmailTemplate.vm
@@ -60,6 +62,11 @@ INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[un
 ; BottomContent ; ; $wideContent ;
 
 INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'ForgottenPasswordEmailTemplate']; validComponentTypes(code)
+; SiteLogo      ; ;              ; logo
+; TopContent    ; ; $wideContent ;
+; BottomContent ; ; $wideContent ;
+
+INSERT_UPDATE ContentSlotName; name[unique = true]; template(uid, $contentCV)[unique = true][default = 'WishListEmailTemplate']; validComponentTypes(code)
 ; SiteLogo      ; ;              ; logo
 ; TopContent    ; ; $wideContent ;
 ; BottomContent ; ; $wideContent ;
@@ -151,6 +158,13 @@ INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = tr
 ; ; TopContent-ForgottenPasswordEmail    ; TopContent    ; ; EmailTopSlot      ; true
 ; ; BottomContent-ForgottenPasswordEmail ; BottomContent ; ; EmailBottomSlot   ; true
 
+
+INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'WishListEmailTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
+; ; SiteLogo-WishListEmail      ; SiteLogo      ; ; EmailSiteLogoSlot ; true
+; ; TopContent-WishListEmail    ; TopContent    ; ; EmailTopSlot      ; true
+; ; BottomContent-WishListEmail ; BottomContent ; ; EmailBottomSlot   ; true
+
+
 INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; pageTemplate(uid, $contentCV)[unique = true][default = 'OrderConfirmationEmailTemplate']; contentSlot(uid, $contentCV)[unique = true]; allowOverwrite
 ; ; SiteLogo-OrderConfirmationEmail      ; SiteLogo      ; ; EmailSiteLogoSlot ; true
 ; ; TopContent-OrderConfirmationEmail    ; TopContent    ; ; EmailTopSlot      ; true
@@ -220,6 +234,7 @@ INSERT_UPDATE ContentSlotForTemplate; $contentCV[unique = true]; uid[unique = tr
 INSERT_UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; name; masterTemplate(uid, $contentCV); defaultPage; approvalStatus(code)[default = 'approved']
 ; ; CustomerRegistrationEmail           ; Customer Registration Email              ; CustomerRegistrationEmailTemplate           ; true ;
 ; ; ForgottenPasswordEmail              ; Forgotten Password Email                 ; ForgottenPasswordEmailTemplate              ; true ;
+; ; WishListEmail                       ; Wish List Email                          ; WishListEmailTemplate                       ; true ;
 ; ; OrderConfirmationEmail              ; Order Confirmation Email                 ; OrderConfirmationEmailTemplate              ; true ;
 ; ; DeliverySentEmail                   ; Delivery Sent Email                      ; DeliverySentEmailTemplate                   ; true ;
 ; ; ReadyForPickupEmail                 ; Ready For Pickup Email                   ; ReadyForPickupEmailTemplate                 ; true ;
@@ -243,6 +258,7 @@ INSERT_UPDATE RendererTemplate; code[unique = true]; contextClass; rendererType(
 INSERT_UPDATE RendererTemplate; code[unique = true]; contextClass; rendererType(code)[default = 'velocity']
 ; utrend_Email_Customer_Registration_Body              ; $emailPackageName.CustomerEmailContext
 ; utrend_Email_Forgotten_Password_Body                 ; $emailPackageName.ForgottenPasswordEmailContext
+; utrend_Email_Wish_List_Body                          ; $emailPackageName.WishListEmailContext
 ; utrend_Email_Order_Confirmation_Body                 ; $emailPackageName.OrderNotificationEmailContext
 ; utrend_Email_Delivery_Sent_Body                      ; $emailPackageName.DeliverySentEmailContext
 ; utrend_Email_Ready_For_Pickup_Body                   ; $emailPackageName.ReadyForPickupEmailContext
@@ -255,6 +271,7 @@ INSERT_UPDATE RendererTemplate; code[unique = true]; contextClass; rendererType(
 ; utrend_Email_NotPickedUpConsignment_Canceled_Body    ; $emailPackageName.NotPickedUpConsignmentCanceledEmailContext
 ; utrend_Email_Customer_Registration_Subject           ; $emailPackageName.CustomerEmailContext
 ; utrend_Email_Forgotten_Password_Subject              ; $emailPackageName.ForgottenPasswordEmailContext
+; utrend_Email_Wish_List_Subject                       ; $emailPackageName.WishListEmailContext
 ; utrend_Email_Order_Confirmation_Subject              ; $emailPackageName.OrderNotificationEmailContext
 ; utrend_Email_Delivery_Sent_Subject                   ; $emailPackageName.DeliverySentEmailContext
 ; utrend_Email_Ready_For_Pickup_Subject                ; $emailPackageName.ReadyForPickupEmailContext
@@ -273,6 +290,7 @@ INSERT_UPDATE Media; $contentCV[unique = true]; code[unique = true]; mime; realf
 UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; previewImage(code, $contentCV)
 ; ; CustomerRegistrationEmail           ; EmailPageModel_preview
 ; ; ForgottenPasswordEmail              ; EmailPageModel_preview
+; ; WishListEmail                       ; EmailPageModel_preview
 ; ; OrderConfirmationEmail              ; EmailPageModel_preview
 ; ; DeliverySentEmail                   ; EmailPageModel_preview
 ; ; ReadyForPickupEmail                 ; EmailPageModel_preview

@@ -192,6 +192,13 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
+
+	<bean id="sendWishListEventListener"
+		  class="com.talos.utrend.core.event.SendWishListEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+
 	<bean id="submitOrderEventListener" class="com.talos.utrend.core.event.SubmitOrderEventListener" parent="abstractAcceleratorSiteEventListener">
 		<property name="businessProcessService" ref="businessProcessService"/>
 		<property name="modelService" ref="modelService"/>
@@ -241,6 +248,10 @@
 	<bean id="forgottenPasswordEmailProcessDefinitionResource"
 		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/utrendcore/processes/forgottenPasswordEmailProcess.xml"/>
+	</bean>
+	<bean id="sendWishListProcessDefinitionResource"
+		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/utrendcore/processes/sendWishListProcess.xml"/>
 	</bean>
 	<bean id="orderConfirmationEmailProcessDefinitionResource"
 		  class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
@@ -301,6 +312,10 @@
 
 	<bean id="generateForgottenPasswordEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="ForgottenPasswordEmailTemplate"/>
+	</bean>
+
+	<bean id="generateWishListEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="WishListEmailTemplate"/>
 	</bean>
 
 	<bean id="generateOrderConfirmationEmail" parent="abstractGenerateEmailAction">
@@ -483,6 +498,55 @@
 		<property name="commerceQuoteDao" ref="commerceQuoteDao"/>
 		<property name="eventService" ref="eventService" />
 		<property name="timeService" ref="timeService" />
+	</bean>
+
+	<!-- Day passed Handler -->
+	<bean id="productDayPassedAttributeHandler" class="com.talos.utrend.core.handlers.Product_dayPassedAttributeHandler"/>
+
+	<!-- Service and DAO Legacy Order -->
+
+	<alias name="defaultLegacyOrderService" alias="legacyOrderService"/>
+	<bean id="defaultLegacyOrderService"
+		  class="com.talos.utrend.core.legacyOrder.impl.DefaultLegacyOrderService">
+		<property name="legacyOrderDAO" ref="legacyOrderDAO"/>
+	</bean>
+
+	<alias name="defaultLegacyOrderDAO" alias="legacyOrderDAO"/>
+	<bean id="defaultLegacyOrderDAO"
+		  class="com.talos.utrend.core.legacyOrder.impl.DefaultLegacyOrderDAO">
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"/>
+	</bean>
+
+	<!-- Total Legacy Order entry Handler -->
+	<bean id="legacyOrderEntryTotalAttributeHandler" class="com.talos.utrend.core.handlers.LegacyOrderEntry_totalAttributeHandler"/>
+
+	<!-- Utrend ProductDAO -->
+	<alias name="defaultUtrendProductDAO" alias="utrendProductDAO"/>
+	<bean id="defaultUtrendProductDAO" class="com.talos.utrend.core.product.impl.DefaultUtrendProductDAO"> </bean>
+
+	<!-- Utrend Product Service Bean  -->
+	<alias name="defaultUtrendProductService" alias="utrendProductService"/>
+	<bean id="defaultUtrendProductService" class="com.talos.utrend.core.product.impl.DefaultUtrendProductService" parent="productService">
+		<property name="utrendProductDAO" ref="utrendProductDAO" />
+		<property name="catalogVersionService" ref="catalogVersionService" />
+	</bean>
+
+	<!-- Bean Job to update all Products with creationDate -->
+	<bean id="populateProductCreationDateJob"
+		  class="com.talos.utrend.core.job.PopulateProductCreationDateJob"
+		  parent="abstractJobPerformable">
+		<property name="timeService" ref="timeService" />
+		<property name="utrendProductService" ref="utrendProductService" />
+	</bean>
+
+	<!-- Wish List Service -->
+	<alias name="defaultWishListService" alias="wishListService"/>
+	<bean id="defaultWishListService"
+		  class="com.talos.utrend.core.wishList.impl.DefaultWishListService">
+		<property name="eventService" ref="eventService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
 	<import resource="/utrendcore/processes/quote/quote-buyer-process-spring.xml"/>
