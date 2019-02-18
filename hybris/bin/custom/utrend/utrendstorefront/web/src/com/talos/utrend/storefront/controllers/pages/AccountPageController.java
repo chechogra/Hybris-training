@@ -24,7 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import com.talos.utrend.facades.legacyOrder.UtrendLegacyOrderFacade;
 import com.talos.utrend.facades.legacyOrder.data.LegacyOrderData;
 import com.talos.utrend.facades.legacyOrder.data.LegacyOrderEntryData;
-import de.hybris.platform.cms2.model.pages.ContentPageModel;
+import com.talos.utrend.facades.wishList.UtrendWishListFacade;
+import com.talos.utrend.storefront.Forms.WishListForm;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import org.apache.commons.collections.CollectionUtils;
@@ -107,6 +108,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String TEXT_ACCOUNT_PROFILE = "text.account.profile";
 	private static final String ADDRESS_DATA_ATTR = "addressData";
 	private static final String ADDRESS_FORM_ATTR = "addressForm";
+	private static final String WISH_LIST_FORM_ATTR = "wishListForm";
 	private static final String COUNTRY_ATTR = "country";
 	private static final String REGIONS_ATTR = "regions";
 	private static final String MY_ACCOUNT_ADDRESS_BOOK_URL = "/my-account/address-book";
@@ -149,6 +151,8 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String LEGACY_ORDERS_ENTRIES_CMS_PAGE = "legacyOrderEntries";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
 	private static final String CONSENT_MANAGEMENT_CMS_PAGE = "consents";
+	private static final String WISH_LIST_CMS_PAGE = "wishList";
+
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
@@ -199,6 +203,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "utrendLegacyOrderFacade")
 	private UtrendLegacyOrderFacade utrendLegacyOrderFacade;
+
+	@Resource(name = "utrendWishListFacade")
+	private UtrendWishListFacade utrendWishListFacade;
 
 	protected PasswordValidator getPasswordValidator()
 	{
@@ -1003,6 +1010,48 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("legacyOrder", legacyOrder);
 		model.addAttribute("legacyOrderEntries", legacyOrderEntries);
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.legacyOrderEntries"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	/**
+	 *
+	 * Method Controller to search and render page of wish list
+	 *
+	 * @param model
+	 * @param request
+	 * @throws CMSItemNotFoundException
+	 */
+	@RequestMapping(value = "/wish-list", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String getWishListPage(final Model model, final HttpServletRequest request)
+			throws CMSItemNotFoundException
+	{
+		storeCmsPageInModel(model, getContentPageForLabelOrId(WISH_LIST_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(WISH_LIST_CMS_PAGE));
+
+		model.addAttribute(WISH_LIST_FORM_ATTR,new WishListForm());
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.wishList"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/wish-list/send-email", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String sendEmailWishList(final Model model, final HttpServletRequest request, final WishListForm wishListForm)
+			throws CMSItemNotFoundException
+	{
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		String fromEmail = customerData.getDisplayUid();
+
+		utrendWishListFacade.sendWishList(fromEmail , wishListForm.getEmail());
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(WISH_LIST_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(WISH_LIST_CMS_PAGE));
+
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.wishList"));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		return getViewForPage(model);

@@ -34,6 +34,8 @@ UPDATE RendererTemplate; code[unique = true]; description[lang = $lang]; templat
 ; utrend_Email_Delivery_Sent_Subject                   ; "Delivery Sent Email Subject"                      ; $emailResource/email-deliverySentSubject.vm
 ; utrend_Email_Forgotten_Password_Body                 ; "Forgotten Password Email Body"                    ; $emailResource/email-forgottenPasswordBody.vm
 ; utrend_Email_Forgotten_Password_Subject              ; "Forgotten Password Email Subject"                 ; $emailResource/email-forgottenPasswordSubject.vm
+; utrend_Email_Wish_List_Body                          ; "Wish List Email Body"                             ; $emailResource/email-wishListBody.vm
+; utrend_Email_Wish_List_Subject                       ; "Wish List Email Subject"                          ; $emailResource/email-wishListSubject.vm
 ; utrend_Email_NotPickedUpConsignment_Canceled_Body    ; "Not Picked Up Consignment Canceled Email Body"    ; $emailResource/email-notPickedUpConsignmentCanceledBody.vm
 ; utrend_Email_NotPickedUpConsignment_Canceled_Subject ; "Not Picked Up Consignment Canceled Email Subject" ; $emailResource/email-notPickedUpConsignmentCanceledSubject.vm
 ; utrend_Email_Order_Cancelled_Body                    ; "Order Cancelled Email Body"                       ; $emailResource/email-orderCancelledBody.vm
@@ -58,6 +60,7 @@ UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; fromEmail[lang 
 ; ; CustomerRegistrationEmail    ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; DeliverySentEmail            ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; ForgottenPasswordEmail       ; "customerservices@hybris.com" ; "Customer Services Team"
+; ; WishListEmail                ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; OrderCancelledEmail          ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; OrderCollectionReminderEmail ; "customerservices@hybris.com" ; "Customer Services Team"
 ; ; OrderConfirmationEmail       ; "customerservices@hybris.com" ; "Customer Services Team"

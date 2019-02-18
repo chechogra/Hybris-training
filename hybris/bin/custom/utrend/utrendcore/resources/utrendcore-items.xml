@@ -149,6 +149,21 @@
         <itemtype code="PopulateProductCreationDateCronJob" autocreate="true" generate="true" extends="CronJob">
         </itemtype>
 
+        <itemtype code="SendWishListProcess" extends="StoreFrontProcess"
+                  autocreate="true" generate="true" >
+            <description>Represents process that is used for send wish List.</description>
+            <attributes>
+            <attribute qualifier="email" type="java.lang.String">
+                <description> Address email of the person that will receive the message</description>
+                <persistence type="property"/>
+            </attribute>
+            <attribute qualifier="fromEmail" type="java.lang.String">
+                <description> Address email of the person that sends the message</description>
+                <persistence type="property"/>
+            </attribute>
+            </attributes>
+        </itemtype>
+
         <!-- TypeGroups are for structure of this file only -->
 
         <typegroup name="Apparel">

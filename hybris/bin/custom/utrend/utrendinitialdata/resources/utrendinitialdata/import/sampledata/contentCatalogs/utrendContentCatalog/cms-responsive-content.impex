@@ -728,6 +728,7 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 ; ; ConsentManagementComponent               ; Consent Management Component                   ; accountConsentManagementPage.jsp                                           ;                 ; ConsentManagementComponent
 ; ; LegacyOrdersManagementComponent          ; Legacy Orders Management Component             ; legacyOrdersManagementPage.jsp                                             ;                 ; LegacyOrdersManagementComponent
 ; ; LegacyOrderEntriesComponent              ; Legacy Order Entries Component                 ; legacyOrderEntriesPage.jsp                                                 ;                 ; LegacyOrderEntriesComponent
+; ; WishListComponent                        ; Wish List Component                            ; wishListPage.jsp                                                           ;                 ; WishListComponent
 ; ; NewCustomerLoginComponent                ; New Customer Login Component                   ; accountNewCustomerLogin.jsp                                                ;                 ; NewCustomerLoginComponent
 ; ; ReturningCustomerLoginComponent          ; Returning Customer Login Component             ; accountReturningCustomerLogin.jsp                                          ;                 ; ReturningCustomerLoginComponent
 ; ; NewCustomerCheckoutLoginComponent        ; New Customer Checkout Login Component          ; checkoutNewCustomerLogin.jsp                                               ;                 ; NewCustomerCheckoutLoginComponent
@@ -1045,7 +1046,8 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; OrderHistoryLink      ; OrderHistoryLink      ; /my-account/orders          ; OrderHistoryLink      ; ; ; ; ;
 ; ; SavedCartsLink        ; SavedCartsLink        ; /my-account/saved-carts     ; SavedCartsLink        ; ; ; ; ;
 ; ; ConsentManagementLink ; ConsentManagementLink ; /my-account/consents        ; ConsentManagementLink ; ; ; ; ;
-; ; LegacyOrderHistoryLink; LegacyOrderHistoryLink; /my-account/legacy-orders    ; LegacyOrderHistoryLink; ; ; ; ;
+; ; LegacyOrderHistoryLink; LegacyOrderHistoryLink; /my-account/legacy-orders   ; LegacyOrderHistoryLink; ; ; ; ;
+; ; WishListLink          ; WishListLink          ; /my-account/wish-list       ; WishListLink          ; ; ; ; ;
 
 
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
@@ -1060,6 +1062,8 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; SavedCartsNavNode        ; ; Saved Carts        ; MyAccountNavNode ; ; SavedCartsNavNode
 ; ConsentManagementNavNode ; ; Consent Management ; MyAccountNavNode ; ; ConsentManagementNavNode
 ; LegacyOrderHistoryNavNode; ; Legacy Order History;MyAccountNavNode ; ; LegacyOrderHistoryNavNode
+; WishListNavNode          ; ; Wish List          ;MyAccountNavNode  ; ; WishListNavNode
+
 
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
 ; PersonalDetailsNavNodeEntry   ; ; PersonalDetailsNavNodeEntry   ; PersonalDetailsNavNode   ; PersonalDetailsLink   ;
@@ -1070,7 +1074,10 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 ; OrderHistoryNavNodeEntry      ; ; OrderHistoryNavNodeEntry      ; OrderHistoryNavNode      ; OrderHistoryLink      ;
 ; SavedCartsNavNodeEntry        ; ; SavedCartsNavNodeEntry        ; SavedCartsNavNode        ; SavedCartsLink        ;
 ; ConsentManagementNavNodeEntry ; ; ConsentManagementNavNodeEntry ; ConsentManagementNavNode ; ConsentManagementLink ;
-; LegacyOrderHistoryNavNodeEntry; ; LegacyOrderHistoryNavNodeEntry; LegacyOrderHistoryNavNode; LegacyOrderHistoryLink ;
+; LegacyOrderHistoryNavNodeEntry; ; LegacyOrderHistoryNavNodeEntry; LegacyOrderHistoryNavNode; LegacyOrderHistoryLink;
+; WishListNavNodeEntry          ; ; WishListNavNodeEntry          ; WishListNavNode          ; WishListLink           ;
+
+
 
 INSERT_UPDATE NavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; styleClass; &componentRef; navigationNode(&nodeRef)
 ; ; MyAccountComponent ; My Account ; accNavComponent ; MyAccountComponent ; MyAccountNavNode
@@ -1185,6 +1192,14 @@ INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; 
 INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'legacyOrderHistory']; contentSlot(uid, $contentCV)[unique = true]
 ; ; SideContent-legacy-orders ; SideContent ; ; SideContentSlot-legacy-orders
 ; ; BodyContent-legacy-orders ; BodyContent ; ; BodyContentSlot-legacy-orders
+
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+; ; SideContentSlot-wish-list ; Side Content Slot for wish list  ; true ;
+; ; BodyContentSlot-wish-list ; Body Content Slot for wish list  ; true ; WishListComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'wishList']; contentSlot(uid, $contentCV)[unique = true]
+; ; SideContent-wish-list ; SideContent ; ; SideContentSlot-wish-list
+; ; BodyContent-wish-list ; BodyContent ; ; BodyContentSlot-wish-list
 
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
 ; ; SideContentSlot-legacy-order-entries ; Side Content Slot for Legacy Order Entries ; true ;

@@ -147,6 +147,9 @@
 		<property name="customerConverter" ref="customerConverter"/>
 	</bean>
 
+	<bean id="wishListEmailContext" class="com.talos.utrend.facades.process.email.context.WishListEmailContext" parent="abstractEmailContext" scope="prototype" >
+	</bean>
+
 	<bean id="orderNotificationEmailContext" class="com.talos.utrend.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
 		<property name="orderConverter" ref="orderConverter"/>
 	</bean>
@@ -249,6 +252,11 @@
 	<alias name="defaultLegacyOrderEntryPopulator" alias="legacyOrderEntryPopulator"/>
 	<bean id="defaultLegacyOrderEntryPopulator"
 		  class="com.talos.utrend.facades.legacyOrder.converters.populator.LegacyOrderEntryPopulator">
+	</bean>
+
+	<alias  name="defaultUtrendWishListFacade" alias="utrendWishListFacade"/>
+	<bean id="defaultUtrendWishListFacade" class="com.talos.utrend.facades.wishList.impl.DefaultUtrendWishListFacade" >
+		<property name="wishListService" ref="wishListService"/>
 	</bean>
 
 </beans>
