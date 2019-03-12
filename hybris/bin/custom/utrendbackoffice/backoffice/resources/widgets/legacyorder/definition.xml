@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+
+<widget-definition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/widget-definition.xsd"
+                   id="com.talos.utrend.backoffice.widgets.legacyorder">
+    <name>Legacy Order Manager</name>
+    <description>Manages the Legacy Order and Legacy Order Entry item types</description>
+    <keywords>
+        <keyword>Legacy</keyword>
+        <keyword>Order</keyword>
+    </keywords>
+    <version>1.0</version>
+</widget-definition>

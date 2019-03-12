@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<config xmlns="http://www.hybris.com/cockpit/config"
+        xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+        xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+        xmlns:list="http://www.hybris.com/cockpitng/component/listView"
+        xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+
+    <!-- Explorer Tree -->
+    <context component="explorer-tree" merge-by="module">
+        <explorer-tree:explorer-tree>
+            <explorer-tree:navigation-node id="Utrend">
+                <explorer-tree:type-node id="utrend_legacyOrder" code="LegacyOrder"/>
+                <explorer-tree:type-node id="utrend_legacyOrderEntry" code="LegacyOrderEntry"/>
+            </explorer-tree:navigation-node>
+        </explorer-tree:explorer-tree>
+    </context>
+
+    <!-- List View: Legacy Order -->
+    <context component="listview" type="LegacyOrder">
+        <list:list-view>
+            <list:column qualifier="orderNumber"/>
+            <list:column qualifier="customer"/>
+            <list:column qualifier="orderStatus"/>
+            <list:column qualifier="orderTotal"/>
+        </list:list-view>
+    </context>
+
+    <!-- List View: Legacy OrderEntry  -->
+    <context component="listview" type="LegacyOrderEntry">
+        <list:list-view>
+            <list:column qualifier="uid"/>
+            <list:column qualifier="basePrice"/>
+            <list:column qualifier="quantity"/>
+            <list:column qualifier="product"/>
+        </list:list-view>
+    </context>
+
+    <!-- Creation Wizard: Legacy Order -->
+    <context component="create-wizard" type="LegacyOrder">
+        <wz:flow id="LegacyOrderWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="legacyOrderPrepare">
+                <wz:initialize property="newLegacyOrder" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+
+            <wz:step id="step1" label="create.legacyorder.general.label" sublabel="create.legacyorder.general.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newLegacyOrder">
+                        <wz:property qualifier="orderNumber" type="java.lang.String"/>
+                        <wz:property qualifier="orderTotal" type="java.lang.Double"/>
+                        <wz:property qualifier="orderStatus"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next
+                            visible="!#empty(newLegacyOrder.orderNumber)"/>
+                </wz:navigation>
+            </wz:step>
+
+            <wz:step id="step2" label="create.legacyorder.administration.label" sublabel="create.legacyorder.administration.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newLegacyOrder">
+                        <wz:property qualifier="customer"/>
+                        <wz:property qualifier="legacyOrderEntries"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:done
+                            visible="newLegacyOrder.customer != null">
+                        <wz:save property="newLegacyOrder"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+    <!-- Creation Wizard: Legacy Order Entry -->
+    <context component="create-wizard" type="LegacyOrderEntry">
+        <wz:flow id="LegacyOrderEntryWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="legacyOrderEntryPrepare">
+                <wz:initialize property="newLegacyOrderEntry" type="ctx.TYPE_CODE"/>
+            </wz:prepare>
+
+            <wz:step id="step1" label="create.legacyorderentry.general.label" sublabel="create.legacyorderentry.general.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newLegacyOrderEntry">
+                        <wz:property qualifier="uid" type="java.lang.String"/>
+                        <wz:property qualifier="product"/>
+                        <wz:property qualifier="quantity" type="java.lang.Long"/>
+                        <wz:property qualifier="basePrice" type="java.lang.Double"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:done
+                            visible="!#empty(newLegacyOrderEntry.uid)">
+                        <wz:save property="newLegacyOrderEntry"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+
+    <!-- Advanced Search: Legacy Order -->
+    <context component="advanced-search" type="LegacyOrder">
+        <advanced-search:advanced-search>
+            <advanced-search:field-list>
+                <advanced-search:field name="orderNumber" selected="true"/>
+                <advanced-search:field name="orderTotal" selected="true"/>
+                <advanced-search:field name="orderStatus" selected="true"/>
+                <advanced-search:field name="customer" selected="true"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+
+    <!-- Advanced Search: Legacy Order Entry -->
+    <context component="advanced-search" type="LegacyOrderEntry">
+        <advanced-search:advanced-search>
+            <advanced-search:field-list>
+                <advanced-search:field name="uid" selected="true"/>
+                <advanced-search:field name="product" selected="true"/>
+                <advanced-search:field name="quantity" selected="true"/>
+                <advanced-search:field name="basePrice" selected="true"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
+</config>

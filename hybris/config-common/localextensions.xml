@@ -16,6 +16,7 @@
     <extension name='utrendstorefront' />
     <extension name='utrendinitialdata' />
     <extension name='talosacceleratoraddon' />
+    <extension name='utrendbackoffice' />
 
     <extension name='acceleratorwebservicesaddon' />
     <extension name='orderselfserviceaddon' />
