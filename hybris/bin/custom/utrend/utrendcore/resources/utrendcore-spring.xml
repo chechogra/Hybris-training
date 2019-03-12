@@ -521,4 +521,22 @@
     <!-- Dynamic attribute handlers -->
     <bean id="productDaysPassedAttributeHandler" class="com.talos.utrend.core.handlers.ProductDaysPassedAttributeHandler"/>
 
+    <!-- Utrend Product -->
+    <alias name="defaultUtrendProductService" alias="utrendProductService"/>
+    <bean id="defaultUtrendProductService" class="com.talos.utrend.core.product.impl.DefaultUtrendProductService" parent="productService">
+        <property name="utrendProductDao" ref="utrendProductDao"/>
+    </bean>
+
+    <alias name="defaultUtrendProductDao" alias="utrendProductDao"/>
+    <bean id="defaultUtrendProductDao" class="com.talos.utrend.core.product.dao.impl.DefaultUtrendProductDao">
+        <constructor-arg index="0" type="java.lang.String" value="Product"/>
+    </bean>
+
+    <!-- Product Creation Date Job -->
+    <bean id="populatingCreationDateJobPerformable" class="com.talos.utrend.core.job.PopulatingCreatedDateJobPerformable"
+          parent="abstractJobPerformable">
+        <property name="utrendProductService" ref="utrendProductService"/>
+        <property name="modelService" ref="modelService"/>
+        <property name="timeService" ref="timeService"/>
+    </bean>
 </beans>
