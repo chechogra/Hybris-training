@@ -10,6 +10,10 @@
  */
 package com.talos.utrend.storefront.controllers.pages;
 
+import com.google.common.collect.Maps;
+import com.talos.utrend.facades.product.UtrendProductFacade;
+import com.talos.utrend.storefront.controllers.ControllerConstants;
+import com.talos.utrend.storefront.forms.product.CreationDateForm;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -26,34 +30,13 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.order.data.ConfigurationInfoData;
-import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
-import de.hybris.platform.commercefacades.product.data.BaseOptionData;
-import de.hybris.platform.commercefacades.product.data.FutureStockData;
-import de.hybris.platform.commercefacades.product.data.ImageData;
-import de.hybris.platform.commercefacades.product.data.ImageDataType;
-import de.hybris.platform.commercefacades.product.data.ProductData;
-import de.hybris.platform.commercefacades.product.data.ReviewData;
+import de.hybris.platform.commercefacades.product.data.*;
 import de.hybris.platform.commerceservices.url.UrlResolver;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.util.Config;
-import com.talos.utrend.storefront.controllers.ControllerConstants;
-
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -61,15 +44,14 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.google.common.collect.Maps;
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
 
 
 /**
@@ -97,8 +79,8 @@ public class ProductPageController extends AbstractPageController
 	@Resource(name = "productDataUrlResolver")
 	private UrlResolver<ProductData> productDataUrlResolver;
 
-	@Resource(name = "productVariantFacade")
-	private ProductFacade productFacade;
+	@Resource(name = "utrendProductVariantFacade")
+	private UtrendProductFacade productFacade;
 
 	@Resource(name = "productService")
 	private ProductService productService;
@@ -142,6 +124,7 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute(new ReviewForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
+		model.addAttribute("creationDateForm", new CreationDateForm());
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
@@ -214,7 +197,7 @@ public class ProductPageController extends AbstractPageController
 	}
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/review", method =
-	{ RequestMethod.GET, RequestMethod.POST })
+			{ RequestMethod.GET, RequestMethod.POST })
 	public String postReview(@PathVariable final String productCode, final ReviewForm form, final BindingResult result,
 			final Model model, final HttpServletRequest request, final RedirectAttributes redirectAttrs)
 			throws CMSItemNotFoundException
@@ -291,6 +274,20 @@ public class ProductPageController extends AbstractPageController
 		updatePageTitle(productCode, model);
 	}
 
+	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/updateCreationDate", method = RequestMethod.POST)
+	public String updateCreationDate(@PathVariable final String productCode, final CreationDateForm form,
+			final RedirectAttributes redirectAttrs)
+	{
+
+		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
+		final Date creationDate = form.getCreationDate();
+		productFacade.updateCreationDate(productCode, creationDate);
+		GlobalMessages
+				.addFlashMessage(redirectAttrs, GlobalMessages.CONF_MESSAGES_HOLDER, "text.product.creationDate.submit.success");
+
+		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
+	}
+
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/writeReview", method = RequestMethod.POST)
 	public String writeReview(@PathVariable final String productCode, final ReviewForm form, final BindingResult result,
 			final Model model, final HttpServletRequest request, final RedirectAttributes redirectAttrs)
@@ -349,7 +346,7 @@ public class ProductPageController extends AbstractPageController
 
 	@ResponseBody
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/grid/skusFutureStock", method =
-	{ RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
+			{ RequestMethod.POST }, produces = MediaType.APPLICATION_JSON_VALUE)
 	public final Map<String, Object> productSkusFutureStock(final FutureStockForm form, final Model model)
 	{
 		final String productCode = form.getProductCode();
