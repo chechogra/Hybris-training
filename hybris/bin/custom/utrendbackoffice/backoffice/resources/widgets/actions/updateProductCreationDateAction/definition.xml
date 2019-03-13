@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<action-definition id="com.talos.utrend.backoffice.action.updateproductcreationdate"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="http://www.hybris.com/schema/cockpitng/action-definition.xsd">
+    <name>UpdateProductCreationDate</name>
+    <descrption>Action that updates the creation date for the current product.</descrption>
+    <author>Alejandro Hernandez Valencia</author>
+    <version>1.0</version>
+
+    <actionClassName>com.talos.utrend.backoffice.widgets.actions.UpdateProductCreationDateAction</actionClassName>
+
+    <inputType>de.hybris.platform.core.model.product.ProductModel</inputType>
+    <outputType>de.hybris.platform.core.model.product.ProductModel</outputType>
+
+    <iconUri>icons/icon_action_edit_default.png</iconUri>
+    <iconHoverUri>icons/icon_action_edit_hover.png</iconHoverUri>
+    <iconDisabledUri>icons/icon_action_edit_disabled.png</iconDisabledUri>
+</action-definition>
