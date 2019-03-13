@@ -34,6 +34,8 @@ UPDATE RendererTemplate; code[unique = true]; description[lang = $lang]; templat
 ; utrend_Email_Delivery_Sent_Subject                   ; "Asunto del Email Enviado"                         ; $emailResource/email-deliverySentSubject.vm
 ; utrend_Email_Forgotten_Password_Body                 ; "Cuerpo del Email Contraseña Olvidada"             ; $emailResource/email-forgottenPasswordBody.vm
 ; utrend_Email_Forgotten_Password_Subject              ; "Asunto del Email Contraseña Olvidada"             ; $emailResource/email-forgottenPasswordSubject.vm
+; utrend_Email_Wish_List_Body                          ; "Cuerpo del Email Lista de Deseos"                 ; $emailResource/email-wishListBody.vm
+; utrend_Email_Wish_List_Subject                       ; "Asunto del Email Lista de Deseos"                 ; $emailResource/email-wishListSubject.vm
 ; utrend_Email_NotPickedUpConsignment_Canceled_Body    ; "Cuerpo del Email No Recogido Envío Cancelado"     ; $emailResource/email-notPickedUpConsignmentCanceledBody.vm
 ; utrend_Email_NotPickedUpConsignment_Canceled_Subject ; "Asunto del Email No Recogido Envío Cancelado"     ; $emailResource/email-notPickedUpConsignmentCanceledSubject.vm
 ; utrend_Email_Order_Cancelled_Body                    ; "Cuerpo del Email Orden Cancelada"                 ; $emailResource/email-orderCancelledBody.vm
@@ -58,6 +60,7 @@ UPDATE EmailPage; $contentCV[unique = true]; uid[unique = true]; fromEmail[lang 
 ; ; CustomerRegistrationEmail    ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
 ; ; DeliverySentEmail            ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
 ; ; ForgottenPasswordEmail       ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
+; ; WishListEmail                ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
 ; ; OrderCancelledEmail          ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
 ; ; OrderCollectionReminderEmail ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"
 ; ; OrderConfirmationEmail       ; "customerservices@hybris.com" ; "Equipo de Servicio al Cliente"

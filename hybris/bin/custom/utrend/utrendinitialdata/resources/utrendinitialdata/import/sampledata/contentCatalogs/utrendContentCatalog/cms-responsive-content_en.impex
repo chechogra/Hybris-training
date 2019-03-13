@@ -37,6 +37,8 @@ UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName
 ; ; SonyBrandCategoryLink  ; "Sony"
 ; ; JBLBrandCategoryLink   ; "JBL"
 ; ; BoseBrandCategoryLink  ; "Bose"
+; ; AccessoriesCategoryLink  ; "Accessories"
+
 
 UPDATE MiniCartComponent; $contentCV[unique = true]; uid[unique = true]; name; title[lang = $lang]
 ; ; MiniCart ; Mini Cart ; "YOUR SHOPPING CART"
@@ -62,6 +64,8 @@ UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[l
 ; ; BrandsNavNode      ; "Brands"
 ; ; UTrendNavNode      ; "Utrend Site"
 ; ; SiteRootNode       ; "SiteRoot"
+; ; AccessoriesNavNode      ; "Accessories"
+
 
 # Utrend FAQ Page
 UPDATE CMSParagraphComponent; $contentCV[unique = true]; uid[unique = true]; content[lang = $lang];
@@ -124,6 +128,10 @@ UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; linkName
 ; ; SavedCartsLink        ; "Saved Carts"
 ; ; ImportSavedCartLink   ; "Import Saved Cart"
 ; ; ConsentManagementLink ; "Consent Management"
+; ; LegacyOrderHistoryLink; "Legacy Order History"
+; ; WishListLink          ; "Wish List"
+
+
 
 #update navigation node title
 UPDATE CMSNavigationNode; $contentCV[unique = true]; uid[unique = true]; title[lang = $lang]

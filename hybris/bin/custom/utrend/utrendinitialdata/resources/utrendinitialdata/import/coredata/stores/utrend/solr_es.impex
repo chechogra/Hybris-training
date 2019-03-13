@@ -34,6 +34,13 @@ UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[uni
 ; $solrIndexedType ; size              ; "Talla"
 ; $solrIndexedType ; style             ; "Estilo"
 ; $solrIndexedType ; swatchColors      ; "Color"
+; $solrIndexedType ; utrendStock       ; "Utrend Stock"
+; $solrIndexedType ; utrendStockRange  ; "Utrend Stock"
+
+
+
+
+
 
 # Define the available sorts
 UPDATE SolrSort; indexedType(identifier)[unique = true]; code[unique = true]; name[lang = $lang]

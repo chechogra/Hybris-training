@@ -28,6 +28,9 @@
 					</div>
 				</div>
 
+				<div> <spring:theme code="view.pageDetail.creationDate"/> ${fn:escapeXml(product.utrendCreationDate)} </div>
+				<div> Utrend Stock : ${fn:escapeXml(product.utrendStock)} </div>
+
 				<div class="col-sm-12 col-md-9 col-lg-6">
 					<cms:pageSlot position="VariantSelector" var="component" element="div" class="page-details-variants-select">
 						<cms:component component="${component}" element="div" class="yComponentWrapper page-details-variants-select-component"/>

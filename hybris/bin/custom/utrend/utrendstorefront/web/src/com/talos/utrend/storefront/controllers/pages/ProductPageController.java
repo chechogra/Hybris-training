@@ -10,6 +10,8 @@
  */
 package com.talos.utrend.storefront.controllers.pages;
 
+import com.talos.utrend.facades.product.UtrendProductFacade;
+import com.talos.utrend.storefront.Forms.UpdateCreationDateForm;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -42,6 +44,8 @@ import de.hybris.platform.util.Config;
 import com.talos.utrend.storefront.controllers.ControllerConstants;
 
 import java.io.UnsupportedEncodingException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -54,6 +58,7 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import net.sf.cglib.core.Local;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -97,8 +102,8 @@ public class ProductPageController extends AbstractPageController
 	@Resource(name = "productDataUrlResolver")
 	private UrlResolver<ProductData> productDataUrlResolver;
 
-	@Resource(name = "productVariantFacade")
-	private ProductFacade productFacade;
+	@Resource(name = "utrendProductFacade")
+	private UtrendProductFacade productFacade;
 
 	@Resource(name = "productService")
 	private ProductService productService;
@@ -140,6 +145,7 @@ public class ProductPageController extends AbstractPageController
 		populateProductDetailForDisplay(productCode, model, request, extraOptions);
 
 		model.addAttribute(new ReviewForm());
+		model.addAttribute(new UpdateCreationDateForm());
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
 
@@ -240,6 +246,22 @@ public class ProductPageController extends AbstractPageController
 		productFacade.postReview(productCode, review);
 		GlobalMessages.addFlashMessage(redirectAttrs, GlobalMessages.CONF_MESSAGES_HOLDER, "review.confirmation.thank.you.title");
 
+		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
+	}
+
+	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/updateCreationDate", method =
+			{ RequestMethod.POST })
+	public String updateCreationDate(@PathVariable final String productCode, final UpdateCreationDateForm updateCreationDateForm, final RedirectAttributes redirectAttrs)
+	{
+		//String converter
+		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d");
+		LocalDate localDate = LocalDate.parse(updateCreationDateForm.getUtrendCreationDate(), formatter);
+
+		//call Facade
+		productFacade.modifyUtrendCreationDate(productCode,localDate);
+
+		//return router to MVC
+		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, null);
 		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
 	}
 
