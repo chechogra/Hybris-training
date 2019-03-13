@@ -87,6 +87,10 @@
 	<bean id="DefaultUtrendCreationDatePopulator" class="com.talos.utrend.facades.populators.UtrendCreationDatePopulator">
 	</bean>
 
+	<alias name="DefaultSearchUtrendCreationDatePopulator" alias="SearchUtrendCreationDatePopulator"/>
+	<bean id="DefaultSearchUtrendCreationDatePopulator" class="com.talos.utrend.facades.populators.SearchUtrendCreationDatePopulator">
+	</bean>
+
 	<!-- Add the apparelProductPopulator to the productConverter -->
 	<bean parent="modifyPopulatorList">
 		<property name="list" ref="productConverter"/>
@@ -97,6 +101,12 @@
 	<bean parent="modifyPopulatorList">
 		<property name="list" ref="productConverter"/>
 		<property name="add" ref="UtrendCreationDatePopulator"/>
+	</bean>
+
+	<!-- Add utrend creation date populator to the converter that process the results for PLP  -->
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="commerceSearchResultProductConverter"/>
+		<property name="add" ref="SearchUtrendCreationDatePopulator"/>
 	</bean>
 
 	<!-- accelerator Image Format Mappings -->

@@ -78,6 +78,12 @@
                     <persistence type="property"/>
                 </attribute>
 
+                <attribute qualifier="utrendStock" type="java.lang.Double">
+                    <description> number of items in stock of Utrend </description>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <persistence type="property"/>
+                </attribute>
+
                 <attribute qualifier="dayPassed" type="java.lang.Long" >
                     <persistence type="dynamic" attributeHandler="productDayPassedAttributeHandler" />
                 </attribute>

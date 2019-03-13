@@ -36,6 +36,10 @@
                             </a>
                         </ycommerce:testId>
 
+                        <div>
+                        Utrend Stock : ${fn:escapeXml(product.utrendStock)}
+                        </div>
+
                         <c:if test="${not empty product.potentialPromotions}">
                             <div class="promo">
                                 <c:forEach items="${product.potentialPromotions}" var="promotion">
@@ -44,11 +48,7 @@
                             </div>
                         </c:if>
 
-                        <ycommerce:testId code="product_productPrice">
-                            <c:if test="${not empty product.price}">
-                                <div class="price"><product:productListerItemPrice product="${product}"/></div>
-                            </c:if>
-                        </ycommerce:testId>
+
                         <div class="product-variable-content">
                             <div class="variant-container <c:if test="${empty product.variantOptions or product.variantOptions.size() == 0}">tc-no-variants</c:if>">
                                 <div class="variant-option-container">

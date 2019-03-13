@@ -140,6 +140,12 @@
 		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
 	</bean>
 
+	<bean id="utrendStockValueProvider"
+		  class="com.talos.utrend.core.provider.UtrendStockValueProvider"
+		  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
 	<bean id="colorFacetDisplayNameProvider"
 		  class="com.talos.utrend.core.search.solrfacetsearch.provider.impl.ColorFacetDisplayNameProvider"
 	>
