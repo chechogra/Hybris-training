@@ -21,6 +21,7 @@
       <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.minicart.js</js>
       <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.productgrid.js</js>
       <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.cart.js</js>
+      <js>/_ui/addons/talosacceleratoraddon/responsive/common/js/tc.checkout.js</js>
    </group>
 </groups>
 
