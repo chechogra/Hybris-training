@@ -6,7 +6,7 @@
 <%@ taglib prefix="action" tagdir="/WEB-INF/tags/addons/talosacceleratoraddon/responsive/action" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <%@ attribute name="currentComponent" required="true"
               type="de.hybris.platform.cms2.model.contents.components.AbstractCMSComponentModel" %>
@@ -49,6 +49,13 @@
                                 <div class="price"><product:productListerItemPrice product="${product}"/></div>
                             </c:if>
                         </ycommerce:testId>
+
+                        <c:if test="${not empty product.creationDate}">
+                            <div>
+                                <p><spring:theme code="text.product.creationDate"/>: <fmt:formatDate value="${product.creationDate}" pattern="dd-MM-yyyy"/></p>
+                            </div>
+                        </c:if>
+
                         <div class="product-variable-content">
                             <div class="variant-container <c:if test="${empty product.variantOptions or product.variantOptions.size() == 0}">tc-no-variants</c:if>">
                                 <div class="variant-option-container">

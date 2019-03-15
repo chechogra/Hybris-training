@@ -32,6 +32,8 @@ UPDATE SolrIndexedProperty; name[unique = true]; $solrIndexedType; displayName[l
 ; height            ; ; "Height"
 ; depth             ; ; "Depth"
 ; volume            ; ; "Volume"
+; utrendCreationDate ; ; "Creation date"
+; utrendCreationDateRange ; ; "Creation date"
 
 # Redirect page URL (Must use INSERT_UPDATE here)
 UPDATE SolrURIRedirect; url[unique = true]; &redirectRefID

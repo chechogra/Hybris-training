@@ -172,6 +172,11 @@
         <property name="commonI18NService" ref="commonI18NService"/>
     </bean>
 
+    <bean id="utrendCreationDateRangeValueResolver"
+          class="com.talos.utrend.core.search.solrfacetsearch.provider.impl.UtrendCreationDateRangeValueResolver"
+          parent="abstractValueResolver">
+    </bean>
+
     <!--
         Event listeners are singletons, therefore the dependency for a bean in tenant-scope
         must be configured with a lookup method.

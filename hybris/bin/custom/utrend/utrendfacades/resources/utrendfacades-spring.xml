@@ -220,6 +220,15 @@
         <property name="add" ref="utrendProductPopulator"/>
     </bean>
 
+    <alias name="defaultUtrendSearchResultProductPopulator" alias="utrendSearchResultProductPopulator"/>
+    <bean id="defaultUtrendSearchResultProductPopulator" class="com.talos.utrend.facades.populators.UtrendSearchResultProductPopulator">
+    </bean>
+
+    <bean parent="modifyPopulatorList">
+        <property name="list" ref="commerceSearchResultProductConverter"/>
+        <property name="add" ref="utrendSearchResultProductPopulator"/>
+    </bean>
+
     <alias name="defaultUtrendProductFacade" alias="utrendProductVariantFacade"/>
     <bean id="defaultUtrendProductFacade" class="com.talos.utrend.facades.product.impl.DefaultUtrendProductFacade"
           parent="defaultProductVariantFacade">

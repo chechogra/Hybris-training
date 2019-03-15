@@ -11408,7 +11408,7 @@ ul.ui-autocomplete li .price {
   .product__list--wrapper .product__grid .product-item-wp .product-item .product-item-inner {
     border: 1px solid transparent;
     position: absolute;
-    height: 100%;
+    height: auto;
     width: calc(100% + 20px);
     left: -10px;
     padding: 10px;
