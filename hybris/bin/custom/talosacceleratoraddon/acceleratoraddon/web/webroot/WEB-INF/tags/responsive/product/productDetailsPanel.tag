@@ -4,6 +4,13 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/addons/talosacceleratoraddon/responsive/formElement" %>
+
+<c:url value="${product.url}/updateCreationDate" var="productUpdateCreationDateActionUrl"/>
 
 <div class="product-details-main-wp">
     <div class="row">
@@ -32,6 +39,22 @@
                             <tc-product:productReviewSummary product="${product}" showLinks="true"/>
                             <div class="description">${ycommerce:sanitizeHTML(product.summary)}</div>
                         </div>
+
+                        <h3><spring:theme code="text.product.creationDate"/>: <fmt:formatDate value="${product.creationDate}" pattern="dd-MM-yyyy HH:mm:ss"/></h3>
+                        <div class="description"><spring:theme code="text.product.daysPassed"/>: ${product.daysPassed}</div>
+                        <form:form method="post" action="${productUpdateCreationDateActionUrl}" modelAttribute="creationDateForm">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    <div class="form-group">
+                                        <form:input path="creationDate" type="date" cssClass="form-control tc-input"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-7">
+                                    <button type="submit" class="btn btn-primary btn-block" value="<spring:theme code="text.product.creationDate.submit"/>"><spring:theme
+                                        code="text.product.creationDate.submit"/></button>
+                                </div>
+                            </div>
+                        </form:form>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-12">

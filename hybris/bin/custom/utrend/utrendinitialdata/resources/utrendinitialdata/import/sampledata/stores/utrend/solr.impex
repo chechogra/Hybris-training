@@ -30,6 +30,8 @@ INSERT_UPDATE SolrValueRangeSet; name[unique = true]; qualifier; type; solrValue
 ; resolutionRange  ; ; double ; resolutionRangeRef1,resolutionRangeRef2,resolutionRangeRef3,resolutionRangeRef4,resolutionRangeRef5
 ; measurementRange ; ; double ; measurementRangeRef1,measurementRangeRef2,measurementRangeRef3,measurementRangeRef4,measurementRangeRef5,measurementRangeRef6,measurementRangeRef7
 ; volumeRange      ; ; double ; volumeRangeRef1,volumeRangeRef2,volumeRangeRef3,volumeRangeRef4,volumeRangeRef5,volumeRangeRef6
+; utrendCreationDateRange ; ; date ; utrendCreationDateRangeRef1,utrendCreationDateRangeRef2,utrendCreationDateRangeRef3
+
 # Define Ranges
 INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique = true]; name[unique = true]; from; to
 # Resolution Range
@@ -53,6 +55,10 @@ INSERT_UPDATE SolrValueRange; &rangeValueRefID; solrValueRangeSet(name)[unique =
 ; volumeRangeRef4      ; volumeRange      ; "200L - 299.9L"   ; 200 ; 299.9999
 ; volumeRangeRef5      ; volumeRange      ; "300L - 399.9L"   ; 300 ; 399.9999
 ; volumeRangeRef6      ; volumeRange      ; "400L +"          ; 400 ; 9999
+# Creation Date Range
+; utrendCreationDateRangeRef1 ; utrendCreationDateRange ; 2015 - 2016 ; 2015-01-01 ; 2016-12-31
+; utrendCreationDateRangeRef2 ; utrendCreationDateRange ; 2017 - 2018 ; 2017-01-01 ; 2018-12-31
+; utrendCreationDateRangeRef3 ; utrendCreationDateRange ; 2019+       ; 2019-01-01 ; 2999-12-31
 
 INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; facet[default = false]; facetType(code); facetSort(code); priority; visible; fieldValueProvider; customFacetSortProvider; rangeSets(name); $classAttributeAssignment
 ; $solrIndexedType ; resolution        ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; resolutionRange  ; photography:::resolution::::
@@ -63,6 +69,10 @@ INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; n
 ; $solrIndexedType ; height            ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; measurementRange ; dimensions:::height::::
 ; $solrIndexedType ; depth             ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; measurementRange ; dimensions:::depth::::
 ; $solrIndexedType ; volume            ; double ; ; ;      ; ; true ; MultiSelectOr ; Custom ; 1000 ; true ; commerceClassificationPropertyValueProvider ; numericFacetSortProviderDesc   ; volumeRange      ; dimensions:::volume::::
+
+INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]     ; type(code); sortableType(code); currency[default = false]; localized[default = false]; multiValue[default = false]; facet[default = true]; facetType(code); facetSort(code); priority; visible; useForSpellchecking[default = false]; useForAutocomplete[default = false]; fieldValueProvider                   ; rangeSets(name)
+                                 ; $solrIndexedType                          ; utrendCreationDate      ; date      ;                   ;                          ;                           ;                            ; false                ;                ;                ;         ; false  ;                                     ;                                    ;                                      ;
+                                 ; $solrIndexedType                          ; utrendCreationDateRange ; date      ;                   ;                          ;                           ;                            ; true                 ; MultiSelectOr  ; Alpha          ; 2000    ; true   ;                                     ;                                    ; utrendCreationDateRangeValueResolver ; utrendCreationDateRange
 
 INSERT_UPDATE SolrIndexedProperty; solrIndexedType(identifier)[unique = true]; name[unique = true]; type(code); localized[default = true]; multiValue[default = false]; fieldValueProvider; $classAttributeAssignment
 
@@ -91,3 +101,7 @@ INSERT_UPDATE SolrSearchQueryProperty; indexedProperty(name, solrIndexedType(ide
 ; height:$solrIndexedType            ; ; MultiSelectOr ; 1000 ; ; ; ; ;
 ; depth:$solrIndexedType             ; ; MultiSelectOr ; 1000 ; ; ; ; ;
 ; volume:$solrIndexedType            ; ; MultiSelectOr ; 1000 ; ; ; ; ;
+; utrendCreationDateRange:$solrIndexedType ; ; MultiSelectOr ; 2000 ; ; ; ; ;
+
+INSERT_UPDATE SolrSearchQueryProperty; indexedProperty(name, solrIndexedType(identifier))[unique = true]; facet[default = true]; includeInResponse[default = true]; searchQueryTemplate(name, indexedType(identifier))[unique = true][default = DEFAULT:$solrIndexedType]
+                                     ; utrendCreationDate:$solrIndexedType                              ; false                ;                                  ;

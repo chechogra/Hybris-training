@@ -19,6 +19,9 @@ import java.util.Set;
 
 import javax.annotation.Resource;
 
+import com.talos.utrend.facades.order.UtrendOrderFacade;
+import com.talos.utrend.facades.order.data.LegacyOrderData;
+import com.talos.utrend.facades.order.data.LegacyOrderHistoryData;
 import de.hybris.platform.servicelayer.exceptions.AmbiguousIdentifierException;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import org.apache.commons.collections.CollectionUtils;
@@ -61,7 +64,6 @@ import de.hybris.platform.commercefacades.address.data.AddressVerificationResult
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
-import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
@@ -119,6 +121,7 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String REDIRECT_TO_PASSWORD_UPDATE_PAGE = REDIRECT_PREFIX + "/my-account/update-password";
 	private static final String REDIRECT_TO_ORDER_HISTORY_PAGE = REDIRECT_PREFIX + "/my-account/orders";
 	private static final String REDIRECT_TO_CONSENT_MANAGEMENT = REDIRECT_PREFIX + "/my-account/consents";
+	private static final String REDIRECT_TO_LEGACY_ORDER_HISTORY_PAGE = REDIRECT_PREFIX + "/my-account/legacy-orders";
 
 	/**
 	 * We use this suffix pattern because of an issue with Spring 3.1 where a Uri value is incorrectly extracted if it
@@ -127,6 +130,7 @@ public class AccountPageController extends AbstractSearchPageController
 	 */
 	private static final String ORDER_CODE_PATH_VARIABLE_PATTERN = "{orderCode:.*}";
 	private static final String ADDRESS_CODE_PATH_VARIABLE_PATTERN = "{addressCode:.*}";
+	private static final String LEGACY_ORDER_NUMBER_PATH_VARIABLE_PATTERN = "{orderNumber:.*}";
 
 	// CMS Pages
 	private static final String ACCOUNT_CMS_PAGE = "account";
@@ -140,11 +144,13 @@ public class AccountPageController extends AbstractSearchPageController
 	private static final String ORDER_HISTORY_CMS_PAGE = "orders";
 	private static final String ORDER_DETAIL_CMS_PAGE = "order";
 	private static final String CONSENT_MANAGEMENT_CMS_PAGE = "consents";
+	private static final String LEGACY_ORDER_HISTORY_CMS_PAGE = "legacy-orders";
+	private static final String LEGACY_ORDER_DETAILS_CMS_PAGE = "legacy-order";
 
 	private static final Logger LOG = Logger.getLogger(AccountPageController.class);
 
-	@Resource(name = "orderFacade")
-	private OrderFacade orderFacade;
+	@Resource(name = "utrendOrderFacade")
+	private UtrendOrderFacade orderFacade;
 
 	@Resource(name = "acceleratorCheckoutFacade")
 	private CheckoutFacade checkoutFacade;
@@ -945,5 +951,53 @@ public class AccountPageController extends AbstractSearchPageController
 					null);
 		}
 		return REDIRECT_TO_CONSENT_MANAGEMENT;
+	}
+
+	@RequestMapping(value = "/legacy-orders", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String legacyOrders(@RequestParam(value = "page", defaultValue = "0") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode, final Model model)
+			throws CMSItemNotFoundException
+	{
+		// Handle paged search results
+		final PageableData pageableData = createPageableData(page, 7, sortCode, showMode);
+		final SearchPageData<LegacyOrderHistoryData> searchPageData = orderFacade.getPagedLegacyOrderHistory(pageableData);
+		populateModel(model, searchPageData, showMode);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(LEGACY_ORDER_HISTORY_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(LEGACY_ORDER_HISTORY_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.legacyOrderHistory"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/legacy-orders/" + LEGACY_ORDER_NUMBER_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String legacyOrder(@PathVariable("orderNumber") final String orderNumber, final Model model,
+			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		try
+		{
+			final LegacyOrderData legacyOrderDetails = orderFacade.getLegacyOrderDetailForOrderNumber(orderNumber);
+			model.addAttribute("legacyOrderData", legacyOrderDetails);
+
+			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
+			breadcrumbs.add(new Breadcrumb("/my-account/legacy-orders", getMessageSource().getMessage("text.account.orderHistory", null,
+					getI18nService().getCurrentLocale()), null));
+			breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.order.orderBreadcrumb", new Object[]
+					{ legacyOrderDetails.getOrderNumber() }, "Order {0}", getI18nService().getCurrentLocale()), null));
+			model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
+		}
+		catch (final UnknownIdentifierException | ModelNotFoundException e)
+		{
+			LOG.warn("Attempted to load a legacy order that does not exist or is not visible", e);
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, "system.error.page.not.found", null);
+			return REDIRECT_TO_LEGACY_ORDER_HISTORY_PAGE;
+		}
+		storeCmsPageInModel(model, getContentPageForLabelOrId(LEGACY_ORDER_DETAILS_CMS_PAGE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(LEGACY_ORDER_DETAILS_CMS_PAGE));
+		return getViewForPage(model);
 	}
 }

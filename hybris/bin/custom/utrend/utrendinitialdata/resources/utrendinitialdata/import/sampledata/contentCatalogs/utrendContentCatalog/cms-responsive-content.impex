@@ -737,6 +737,9 @@ INSERT_UPDATE JspIncludeComponent; $contentCV[unique = true]; uid[unique = true]
 ; ; AccountSavedCartDetailsActionComponent   ; Account Order Details Action Component         ; accountSavedCartDetailsAction.jsp                                          ;                 ; AccountSavedCartDetailsActionComponent
 ; ; SavedCartsComponent                      ; Saved Carts Component                          ; accountSavedCartsPage.jsp                                                  ;                 ; SavedCartsComponent
 
+; ; AccountLegacyOrderHistoryComponent       ; Account Legacy Order History Component         ; accountLegacyOrderHistoryPage.jsp                                          ; ViewLegacyOrderAction ; AccountLegacyOrderHistoryComponent
+; ; AccountLegacyOrderDetailsComponent       ; Account Legacy Order Details Component         ; accountLegacyOrderDetailsPage.jsp                                          ;                 ; AccountLegacyOrderDetailsComponent
+
 INSERT_UPDATE MiniCartComponent; $contentCV[unique = true]; uid[unique = true]; name; &componentRef; totalDisplay(code); shownProductCount; lightboxBannerComponent(&componentRef)
 ; ; MiniCart ; Mini Cart ; MiniCart ; SUBTOTAL ; 3 ;
 
@@ -757,6 +760,9 @@ INSERT_UPDATE ProductAddToCartComponent; $contentCV[unique = true]; uid[unique =
 
 INSERT_UPDATE ViewOrderAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
 ; ; ViewOrderAction ; /my-account/order/{orderCode} ; View Order Action ; ActionRestriction ; ViewOrderAction
+
+INSERT_UPDATE ViewOrderAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
+                             ; ; ViewLegacyOrderAction ; /my-account/legacy-orders/{orderNumber} ; View Legacy Order Action ; ActionRestriction ; ViewLegacyOrderAction
 
 INSERT_UPDATE ViewStoreAction; $contentCV[unique = true]; uid[unique = true]; url; name; restrictions(uid, $contentCV); &actionRef
 ; ; ViewStoreAction ; ; View Store Action ; ActionRestriction ; ViewStoreAction
@@ -1037,6 +1043,8 @@ INSERT_UPDATE CMSLinkComponent; $contentCV[unique = true]; uid[unique = true]; n
 ; ; SavedCartsLink        ; SavedCartsLink        ; /my-account/saved-carts     ; SavedCartsLink        ; ; ; ; ;
 ; ; ConsentManagementLink ; ConsentManagementLink ; /my-account/consents        ; ConsentManagementLink ; ; ; ; ;
 
+; ; LegacyOrderHistoryLink ; LegacyOrderHistoryLink ; /my-account/legacy-orders ; LegacyOrderHistoryLink ; ; ; ; ;
+
 INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; name; parent(uid, $contentCV); links(&linkRef); &nodeRef
 ; MyAccountNavNode         ; ; My Account         ; UTrendNavNode    ; ; MyAccountNavNode
 # children for my account
@@ -1049,6 +1057,8 @@ INSERT_UPDATE CMSNavigationNode; uid[unique = true]; $contentCV[unique = true]; 
 ; SavedCartsNavNode        ; ; Saved Carts        ; MyAccountNavNode ; ; SavedCartsNavNode
 ; ConsentManagementNavNode ; ; Consent Management ; MyAccountNavNode ; ; ConsentManagementNavNode
 
+; LegacyOrderHistoryNavNode ; ; Legacy Order History ; MyAccountNavNode ; ; LegacyOrderHistoryNavNode
+
 INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true]; name; navigationNode(&nodeRef); item(&linkRef);
 ; PersonalDetailsNavNodeEntry   ; ; PersonalDetailsNavNodeEntry   ; PersonalDetailsNavNode   ; PersonalDetailsLink   ;
 ; UpdateEmailNavNodeEntry       ; ; UpdateEmailNavNodeEntry       ; UpdateEmailNavNode       ; UpdateEmailLink       ;
@@ -1058,6 +1068,8 @@ INSERT_UPDATE CMSNavigationEntry; uid[unique = true]; $contentCV[unique = true];
 ; OrderHistoryNavNodeEntry      ; ; OrderHistoryNavNodeEntry      ; OrderHistoryNavNode      ; OrderHistoryLink      ;
 ; SavedCartsNavNodeEntry        ; ; SavedCartsNavNodeEntry        ; SavedCartsNavNode        ; SavedCartsLink        ;
 ; ConsentManagementNavNodeEntry ; ; ConsentManagementNavNodeEntry ; ConsentManagementNavNode ; ConsentManagementLink ;
+
+; LegacyOrderHistoryNavNodeEntry ; ; LegacyOrderHistoryNavNodeEntry ; LegacyOrderHistoryNavNode ; LegacyOrderHistoryLink ;
 
 INSERT_UPDATE NavigationComponent; $contentCV[unique = true]; uid[unique = true]; name; styleClass; &componentRef; navigationNode(&nodeRef)
 ; ; MyAccountComponent ; My Account ; accNavComponent ; MyAccountComponent ; MyAccountNavNode
@@ -1177,6 +1189,23 @@ INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true];
 ; ; SideContent-saved-carts ; SideContent ; ; SideContent-saved-carts
 ; ; BodyContent-saved-carts ; BodyContent ; ; BodyContent-saved-carts
 
+###### Utrend Account Legacy Order History
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+                         ; ; SideContent-legacy-orders ; Side Content Slot for My Account Legacy Order History ; true ;
+                         ; ; BodyContent-legacy-orders ; Body Content Slot for My Account Legacy Order History ; true ; AccountLegacyOrderHistoryComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'legacy-orders']; contentSlot(uid, $contentCV)[unique = true]
+                                ; ; SideContent-legacy-orders ; SideContent ; ; SideContent-legacy-orders
+                                ; ; BodyContent-legacy-orders ; BodyContent ; ; BodyContent-legacy-orders
+
+###### Utrend Account Legacy Order Details
+INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
+                         ; ; SideContent-legacy-orderdetail ; Side Content Slot for My Account Legacy Order Details ; true ;
+                         ; ; BodyContent-legacy-orderdetail ; Body Content Slot for My Account Legacy Order Details ; true ; AccountLegacyOrderDetailsComponent
+
+INSERT_UPDATE ContentSlotForPage; $contentCV[unique = true]; uid[unique = true]; position[unique = true]; page(uid, $contentCV)[unique = true][default = 'legacy-order']; contentSlot(uid, $contentCV)[unique = true]
+                                ; ; SideContent-legacy-orderdetail ; SideContent ; ; SideContent-legacy-orderdetail
+                                ; ; BodyContent-legacy-orderdetail ; BodyContent ; ; BodyContent-legacy-orderdetail
 
 ###### Utrend Product List Page
 INSERT_UPDATE ContentSlot; $contentCV[unique = true]; uid[unique = true]; name; active; cmsComponents(&componentRef)
